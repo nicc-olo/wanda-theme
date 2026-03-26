@@ -7,6 +7,7 @@
  * @package wanda
  */
 
+ $copyright = get_field( 'copyright', 'options' );
 ?>
 
 <footer id="colophon">
@@ -34,19 +35,15 @@
 	<div>
 		<?php
 		$wanda_blog_info = get_bloginfo( 'name' );
-		if ( ! empty( $wanda_blog_info ) ) :
+		if ( ! empty( $copyright ) ): echo __($copyright);
+		elseif ( ! empty( $wanda_blog_info ) ) :
 			?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>,
 			<?php
 		endif;
-
-		/* translators: 1: WordPress link, 2: WordPress. */
-		printf(
-			'<a href="%1$s">proudly powered by %2$s</a>.',
-			esc_url( __( 'https://wordpress.org/', 'wanda' ) ),
-			'WordPress'
-		);
 		?>
+		<br />
+		<a class="opacity-50 transition-all text-inherit no-underline hover:underline focus:underline focus:opacity-100" href="https://nicc-olo.com" rel="nofollow">Credits: <span class="sr-only">olo</span> <attr title="OLO" aria-hidden="true">o&iota;͜&sigma;</attr></a>
 	</div>
 
 </footer><!-- #colophon -->

@@ -10,30 +10,55 @@
 					"name": "Background"
 				},
 				{
+					"slug": "background-alt",
+					"color": "#f0f0f0",
+					"name": "Background Alt"
+				},
+				{
 					"slug": "foreground",
 					"color": "#404040",
 					"name": "Foreground"
 				},
+				{ "slug": "primary-50", "color": "#eef2ff", "name": "Primary 50" },
+				{ "slug": "primary-100", "color": "#e0e7ff", "name": "Primary 100" },
+				{ "slug": "primary", "color": "#081e5b", "name": "Primary (Base)" },
+				{ "slug": "primary-900", "color": "#1e1b4b", "name": "Primary 900" },
+				
+				{ "slug": "secondary-50", "color": "#eff6ff", "name": "Secondary 50" },
+				{ "slug": "secondary-100", "color": "#dbeafe", "name": "Secondary 100" },
+				{ "slug": "secondary", "color": "#3d61a5", "name": "Secondary (Base)" },
+				{ "slug": "secondary-900", "color": "#1e3a8a", "name": "Secondary 900" },
+
+				{ "slug": "tertiary-50", "color": "#fff1f2", "name": "Tertiary 50" },
+				{ "slug": "tertiary-100", "color": "#ffe4e6", "name": "Tertiary 100" },
+				{ "slug": "tertiary", "color": "#93112a", "name": "Tertiary (Base)" },
+				{ "slug": "tertiary-900", "color": "#4c0519", "name": "Tertiary 900" }
+			]
+		},
+		"typography": {
+			"fontFamilies": [
 				{
-					"slug": "primary",
-					"color": "#b91c1c",
-					"name": "Primary"
-				},
-				{
-					"slug": "secondary",
-					"color": "#15803d",
-					"name": "Secondary"
-				},
-				{
-					"slug": "tertiary",
-					"color": "#0369a1",
-					"name": "Tertiary"
+				"fontFamily": "\"DM Serif\"",
+				"name": "DM Serif",
+				"slug": "dm-serif",
+				"fontFace": [
+					{
+						"fontFamily": "DM Serif",
+						"fontStyle": "normal",
+						"src": [ "file:./assets/fonts/DM_Serif_Display/DMSerifDisplay-Regular.woff2" ]
+					},
+					{
+						"fontFamily": "DM Serif",
+						"fontStyle": "italic",
+						"src": [ "file:./assets/fonts/DM_Serif_Display/DMSerifDisplay-Italic.woff2" ]
+					}
+				]
 				}
 			]
 		},
 		"layout": {
-			"contentSize": "40rem",
-			"wideSize": "60rem"
+			"contentSize": "46rem",
+			"wideSize": "80rem"
 		}
 	}
 }

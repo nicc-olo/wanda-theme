@@ -7,31 +7,41 @@
  * @package wanda
  */
 
-?>
 
-<header id="masthead">
+$banner = get_field( 'banner', 'options' );    // group: testo (wysiwyg), banner_is_active (true_false)
+$bando  = get_field( 'bando', 'options' );    // file (return: array)
+
+if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
+	
+<div class="bg-tertiary text-white/90 text-center p-2 text-sm font-sans" role="banner" aria-live="polite" >
+	<?= wp_kses_post($banner['testo']) ?>
+</div>
+
+<?php endif; ?>
+
+<header id="masthead" class="flex flex-row items-center justify-between px-2 py-4 max-w-wide mx-auto border-b border-foreground/15">
 
 	<div>
 		<?php
-		if ( is_front_page() ) :
-			?>
-			<h1><?php bloginfo( 'name' ); ?></h1>
-			<?php
-		else :
-			?>
-			<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-		endif;
-
 		$wanda_description = get_bloginfo( 'description', 'display' );
 		if ( $wanda_description || is_customize_preview() ) :
 			?>
-			<p><?php echo $wanda_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<p class="italic text-primary-900 leading-none"><?php echo $wanda_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+		<?php endif; ?>
+
+		<?php
+		if ( is_front_page() ) :
+			?>
+			<h1 class="font-bold uppercase text-primary"><?php bloginfo( 'name' ); ?></h1>
+			<?php
+		else :
+			?>
+			<p class="font-bold uppercase text-primary"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 		<?php endif; ?>
 	</div>
 
-	<nav id="site-navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'wanda' ); ?>">
-		<button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'wanda' ); ?></button>
+	<nav id="site-navigation" class="flex flex-row justify-end items-center gap-2" aria-label="<?php esc_attr_e( 'Main Navigation', 'wanda' ); ?>">
+		<!-- <button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'wanda' ); ?></button> -->
 
 		<?php
 		wp_nav_menu(
@@ -41,7 +51,15 @@
 				'items_wrap'     => '<ul id="%1$s" class="%2$s" aria-label="submenu">%3$s</ul>',
 			)
 		);
-		?>
+		if( ! empty( $bando ) ): ?>
+			<a 
+			class="primary-button"
+			href="<?php esc_html_e($bando); ?>"
+			target="_blank"
+			rel="noopener nofollow noreferrer">
+				<?= __('Bando','wanda') . ' ' . date("Y"); ?>
+			</a>
+		<?php endif; ?>
 	</nav><!-- #site-navigation -->
 
 </header><!-- #masthead -->

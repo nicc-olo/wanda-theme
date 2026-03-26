@@ -19,9 +19,23 @@
      */
 	--color-background: var(--wp--preset--color--background);
 	--color-foreground: var(--wp--preset--color--foreground);
+	--color-background-alt:  var(--wp--preset--color--background-alt);
+	
+	--color-primary-50: var(--wp--preset--color--primary-50);
+	--color-primary-100: var(--wp--preset--color--primary-100);
 	--color-primary: var(--wp--preset--color--primary);
+	--color-primary-900: var(--wp--preset--color-primary-900);
+
+	--color-secondary-50: var(--wp--preset--color--secondary-50);
+	--color-secondary-100: var(--wp--preset--color--secondary-100);
 	--color-secondary: var(--wp--preset--color--secondary);
+	--color-secondary-900: var(--wp--preset--color-secondary-900);
+
+	--color-tertiary-50: var(--wp--preset--color--tertiary-50);
+	--color-tertiary-100: var(--wp--preset--color--tertiary-100);
 	--color-tertiary: var(--wp--preset--color--tertiary);
+	--color-tertiary-900: var(--wp--preset--color-tertiary-900);
+
 	--container-content: var(--wp--style--global--content-size);
 	--container-wide: var(--wp--style--global--wide-size);
 
@@ -39,7 +53,7 @@
 	--font-sans:
 		ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
 		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	--font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	--font-serif: 'DM Serif Display', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	--font-mono:
 		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;

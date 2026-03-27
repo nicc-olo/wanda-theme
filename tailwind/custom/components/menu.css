@@ -1,0 +1,69 @@
+@scope ( #masthead ) {
+	#menu-state,
+	.hamburger-button {
+		display: none;
+	}
+	/* To not interfere with the mobile menu */
+	@media (min-width: 996px) {
+		.hamburger-menu {
+			@apply flex flex-row items-center justify-center gap-4;
+		}
+	}
+	@media (max-width: 996px) {
+		.hamburger-button {
+			display: block;
+			position: relative;
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+
+		.hamburger-button :is(label, a) {
+			position: absolute;
+			inset: 0;
+		}
+
+		.menu-close {
+			display: none;
+		}
+
+		label {
+			/* Basic styling of hamburger button */
+			cursor: pointer;
+			display: grid;
+			place-content: center;
+			font-size: 2rem;
+			background: var(--color-primary-50);
+		}
+
+		#menu-state,
+		nav ul,
+		nav .menu-close {
+			/* Hide the checkbox, menu and close button by default */
+			display: none;
+		}
+		:is(#menu-state:checked, #menu-state:target) ~ nav .menu-close {
+			/*
+            Show the close button when the menu is open
+            (when the #menu-state input field is checked)
+            */
+			display: block;
+		}
+		#menu-state:checked ~ nav .menu-open {
+			/* Hide the open button when the menu is open */
+			display: none;
+		}
+
+		:is(#menu-state:checked, #menu-state:target) ~ nav .hamburger-menu {
+			/* Show the  ul.hamburger-menu when the #menu-state input field is checked or the target */
+			@apply border-primary-100 absolute top-10 right-10/12 flex flex-col gap-1 border bg-white drop-shadow-sm;
+		}
+
+		:is(#menu-state:checked, #menu-state:target)
+			~ nav
+			.hamburger-menu
+			li
+			a {
+			@apply hover:bg-primary-50 focus:bg-primary-50 text-primary min-w-64 p-4;
+		}
+	}
+}

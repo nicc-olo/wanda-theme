@@ -56,3 +56,25 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 });
+
+
+
+
+
+// MENU
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const menuState = document.querySelector("#menu-state");
+
+    document.querySelector("a.menu-open").addEventListener("click", (e) => {
+        e.preventDefault();
+        menuState.checked = true;
+    });
+
+    document.querySelector("a.menu-close").addEventListener("click", (e) => {
+        e.preventDefault();
+        menuState.checked = false;
+    });
+
+});

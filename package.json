@@ -51,5 +51,8 @@
 		"prettier": "^3.8.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"tailwindcss": "^4.2.2"
+	},
+	"dependencies": {
+		"swiper": "^12.1.3"
 	}
 }

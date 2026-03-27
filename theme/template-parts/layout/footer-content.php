@@ -11,7 +11,7 @@
 ?>
 
 <footer id="colophon" class="bg-background-alt text-muted">
-	<div class="mx-auto max-w-wide flex md:flex-row py-6">
+	<div class="mx-auto max-w-wide py-6">
 
 		<?php if ( has_nav_menu( 'menu-2' ) ) : ?>
 			<nav aria-label="<?php esc_attr_e( 'Menu del Footer', 'wanda' ); ?>">
@@ -19,7 +19,7 @@
 				wp_nav_menu(
 					array(
 						'theme_location' => 'menu-2',
-						'menu_class'     => 'footer-menu menu',
+						'menu_class'     => 'footer-menu menu flex flex-row justify-center items-center gap-4',
 						'depth'          => 1,
 					)
 				);

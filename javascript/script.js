@@ -8,3 +8,51 @@
  * For esbuild documentation, please see:
  * https://esbuild.github.io/
  */
+
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
+
+window.Swiper = Swiper;
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const progressCircle = document.querySelector(".autoplay-progress svg");
+    const progressContent = document.querySelector(".autoplay-progress span");
+        
+    const swiper = new Swiper('.swiper', {
+        // Configure Swiper to use modules
+        modules: [Navigation, Pagination],
+        loop: true,
+        slidesPerView: 1,
+        centeredSlides: true,
+        a11y: {
+            prevSlideMessage: 'Immagine precedente',
+            nextSlideMessage: 'Immagine successiva'
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: true,
+        },
+        keyboard: {
+            enabled: true,
+        },
+        pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        dynamicBullets: true,
+        },
+    
+        navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+        },
+
+        on: {
+            autoplayTimeLeft(s, time, progress) {
+            progressCircle.style.setProperty("--progress", 1 - progress);
+            progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+            }
+        },
+    })
+
+});

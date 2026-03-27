@@ -39,14 +39,15 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 	</div>
 
 	<nav id="site-navigation" class="flex flex-row justify-end items-center gap-4" aria-label="<?php esc_attr_e( 'Navigazione principale', 'wanda' ); ?>">
-		<!-- <button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu principale', 'wanda' ); ?></button> -->
+		<button class="lg:hidden transition-transform hover:cursor-pointer hover:scale-105 hover:bg-background-alt p-4" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'wanda' ); ?></button>
 
+		<div class="hidden lg:flex flex-row items-center justify-end gap-4" id="primary-menu">
 		<?php
 		wp_nav_menu(
 			array(
 				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-				'items_wrap'     => '<ul id="%1$s" class="%2$s menu" aria-label="submenu">%3$s</ul>',
+				'menu_id'        => '',
+				'items_wrap'     => '<ul id="%1$s" class="%2$s flex flex-col gap-8 lg:flex-row lg:justify-center lg:items-center lg:gap-4" aria-label="submenu">%3$s</ul>',
 			)
 		);
 		if( ! empty( $bando ) ): ?>
@@ -58,6 +59,7 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 				<?= __('Bando','wanda') . ' ' . date("Y"); ?>
 			</a>
 		<?php endif; ?>
+		</div>
 	</nav><!-- #site-navigation -->
 
 </header><!-- #masthead -->

@@ -212,21 +212,155 @@ function wanda_current_year( ) {
 	return date('Y');
 }
 
+add_shortcode('year', 'wanda_current_year');
+
+
+/** Returns the end date to enroll */
+function wanda_data_ultima() {
+
+    if ( function_exists( 'get_field' ) ) { 
+        $data = get_field( 'data_scadenza_iscrizioni', 'options' );
+        
+        if ( $data ) {
+            return date_i18n( 'j F Y', strtotime( $data ) );
+        }
+    }
+    
+    // Fallback se ACF non c'è o il campo è vuoto
+    return __('data da definirsi', 'wanda');
+}
+
+add_shortcode('data_ultima', 'wanda_data_ultima');
+
+
+/**
+ * return NULL | True | False;
+ */
+function wanda_is_past_enrollment_date() {
+	if ( !function_exists( 'get_field' ) ) return NULL;
+
+	$data_scadenza = get_field( 'data_scadenza_iscrizioni', 'options' ) ;
+ 	if ( !$data_scadenza ) return NULL;
+
+	// se il tempo trascorso fino ad adesso è maggiore del tempo trascorso fino alla data_scadenza, le iscrizioni sono già concluse
+	return time() > strtotime( $data_scadenza ); 
+}
+
+
+
+/**
+ * Countdown alla data iscrizioni
+ */
+function wanda_countdown_scadenza() {
+    if ( !function_exists( 'get_field' ) ) return '';
+
+    $data_scadenza = get_field( 'data_scadenza_iscrizioni', 'options' );
+    if ( !$data_scadenza ) return '<p>' . __('Data non disponibile', 'wanda') . '</p>';
+
+	/* translators: %s: estensione della parola giorni per screen reader */
+	$label_days = sprintf(__('g%s', 'wanda'), '<span class="sr-only">' . __('iorni', 'wanda') . '</span>');
+    $label_hours = sprintf(__('h%s', 'wanda'), '<span class="sr-only">' . __('ore', 'wanda') . '</span>');
+    $label_mins = sprintf(__('m%s', 'wanda'), '<span class="sr-only">' . __('inuti', 'wanda') . '</span>');
+    $label_secs = sprintf(__('s%s', 'wanda'), '<span class="sr-only">' . __('econdi', 'wanda') . '</span>');
+
+    $iso_date = date('c', strtotime($data_scadenza));
+	$id = uniqid();
+
+    ob_start(); 
+    ?>
+    <div class="wanda-countdown">
+        <div class="wanda-timer mx-auto w-fit" 
+			 id="wanda-timer-<?= $id; ?>"
+             data-deadline="<?php echo esc_attr($iso_date); ?>" 
+             role="timer" 
+             aria-live="polite" 
+             aria-atomic="true">
+            
+            <span class="unit-group">
+                <span class="number days">00</span>
+                <span class="label"><?= $label_days; ?></span>
+            </span>
+            
+            <span class="unit-group">
+                <span class="number hours">00</span>
+                <span class="label"><?= $label_hours; ?></span>
+            </span>
+
+            <span class="unit-group">
+                <span class="number minutes">00</span>
+                <span class="label"><?= $label_mins; ?></span>
+            </span>
+
+            <span class="unit-group">
+                <span class="number seconds">00</span>
+                <span class="label"><?= $label_secs; ?></span>
+            </span>
+        </div>
+        
+        <div class="bg-red-100 text-red-950 border-l-4 border-red-900 p-2" id="wanda-expired-<?= $id; ?>" style="display:none;" role="alert">
+            <?php _e('Le iscrizioni sono ufficialmente chiuse.', 'wanda'); ?>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const timerEl = document.getElementById('wanda-timer-<?= $id; ?>');
+        if (!timerEl) return;
+
+        const deadline = new Date(timerEl.getAttribute('data-deadline')).getTime();
+        const expiredEl = document.getElementById('wanda-expired-<?= $id; ?>');
+
+        const updateTimer = setInterval(() => {
+            const now = new Date().getTime();
+            const diff = deadline - now;
+
+            if (diff <= 0) {
+                clearInterval(updateTimer);
+                timerEl.style.display = 'none';
+                expiredEl.style.display = 'block';
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            timerEl.querySelector('.days').textContent = d;
+            timerEl.querySelector('.hours').textContent = h.toString().padStart(2, '0');
+            timerEl.querySelector('.minutes').textContent = m.toString().padStart(2, '0');
+            timerEl.querySelector('.seconds').textContent = s.toString().padStart(2, '0');
+        }, 1000);
+    })();
+    </script>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('countdown_scadenza', 'wanda_countdown_scadenza');
+
+
 /** Returns the latest "edition" of the festival based on the last "edition" post type  published, or the current year */
 function wanda_current_edition() {
 
 	$edtion = get_posts([
 		'numberposts' => 1,
 		'orderby' => 'date',
-		'order' => DESC,
+		'order' => 'DESC',
 		'post_type' => 'edizione',
 		'post_status' => 'publish'
 	]);
-
-	$last_edition = date('Y');
 	if ( ! empty($edition) ){
-		$last_edition = $edition->title;
+		$edition_number = [];
+
+		preg_match(
+			'/^[MDCLXVI]{2,}|[MDCLXVI]{2,}$/i', // search for roman numbers in the string either at the start or end
+			apply_filters( 'the_title', $edition[0]->title ), 
+			$edition_number
+		);
 	}
 
+	$last_edition = ! empty( $edition_number ) ? $edition_number[0] : date('Y');
 	return __('Edizione', 'wanda') . ' ' . $last_edition;
 }
+
+add_shortcode('edizione', 'wanda_current_edition');

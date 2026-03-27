@@ -6,3 +6,8 @@
  *
  * https://tailwindcss.com/docs/adding-custom-styles#adding-custom-utilities
  */
+
+
+ .small-caps {
+    font-variant:small-caps;
+ }

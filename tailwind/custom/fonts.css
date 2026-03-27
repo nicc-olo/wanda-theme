@@ -6,17 +6,19 @@
 
 
  @font-face {
-    font-family: 'DM Serif';
-    src: url('assets/fonts/DM_Serif_Display/DMSerifDisplay-Regular.woff2') format('woff2');
-    font-weight: normal;
+    font-family: 'Cormorant Garamond';
+    src: url('assets/fonts/CormorantGaramond-VariableFont_wght.woff2') format('woff2');
+    font-weight: 300 700;
     font-style: normal;
     font-display: swap;
+    font-feature-settings: "ss09" on, "ss03" on, "lnum" on, "dlig" on, "ordn" on, "case" on;
 }
 
 @font-face {
-    font-family: 'DM Serif';
-    src: url('assets/fonts/DM_Serif_Display/DMSerifDisplay-Italic.woff2') format('woff2');
-    font-weight: normal;
+    font-family: 'Cormorant Garamond';
+    src: url('assets/fonts/CormorantGaramond-Italic-VariableFont_wght.woff2') format('woff2');
+    font-weight: 300 700;
     font-style: italic;
     font-display: swap;
+    font-feature-settings: "ss09" on, "ss03" on, "lnum" on, "dlig" on, "ordn" on, "case" on;
 }

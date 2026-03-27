@@ -68,10 +68,40 @@
 	@apply float-right ml-8;
 }
 
+.wp-block-search__button.wp-element-button,
 .primary-button {
-	@apply border-primary bg-primary hover:bg-primary-900 focus:bg-primary-900 border px-4 py-2 text-white hover:drop-shadow-sm focus:outline-blue-500;
+	@apply border-primary hover:border-primary-100 bg-primary hover:bg-primary-900 focus:bg-primary-900 inline-block border px-4 py-2 text-white transition-all hover:-translate-y-1 hover:text-white hover:drop-shadow-sm focus:-translate-y-1 focus:text-white focus:outline-blue-500;
 }
 
 .secondary-button {
-	@apply border-primary bg-background hover:bg-primary/30 focus:bg-primary/30 text-primary-900 border px-4 py-2 hover:drop-shadow-sm focus:outline-blue-500;
+	@apply border-primary bg-background hover:bg-primary/30 focus:bg-primary/30 text-primary-900 hover:text-primary-900 focus:text-primary-900 inline-block border px-4 py-2 transition-all hover:-translate-y-1 hover:drop-shadow-sm focus:-translate-y-1 focus:outline-blue-500;
+}
+
+.menu > a:hover {
+	@apply underline;
+}
+
+.wp-block-search__input {
+	@apply border-primary-100 text-primary-900 border bg-white p-2;
+}
+
+.widget.widget_block:not(:first-child) {
+	@apply my-6;
+}
+
+.widget .wp-block-heading {
+	font-variant: small-caps;
+}
+
+@scope ( .wanda-countdown ) {
+	.wanda-timer {
+		@apply text-primary font-mono text-xl font-bold;
+	}
+	.unit-group {
+		@apply bg-background-alt mx-2 inline-block px-4 py-2;
+	}
+	.number {
+		@apply font-bold;
+		font-variant-numeric: tabular-nums;
+	}
 }

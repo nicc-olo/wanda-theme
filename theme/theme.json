@@ -15,6 +15,11 @@
 					"name": "Background Alt"
 				},
 				{
+					"slug": "muted",
+					"color": "#5a5a5f",
+					"name": "Muted"
+				},
+				{
 					"slug": "foreground",
 					"color": "#404040",
 					"name": "Foreground"
@@ -38,26 +43,26 @@
 		"typography": {
 			"fontFamilies": [
 				{
-				"fontFamily": "\"DM Serif\"",
-				"name": "DM Serif",
-				"slug": "dm-serif",
+				"fontFamily": "\"Cormorant Garamond\"",
+				"name": "Cormorant Garamond",
+				"slug": "cormorant-garamond",
 				"fontFace": [
 					{
-						"fontFamily": "DM Serif",
+						"fontFamily": "Cormorant Garamond",
 						"fontStyle": "normal",
-						"src": [ "file:./assets/fonts/DM_Serif_Display/DMSerifDisplay-Regular.woff2" ]
+						"src": [ "file:./assets/fonts/CormorantGaramond-VariableFont_wght.woff2" ]
 					},
 					{
-						"fontFamily": "DM Serif",
+						"fontFamily": "Cormorant Garamond",
 						"fontStyle": "italic",
-						"src": [ "file:./assets/fonts/DM_Serif_Display/DMSerifDisplay-Italic.woff2" ]
+						"src": [ "file:./assets/fonts/CormorantGaramond-Italic-VariableFont_wght.woff2" ]
 					}
 				]
 				}
 			]
 		},
 		"layout": {
-			"contentSize": "46rem",
+			"contentSize": "52rem",
 			"wideSize": "80rem"
 		}
 	}

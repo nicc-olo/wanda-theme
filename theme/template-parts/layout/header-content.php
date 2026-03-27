@@ -12,11 +12,9 @@ $banner = get_field( 'banner', 'options' );    // group: testo (wysiwyg), banner
 $bando  = get_field( 'bando', 'options' );    // file (return: array)
 
 if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
-	
 <div class="bg-tertiary text-white/90 text-center p-2 text-sm font-sans" role="banner" aria-live="polite" >
-	<?= wp_kses_post($banner['testo']) ?>
+	<?= wp_kses_post( do_shortcode( $banner['testo'] ) ); ?>
 </div>
-
 <?php endif; ?>
 
 <header id="masthead" class="flex flex-row items-center justify-between px-2 py-4 max-w-wide mx-auto border-b border-foreground/15">
@@ -26,21 +24,21 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 		$wanda_description = get_bloginfo( 'description', 'display' );
 		if ( $wanda_description || is_customize_preview() ) :
 			?>
-			<p class="italic text-primary-900 leading-none"><?php echo $wanda_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<p class="italic font-title font-light text-primary-900 leading-none"><?php echo $wanda_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 		<?php endif; ?>
 
 		<?php
 		if ( is_front_page() ) :
 			?>
-			<h1 class="font-bold uppercase text-primary"><?php bloginfo( 'name' ); ?></h1>
+			<h1 class="font-bold font-title uppercase text-primary"><?php bloginfo( 'name' ); ?></h1>
 			<?php
 		else :
 			?>
-			<p class="font-bold uppercase text-primary"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+			<p class="font-bold font-title uppercase text-primary"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 		<?php endif; ?>
 	</div>
 
-	<nav id="site-navigation" class="flex flex-row justify-end items-center gap-2" aria-label="<?php esc_attr_e( 'Navigazione principale', 'wanda' ); ?>">
+	<nav id="site-navigation" class="flex flex-row justify-end items-center gap-4" aria-label="<?php esc_attr_e( 'Navigazione principale', 'wanda' ); ?>">
 		<!-- <button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu principale', 'wanda' ); ?></button> -->
 
 		<?php
@@ -48,7 +46,7 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 			array(
 				'theme_location' => 'menu-1',
 				'menu_id'        => 'primary-menu',
-				'items_wrap'     => '<ul id="%1$s" class="%2$s" aria-label="submenu">%3$s</ul>',
+				'items_wrap'     => '<ul id="%1$s" class="%2$s menu" aria-label="submenu">%3$s</ul>',
 			)
 		);
 		if( ! empty( $bando ) ): ?>

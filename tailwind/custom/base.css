@@ -1,3 +1,4 @@
+/* tailwindcss */
 /**
  * Custom styles to immediately follow Tailwind’s `base` layer
  */
@@ -8,4 +9,23 @@
  */
 body {
 	@apply bg-background text-foreground font-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply font-title text-primary-900 font-bold;
+}
+
+a[target="_blank"]::after {
+	content: "";
+	display: inline-block;
+	height: 1rem;
+	width: 1rem;
+	vertical-align: middle;
+	background: currentColor;
+	mask: url("data:image/svg+xml,%3Csvg width='1rem' height='1rem' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='M0 0h48v48H0z' fill='none'/%3E%3Cpolygon points='44,30 40,30 40,38 8,38 8,10 20,10 20,6 4,6 4,42 44,42 '/%3E%3Cpolygon points='26,26.828 40,12.828 40,24 44,24 44,6 26,6 26,10 37.172,10 23.172,24'/%3E%3C/svg%3E");
 }

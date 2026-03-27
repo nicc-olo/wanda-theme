@@ -62,6 +62,9 @@ if ( ! function_exists( 'wanda_setup' ) ) :
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
 
+		// Add custom logo support in the Customizer.
+		add_theme_support( 'custom-logo' );
+
 		/*
 		 * Let WordPress manage the document title.
 		 * By adding theme support, we declare that this theme does not use a
@@ -80,8 +83,9 @@ if ( ! function_exists( 'wanda_setup' ) ) :
 		// This theme uses wp_nav_menu() in two locations.
 		register_nav_menus(
 			array(
-				'menu-1' => __( 'Primary', 'wanda' ),
-				'menu-2' => __( 'Footer Menu', 'wanda' ),
+				'menu-1' => __( 'Principale', 'wanda' ),
+				'menu-2' => __( 'Footer', 'wanda' ),
+				'menu-3' => __( 'Legale', 'wanda'),
 			)
 		);
 

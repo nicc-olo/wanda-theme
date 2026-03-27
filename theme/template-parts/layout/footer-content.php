@@ -35,7 +35,7 @@
 	<div>
 		<?php
 		$wanda_blog_info = get_bloginfo( 'name' );
-		if ( ! empty( $copyright ) ): echo __($copyright);
+		if ( ! empty( $copyright ) ): echo do_shortcode($copyright);
 		elseif ( ! empty( $wanda_blog_info ) ) :
 			?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>,
@@ -43,7 +43,7 @@
 		endif;
 		?>
 		<br />
-		<a class="opacity-50 transition-all text-inherit no-underline hover:underline focus:underline focus:opacity-100" href="https://nicc-olo.com" rel="nofollow">Credits: <span class="sr-only">olo</span> <attr title="OLO" aria-hidden="true">o&iota;͜&sigma;</attr></a>
+		<a class="opacity-50 font-sans text-sm transition-all text-inherit no-underline hover:underline focus:underline focus:opacity-100" href="https://nicc-olo.com" rel="nofollow">Credits: <span class="sr-only">olo</span> <attr title="OLO" aria-hidden="true">o&iota;͜&sigma;</attr></a>
 	</div>
 
 </footer><!-- #colophon -->

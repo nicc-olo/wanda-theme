@@ -204,3 +204,29 @@ function wanda_html5_comment( $comment, $args, $depth ) {
 		</article><!-- .comment-body -->
 	<?php
 }
+
+
+
+/** Returns the current year  */
+function wanda_current_year( ) {
+	return date('Y');
+}
+
+/** Returns the latest "edition" of the festival based on the last "edition" post type  published, or the current year */
+function wanda_current_edition() {
+
+	$edtion = get_posts([
+		'numberposts' => 1,
+		'orderby' => 'date',
+		'order' => DESC,
+		'post_type' => 'edizione',
+		'post_status' => 'publish'
+	]);
+
+	$last_edition = date('Y');
+	if ( ! empty($edition) ){
+		$last_edition = $edition->title;
+	}
+
+	return __('Edizione', 'wanda') . ' ' . $last_edition;
+}

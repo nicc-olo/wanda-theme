@@ -156,7 +156,7 @@ if ( $last_edition->have_posts() ) {
 		?>
 		<section id="final-cta" class="bg-primary-900 text-white flex md:flex-row mx-auto max-w-content my-12 p-12 gap-4">
 			<?php if ( ! empty( $homepage['cta_finale_img'] ) ) : ?>
-				<img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" role="presentation" loading="lazy" />
+				<img src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" role="presentation" loading="lazy" />
 			<?php endif; ?>
 			<div>
 				<?php if ( ! empty($homepage['cta_finale_titolo'])): ?>

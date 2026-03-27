@@ -63,3 +63,12 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 	</nav><!-- #site-navigation -->
 
 </header><!-- #masthead -->
+
+
+<?php
+
+if ( function_exists( 'rank_math_the_breadcrumbs' ) && ! is_front_page() ): ?>
+<div class="px-2 py-4 max-w-wide mx-auto">
+	<?php rank_math_the_breadcrumbs(); ?>
+</div>
+<?php endif; ?>

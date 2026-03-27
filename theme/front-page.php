@@ -154,11 +154,11 @@ if ( $last_edition->have_posts() ) {
 		<?php
 		if ( $homepage ): 
 		?>
-		<section id="final-cta" class="bg-primary-900 text-white flex md:flex-row mx-auto max-w-content my-12 p-12 gap-4">
+		<section id="final-cta" class="bg-primary-900 text-white flex flex-col md:flex-row justify-between mx-auto max-w-content my-12 p-6 gap-4">
 			<?php if ( ! empty( $homepage['cta_finale_img'] ) ) : ?>
-				<img src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" role="presentation" loading="lazy" />
+				<img class="max-w-4/12" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" role="presentation" loading="lazy" />
 			<?php endif; ?>
-			<div>
+			<div class="p-6">
 				<?php if ( ! empty($homepage['cta_finale_titolo'])): ?>
 					<h2 class="text-primary-100 text-4xl italic font-regular small-caps">
 						<?= sanitize_text_field( $homepage['cta_finale_titolo'] ); ?>

@@ -14,7 +14,7 @@
 	<header class="entry-header">
 		<?php
 		if ( is_sticky() && is_home() && ! is_paged() ) {
-			printf( '<span">%s</span>', esc_html_x( 'Featured', 'post', 'wanda' ) );
+			printf( '<span">%s</span>', esc_html_x( 'In evidenza', 'post', 'wanda' ) );
 		}
 		if ( is_singular() ) :
 			the_title( '<h1 class="entry-title">', '</h1>' );
@@ -32,7 +32,7 @@
 
 		wp_link_pages(
 			array(
-				'before' => '<div>' . __( 'Pages:', 'wanda' ),
+				'before' => '<div>' . __( 'Pagine:', 'wanda' ),
 				'after'  => '</div>',
 			)
 		);

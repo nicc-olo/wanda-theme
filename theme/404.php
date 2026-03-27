@@ -15,11 +15,11 @@ get_header();
 
 			<div>
 				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'Page Not Found', 'wanda' ); ?></h1>
+					<h1 class="page-title"><?php esc_html_e( 'Pagina non trovata', 'wanda' ); ?></h1>
 				</header><!-- .page-header -->
 
 				<div <?php wanda_content_class( 'page-content' ); ?>>
-					<p><?php esc_html_e( 'This page could not be found. It might have been removed or renamed, or it may never have existed.', 'wanda' ); ?></p>
+					<p><?php esc_html_e( 'Impossibile trovare questa pagina. Potrebbe essere stata rimossa, rinominata o non essere mai esistita.', 'wanda' ); ?></p>
 					<?php get_search_form(); ?>
 				</div><!-- .page-content -->
 			</div>

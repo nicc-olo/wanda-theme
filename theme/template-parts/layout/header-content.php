@@ -40,8 +40,8 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 		<?php endif; ?>
 	</div>
 
-	<nav id="site-navigation" class="flex flex-row justify-end items-center gap-2" aria-label="<?php esc_attr_e( 'Main Navigation', 'wanda' ); ?>">
-		<!-- <button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'wanda' ); ?></button> -->
+	<nav id="site-navigation" class="flex flex-row justify-end items-center gap-2" aria-label="<?php esc_attr_e( 'Navigazione principale', 'wanda' ); ?>">
+		<!-- <button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu principale', 'wanda' ); ?></button> -->
 
 		<?php
 		wp_nav_menu(

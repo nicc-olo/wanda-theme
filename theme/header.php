@@ -24,7 +24,7 @@
 <?php wp_body_open(); ?>
 
 <div id="page">
-	<a href="#content" class="sr-only"><?php esc_html_e( 'Skip to content', 'wanda' ); ?></a>
+	<a href="#content" class="sr-only"><?php esc_html_e( 'Passa al contenuto', 'wanda' ); ?></a>
 
 	<?php get_template_part( 'template-parts/layout/header', 'content' ); ?>
 

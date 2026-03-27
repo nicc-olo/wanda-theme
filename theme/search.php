@@ -20,7 +20,7 @@ get_header();
 				printf(
 					/* translators: 1: search result title. 2: search term. */
 					'<h1 class="page-title">%1$s <span>%2$s</span></h1>',
-					esc_html__( 'Search results for:', 'wanda' ),
+					esc_html__( 'Risultati della ricerca per:', 'wanda' ),
 					get_search_query()
 				);
 				?>

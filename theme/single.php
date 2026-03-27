@@ -24,11 +24,11 @@ get_header();
 					// Previous/next post navigation.
 					the_post_navigation(
 						array(
-							'next_text' => '<span aria-hidden="true">' . __( 'Next Post', 'wanda' ) . '</span> ' .
-								'<span class="sr-only">' . __( 'Next post:', 'wanda' ) . '</span> <br/>' .
+							'next_text' => '<span aria-hidden="true">' . __( 'Prossimo articolo', 'wanda' ) . '</span> ' .
+								'<span class="sr-only">' . __( 'Prossimo articolo:', 'wanda' ) . '</span> <br/>' .
 								'<span>%title</span>',
-							'prev_text' => '<span aria-hidden="true">' . __( 'Previous Post', 'wanda' ) . '</span> ' .
-								'<span class="sr-only">' . __( 'Previous post:', 'wanda' ) . '</span> <br/>' .
+							'prev_text' => '<span aria-hidden="true">' . __( 'Articolo precedente', 'wanda' ) . '</span> ' .
+								'<span class="sr-only">' . __( 'Articolo precedente:', 'wanda' ) . '</span> <br/>' .
 								'<span>%title</span>',
 						)
 					);

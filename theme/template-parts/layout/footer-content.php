@@ -19,7 +19,7 @@
 	<?php endif; ?>
 
 	<?php if ( has_nav_menu( 'menu-2' ) ) : ?>
-		<nav aria-label="<?php esc_attr_e( 'Footer Menu', 'wanda' ); ?>">
+		<nav aria-label="<?php esc_attr_e( 'Menu del Footer', 'wanda' ); ?>">
 			<?php
 			wp_nav_menu(
 				array(

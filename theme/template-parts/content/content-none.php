@@ -19,7 +19,7 @@
 				printf(
 					/* translators: 1: search result title. 2: search term. */
 					'<h1 class="page-title">%1$s <span>%2$s</span></h1>',
-					esc_html__( 'Search results for:', 'wanda' ),
+					esc_html__( 'Risultati della ricerca per:', 'wanda' ),
 					get_search_query()
 				);
 				?>
@@ -27,7 +27,7 @@
 
 		<?php else : ?>
 
-			<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'wanda' ); ?></h1>
+			<h1 class="page-title"><?php esc_html_e( 'Nessun risultato', 'wanda' ); ?></h1>
 
 		<?php endif; ?>
 	</header><!-- .page-header -->
@@ -38,14 +38,14 @@
 			?>
 
 			<p>
-				<?php esc_html_e( 'Your site is set to show the most recent posts on your homepage, but you haven&rsquo;t published any posts.', 'wanda' ); ?>
+				<?php esc_html_e( 'Il tuo sito è impostato per mostrare gli articoli più recenti nella pagina iniziale, ma non hai ancora pubblicato nulla.', 'wanda' ); ?>
 			</p>
 
 			<p>
 				<a href="<?php echo esc_url( admin_url( 'edit.php' ) ); ?>">
 					<?php
 					/* translators: 1: link to WP admin new post page. */
-					esc_html_e( 'Add or publish posts', 'wanda' );
+					esc_html_e( 'Aggiungi o pubblica articoli', 'wanda' );
 					?>
 				</a>
 			</p>
@@ -55,7 +55,7 @@
 			?>
 
 			<p>
-				<?php esc_html_e( 'Your search generated no results. Please try a different search.', 'wanda' ); ?>
+				<?php esc_html_e( 'La tua ricerca non ha prodotto risultati. Prova a effettuare una ricerca diversa.', 'wanda' ); ?>
 			</p>
 
 			<?php
@@ -64,7 +64,7 @@
 			?>
 
 			<p>
-				<?php esc_html_e( 'No content matched your request.', 'wanda' ); ?>
+				<?php esc_html_e( 'Nessun contenuto corrisponde alla tua richiesta.', 'wanda' ); ?>
 			</p>
 
 			<?php

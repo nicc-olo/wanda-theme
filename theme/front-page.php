@@ -15,7 +15,6 @@ $homepage  = get_field( 'homepage', 'options' ); // group: descrizione_del_sito,
 ?>
 
 	<section id="primary" class="mt-8>
-    <h2> HSHSHSHS </h2>
 		<main id="main">
 
 			<?php

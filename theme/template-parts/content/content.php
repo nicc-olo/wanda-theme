@@ -9,7 +9,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('max-w-content mx-auto my-12'); ?>>
 
 	<?php wanda_post_thumbnail(); ?>
 

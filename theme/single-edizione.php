@@ -30,7 +30,7 @@ $loghi_sostenitori 	= get_field('edizione_lista_sostenitori'); // gallery
 $anno_edizione 		= $data_serata->format('Y'); 
 $orario_serata		= $data_serata->format('H:i');
 $giorno_serata 		= date_i18n('j F', $data_serata->getTimestamp()); // data tradotta wp
-$is_past_event_date = false;//new DateTime() > $data_serata;
+$is_past_event_date = new DateTime() > $data_serata;
 
 // TAG per filtrare i finalisti
 $tag_edizione = get_the_terms(get_the_ID(), 'tag-edizione');
@@ -234,11 +234,37 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			</section> <!-- #giuria -->
 			<section role="tabpanel" id="finalisti" aria-labelledby="finalisti-control" <?= $active_tab == 'finalisti' ? '' : 'hidden'; ?>>
 				<?php if ($is_past_event_date): ?>
-					<h2 class="entry-title text-center"><?php _e('Vincitori del Concorso','wanda'); ?></h2>
-					<div class="posts-grid">
-					</div>
-				<?php endif; ?>
+					<h2 class="entry-title text-center mb-2"><?php _e('I vincitori del Concorso','wanda'); ?></h2>
+					<p class="text-center text-lg"><?php _e('E gli altri finalisti','wanda'); ?></p>
+				<?php else: ?>
 				<h2 class="entry-title text-center"><?php _e('I Finalisti','wanda'); ?></h2>
+				<?php endif; ?>
+				<div class="posts-grid">
+				<?php if ( $tag_edizione_id ) {
+					$finalisti_query = new WP_Query( array(
+						'post_type'      => 'finalista',
+						'posts_per_page' => -1,
+						'post_status'    => 'publish',
+						'tax_query'      => array(
+							array(
+								'taxonomy' => 'tag-edizione',
+								'field'    => 'term_id',
+								'terms'    => $tag_edizione_id,
+							),
+						),
+						'meta_key'       => 'finalista_ha_vinto_concorso',
+						'orderby'        => 'meta_value_num',
+						'order'          => 'DESC',
+					) );
+					while ( $finalisti_query->have_posts() ) { 
+						$finalisti_query->the_post();
+						get_template_part( 'template-parts/content/content', 'finalista', [
+							'finalista_id' => $finalisti_query->post->ID
+						]);
+					}
+					wp_reset_postdata();
+				} ?>
+				</div>
 			</section> <!-- #finalisti -->
 			<section role="tabpanel" id="sostenitori" aria-labelledby="sostenitori-control" <?= $active_tab == 'sostenitori' ? '' : 'hidden'; ?>>
 				<h2 class="entry-title text-center"><?php _e('Patrocini e Sostenitori','wanda'); ?></h2>

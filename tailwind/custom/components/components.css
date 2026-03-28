@@ -74,7 +74,7 @@
 }
 
 .secondary-button {
-	@apply border-primary bg-background hover:bg-primary/30 focus:bg-primary/30 text-primary-900 hover:text-primary-900 focus:text-primary-900 inline-block border px-4 py-2 transition-all hover:-translate-y-1 hover:drop-shadow-sm focus:-translate-y-1 focus:outline-blue-500;
+	@apply border-primary bg-background hover:bg-secondary-50 focus:bg-secondary-50 text-primary-900 hover:text-primary-900 focus:text-primary-900 inline-block border px-4 py-2 transition-all hover:-translate-y-1 hover:drop-shadow-sm focus:-translate-y-1 focus:outline-blue-500;
 }
 
 .widget.widget_block a,
@@ -107,11 +107,15 @@
 	}
 }
 
+.prose h2.wp-block-heading {
+	@apply text-4xl;
+}
+
 .posts-grid {
 	@apply grid grid-flow-col gap-4 md:grid-cols-3;
 }
 .posts-grid .post {
-	@apply bg-primary-50 border border-transparent p-4 transition-all;
+	@apply border-2 border-transparent bg-neutral-100 p-6 transition-all;
 }
 .posts-grid .post img {
 	aspect-ratio: 1;
@@ -121,7 +125,23 @@
 	@apply m-0 text-center;
 }
 
+.posts-grid .post .entry-title {
+	@apply mb-1;
+}
+
 .posts-grid .post:has(a:hover),
 .posts-grid .post:has(a:focus) {
-	@apply border-primary-100 -translate-y-0.5 drop-shadow-sm;
+	@apply border-b-primary -translate-y-0.5 border-neutral-200 drop-shadow-xs;
+}
+
+.promotori a > img {
+	@apply mt-0 mb-2 max-w-48;
+}
+
+.promotori a {
+	@apply inline-block transition-all hover:-translate-y-0.5 hover:underline focus:-translate-y-0.5;
+}
+
+.promotori a:has(> img) {
+	@apply my-4 block;
 }

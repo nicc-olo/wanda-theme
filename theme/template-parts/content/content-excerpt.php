@@ -26,8 +26,4 @@
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php wanda_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
-
 </article><!-- #post-${ID} -->

@@ -12,11 +12,14 @@ get_header();
 
 $luogo_serata 		= get_field('edizione_luogo'); // testo
 $data_serata 		= DateTime::createFromFormat('Y-m-d H:i:s', get_field('edizione_data_serata')); // data Y-m-d H:i:s (required)
+$promosso_da 		= get_field('edizione_promosso_da'); // WYSIWYG Editor 
+$ingresso 			= get_field('edizione_ingresso'); // testo
 $presentatore 		= get_field('edizione_presentatore'); // testo
 $esibizione 		= get_field('edizione_esibizione'); // WYSIWYG Editor 
 $finalisti 			= get_field('edizione_finalisti'); // WYSIWYG Editor 
-$giuria 			= get_field('edizione_giuria'); // WYSIWYG Editor 
-$commissione 		= get_field('edizione_commissione'); // WYSIWYG Editor 
+$giuria_intro 		= get_field('edizione_giuria_wysiwyg'); // WYSIWYG Editor 
+$giuria_list 		= get_field('edizione_giuria_relationship'); // Relationship 
+$giuria_comm_list 	= get_field('edizione_commissione_relationship'); // WYSIWYG Editor 
 $altre_informazioni = get_field('edizione_altre_informazioni'); // WYSIWYG Editor 
 $regolamento 		= get_field('edizione_regolamento'); // WYSIWYG Editor 
 $file_regolamento 	= get_field('edizione_regolamento_file'); // file 
@@ -27,13 +30,23 @@ $loghi_sostenitori 	= get_field('edizione_lista_sostenitori'); // gallery
 $anno_edizione 		= $data_serata->format('Y'); 
 $orario_serata		= $data_serata->format('H:i');
 $giorno_serata 		= date_i18n('j F', $data_serata->getTimestamp()); // data tradotta wp
-$is_past_event_date = new DateTime() > $data_serata;
+$is_past_event_date = false;//new DateTime() > $data_serata;
 
+// TAG per filtrare i finalisti
+$tag_edizione = get_the_terms(get_the_ID(), 'tag-edizione');
+if ( $tag_edizione ) {
+	$tag_edizione_id = $tag_edizione[0]->term_id;
+} else {
+	$tag_edizione_id = null;
+}
+
+
+// TODO
 // ?scheda=tabId
 $active_tab = filter_input(INPUT_GET, 'scheda', FILTER_SANITIZE_SPECIAL_CHARS);
 $accepted_tabs = [
 	'intro',
-	'info',
+	'news',
 	'programma',
 	'iscrizione',
 	'giuria',
@@ -69,8 +82,8 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					<li><button role="tab" aria-controls="intro" id="intro-control" aria-selected="<?= $active_tab == 'intro'; ?>">
 						<?php _e('Introduzione','wanda'); ?>
 					</button></li>
-					<li><button role="tab" aria-controls="info" id="info-control" aria-selected="<?= $active_tab == 'info'; ?>">
-						<?php _e('Info Evento','wanda'); ?>
+					<li><button role="tab" aria-controls="news" id="news-control" aria-selected="<?= $active_tab == 'news'; ?>">
+						<?php _e('News e Info','wanda'); ?>
 					</button></li>
 					<li><button role="tab" aria-controls="programma" id="programma-control" aria-selected="<?= $active_tab == 'programma'; ?>">
 						<?php _e('Programma','wanda'); ?>
@@ -99,45 +112,137 @@ if (! in_array($active_tab, $accepted_tabs)) {
 
 			<?php /* INTRO: Featured Image + Contenuto del post */ ?>
             <section role="tabpanel" id="intro" aria-labelledby="intro-control" <?= $active_tab == 'intro' ? '' : 'hidden'; ?>>
-				<div class="flex flex-col-reverse items-start gap-6 lg:flex-row">
-					<?php if ( has_post_thumbnail() ) {
-						the_post_thumbnail( 'large', array( 'class' => 'w-full max-w-prose h-auto object-contain' ) );
-					} ?>
-					<div class="w-prose">
-					<?php
-					/* Start the Loop */
-					while ( have_posts() ) :
-						the_post();
-						get_template_part( 'template-parts/content/content-minimal', 'single' );
-						// End the loop.
-					endwhile;
-					?>
-					</div>
+				<div class="w-prose">
+				<?php
+				/* Start the Loop */
+				while ( have_posts() ) :
+					the_post();
+					get_template_part( 'template-parts/content/content-minimal', 'single' );
+					// End the loop.
+				endwhile;
+				?>
 				</div>
             </section> <!-- #intro -->
-			<section role="tabpanel" id="info" aria-labelledby="info-control" <?= $active_tab == 'info' ? '' : 'hidden'; ?>>
-				<h2 class="entry-title text-center"><?php _e('Informazioni sull&apos;evento','wanda'); ?></h2>
-			</section> <!-- #info -->
+			<section role="tabpanel" id="news" aria-labelledby="news-control" <?= $active_tab == 'news' ? '' : 'hidden'; ?>>
+				<h2 class="entry-title text-center"><?php _e('Ultime informazioni e novità su quest&apos;edizione','wanda'); ?></h2>
+				<div class="posts-grid">
+				<?php  
+					$news_query = new WP_Query( array(
+						'post_type' => 'post',
+						'posts_per_page' => 9,
+						'paged' => 1,
+						'orderby' => 'date',
+						'order' => 'DESC',
+						'taxonomy' => 'tag-edizione',
+					) );
+					while ( $news_query->have_posts() ) {
+						$news_query->the_post();
+						get_template_part( 'template-parts/content/content-excerpt', 'page' );
+					}
+					wp_reset_postdata();
+				?>
+				</div>
+			</section> <!-- #news -->
 			<section role="tabpanel" id="programma" aria-labelledby="programma-control" <?= $active_tab == 'programma' ? '' : 'hidden'; ?>>
-				<h2 class="entry-title text-center"><?php _e('Il programma della serata','wanda'); ?></h2>
+				<div class="flex flex-col-reverse items-start gap-6 lg:flex-row">
+					<?php if ( has_post_thumbnail() ) {
+						the_post_thumbnail( 'large', array( 'class' => 'sticky top-20 w-full max-w-prose h-auto object-contain' ) );
+					} ?>
+					<div class="w-prose">
+						<h2 class="entry-title text-center"><?php _e('Informazioni sulla serata','wanda'); ?></h2>
+						<div class="p-4 bg-slate-50 my-6 w-full">
+							<h3 class="small-caps text-xl mb-2"><?php _e('Data dell&apos;evento','wanda'); ?></h3>
+							<p class="text-lg my-2"><?php printf(
+								__('Il Concorso si svolgerà il %s alle ore %s','wanda'),
+								'<strong>' . $giorno_serata . '</strong>',
+								'<strong>' . $orario_serata . '</strong>',
+							); ?></p>
+							<p class="my-2 italic"><?php echo wp_kses(do_shortcode($ingresso), wanda_allowed_html()); ?></p>
+						</div>
+						<div class="p-4 bg-slate-50 my-6 w-full">
+							<h3 class="small-caps text-xl mb-2"><?php _e('Luogo dell&apos;evento','wanda'); ?></h3>
+							<p class="my-2"><?php echo $luogo_serata; ?></p>
+							<a class="primary-button my-4" href="https://maps.google.com/?q=<?php echo urlencode($luogo_serata); ?>" target="_blank" rel="noopener nofollow noreferrer">
+								<?php _e('Visualizza su Google Maps','wanda'); ?>
+							</a>
+						</div>
+						<div class="mb-6 p-4 bg-slate-50 w-full">
+							<h3 class="small-caps text-xl mb-2"><?php _e('Promosso da','wanda'); ?></h3>
+							<div class="prose promotori">
+								<?php echo wp_kses($promosso_da, wanda_allowed_html()); ?>
+							</div>
+						</div>
+						<div class="my-6 p-4 bg-slate-50 w-full">
+							<h3 class="text-2xl text-center"> <?php _e('Il programma della serata','wanda'); ?></h3>
+							<h4 class="text-lg mt-4"><?php _e('A presentare la serata','wanda'); ?></h4>
+							<p class="font-bold"><?php echo $presentatore; ?></p>
+							<h4 class="text-lg mt-4"><?php _e('Esibizione','wanda'); ?></h4>
+							<?php echo wp_kses($esibizione, wanda_allowed_html()); ?>
+							<h4 class="text-lg mt-4"> <?php _e('A seguire si esibiranno i finalisti','wanda'); ?></p>
+							<?php echo wp_kses($finalisti, wanda_allowed_html()); ?>
+						</div>
+						<?php if ( $giuria_intro ): ?>
+							<div class="my-6 bg-slate-50 p-4 w-full">
+								<h3 class="text-2xl text-center"><?php _e('La Giuria','wanda'); ?></h3>
+								<div class="w-prose mx-auto max-w-content mb-8">
+									<?php echo wp_kses($giuria_intro, wanda_allowed_html(true)); ?>
+								</div>
+							</div>
+						<?php endif; ?>
+						<?php if ( $altre_informazioni ): ?>
+						<div class="prose p-4 bg-slate-50 my-6 w-full">
+							<?php echo wp_kses($altre_informazioni, wanda_allowed_html(true)); ?>
+						</div>
+						<?php endif; ?>
+					</div>
+				</div>
 			</section> <!-- #programma -->
-			<?php if ( ! $is_past_event_date ): ?>
+			<?php if ( !$is_past_event_date ): ?>
 			<section role="tabpanel" id="iscrizione" aria-labelledby="iscrizione-control" <?= $active_tab == 'iscrizione' ? '' : 'hidden'; ?>>
 				<h2 class="entry-title text-center"><?php _e('Come partecipare al concorso','wanda'); ?></h2>
+				<a href="<?php echo $file_regolamento['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="secondary-button mx-auto block w-fit">
+					<?php _e('Scarica il bando','wanda'); ?>
+				</a>
+				<?php if ( $regolamento ): ?>
+				<div class="prose max-w-content mx-auto my-6 w-full">
+					<?php echo wp_kses_post($regolamento); ?>
+				</div>
+				<?php endif; ?>
 			</section> <!-- #iscrizione -->
 			<?php endif; ?>
 			<section role="tabpanel" id="giuria" aria-labelledby="giuria-control" <?= $active_tab == 'giuria' ? '' : 'hidden'; ?>>
-				<h2 class="entry-title text-center"><?php _e('La Giuria','wanda'); ?></h2>
+				<?php if ( $giuria_list ): ?>
+					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La Giuria','wanda'); ?></h2>
+					<div class="posts-grid lg:grid-cols-4 place-items-center">
+					<?php foreach ( $giuria_list as $giudice ) {
+						get_template_part( 'template-parts/content/content', 'giudice', [
+							'giudice_id' => $giudice->ID
+						]);
+					}?>
+					</div>
+				<?php endif; ?>
+				<?php if ( $giuria_comm_list ): ?>
+					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La Commissione di selezione','wanda'); ?></h2>
+					<div class="posts-grid lg:grid-cols-4 place-items-center">
+						<?php foreach ( $giuria_comm_list as $giudice ) {
+							get_template_part( 'template-parts/content/content', 'giudice', [
+								'giudice_id' => $giudice->ID
+							]);
+						}?>
+					</div>
+				<?php endif; ?>
 			</section> <!-- #giuria -->
 			<section role="tabpanel" id="finalisti" aria-labelledby="finalisti-control" <?= $active_tab == 'finalisti' ? '' : 'hidden'; ?>>
 				<?php if ($is_past_event_date): ?>
 					<h2 class="entry-title text-center"><?php _e('Vincitori del Concorso','wanda'); ?></h2>
+					<div class="posts-grid">
+					</div>
 				<?php endif; ?>
 				<h2 class="entry-title text-center"><?php _e('I Finalisti','wanda'); ?></h2>
 			</section> <!-- #finalisti -->
 			<section role="tabpanel" id="sostenitori" aria-labelledby="sostenitori-control" <?= $active_tab == 'sostenitori' ? '' : 'hidden'; ?>>
 				<h2 class="entry-title text-center"><?php _e('Patrocini e Sostenitori','wanda'); ?></h2>
-				<p class="w-prose my-2">
+				<p class="max-w-content mx-auto my-2">
 					<?php 
 					/** translators: edizione, definizioe concorso, nome concorso */
 					printf(
@@ -147,12 +252,22 @@ if (! in_array($active_tab, $accepted_tabs)) {
 						'<em>' . apply_filters( 'bloginfo', get_bloginfo( 'title' ) ) . '</em>'
 					); ?>
 				</p>
-				<div class="max-w-wide flex flex-col lg:flex-row gap-4">
-					<div class="border border-primary bg-background-alt p-8">
-						<h3 class="text-primary text-center small-caps">Con il patrocinio di:</h3>
+				<div class="max-w-wide flex flex-col lg:flex-row gap-4 mt-8">
+					<div class="border border-tertiary bg-neutral-50 p-8">
+						<h3 class="text-primary text-center small-caps mb-4">Con il patrocinio di:</h3>
+						<div class="flex flex-col gap-4">
+							<?php foreach ( $loghi_patrocini as $logo ) {
+								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain' ) );
+							} ?>
+						</div>
 					</div>
 					<div class="p-8">
-						<h3 class="text-primary text-center small-caps">Con il sostegno di:</h3>
+						<h3 class="text-primary text-center small-caps mb-4">Con il sostegno di:</h3>
+						<div class="grid grid-auto-fit-fill grid-flow-col gap-4">
+							<?php foreach ( $loghi_patrocini as $logo ) {
+								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain' ) );
+							} ?>
+						</div>
 					</div>
 				</div>
 			</section> <!-- #sostenitori -->

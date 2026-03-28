@@ -11,6 +11,8 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
+	<?php wanda_post_thumbnail(); ?>
+
 	<header class="entry-header">
 		<?php
 		if ( is_sticky() && is_home() && ! is_paged() ) {
@@ -23,8 +25,6 @@
 		endif;
 		?>
 	</header><!-- .entry-header -->
-
-	<?php wanda_post_thumbnail(); ?>
 
 	<div <?php wanda_content_class( 'entry-content' ); ?>>
 		<?php

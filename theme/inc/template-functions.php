@@ -127,9 +127,9 @@ function wanda_html5_comment( $comment, $args, $depth ) {
 	$show_pending_links = ! empty( $commenter['comment_author'] );
 
 	if ( $commenter['comment_author_email'] ) {
-		$moderation_note = __( 'Your comment is awaiting moderation.', 'wanda' );
+		$moderation_note = __( 'Il tuo commento è in attesa di moderazione.', 'wanda' );
 	} else {
-		$moderation_note = __( 'Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved.', 'wanda' );
+		$moderation_note = __( 'Il tuo commento è in attesa di moderazione. Questo è un&apos;anteprima; il tuo commento sarà visibile dopo che sarà stato approvato.', 'wanda' );
 	}
 	?>
 	<<?php echo esc_attr( $tag ); ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $comment->has_children ? 'parent' : '', $comment ); ?>>
@@ -150,7 +150,7 @@ function wanda_html5_comment( $comment, $args, $depth ) {
 
 					printf(
 						/* translators: %s: Comment author link. */
-						wp_kses_post( __( '%s <span class="says">says:</span>', 'wanda' ) ),
+						wp_kses_post( __( '%s <span class="says">dice:</span>', 'wanda' ) ),
 						sprintf( '<b class="fn">%s</b>', wp_kses_post( $comment_author ) )
 					);
 					?>
@@ -165,14 +165,14 @@ function wanda_html5_comment( $comment, $args, $depth ) {
 						esc_html(
 							sprintf(
 							/* translators: 1: Comment date, 2: Comment time. */
-								__( '%1$s at %2$s', 'wanda' ),
+								__( '%1$s alle ore %2$s', 'wanda' ),
 								get_comment_date( '', $comment ),
 								get_comment_time()
 							)
 						)
 					);
 
-					edit_comment_link( __( 'Edit', 'wanda' ), ' <span class="edit-link">', '</span>' );
+					edit_comment_link( __( 'Modifica', 'wanda' ), ' <span class="edit-link">', '</span>' );
 					?>
 				</div><!-- .comment-metadata -->
 
@@ -231,6 +231,48 @@ function wanda_data_ultima() {
 }
 
 add_shortcode('data_ultima', 'wanda_data_ultima');
+
+
+
+/** Shortcode per mostrare i contatti */
+function wanda_contatti($atts) {
+
+    $pairs = [
+        'tipo' => 'email', // default: email
+    ];
+	if ( isset($atts[0]) ) {
+        $pairs['tipo'] = $atts[0]; // tipo: email, numero_di_telefono
+    }
+    $atts = shortcode_atts($pairs, $atts, 'contatto');
+
+    $allowed_types = ['email', 'numero_di_telefono'];
+    if ( ! in_array($atts['tipo'], $allowed_types, true) ) {
+        return 'tipo di contatto non valido'; 
+    }
+
+
+    $value = get_field( $atts['tipo'], 'options' );
+
+    if ( ! $value ) {
+        return 'N/A';
+    }
+
+    if ( $atts['tipo'] === 'email' ) {
+        $clean_email = antispambot($value);
+        return '<a href="mailto:' . $clean_email . '">' . $clean_email . '</a>';
+    }
+
+    if ( $atts['tipo'] === 'numero_di_telefono' ) {
+        // Remove spaces/dashes for the tel: link
+        $tel_link = preg_replace('/[^0-9+]/', '', $value);
+        return '<a href="tel:' . esc_attr($tel_link) . '">' . esc_html($value) . '</a>';
+    }
+
+    return esc_html($value);
+}
+
+add_shortcode('contatto', 'wanda_contatti');
+
 
 
 /**
@@ -409,3 +451,34 @@ function wanda_current_edition() {
 }
 
 add_shortcode('edizione', 'wanda_current_edition');
+
+
+
+
+
+function wanda_allowed_html($allow_titles = false) {
+
+    $allowed_html = wp_kses_allowed_html('post');
+
+    // Tags to STRIP (Layout, Media, and specific Headers)
+    $strip_tags = [
+        'h1', 
+        'div', 'section', 'article', 'aside', 'main', 'header', 'footer', // Layout
+        'video', 'audio', 'track', 'source', // Media
+        'iframe', 'object', 'embed',         // Iframes/Embeds
+        'canvas', 'math'             		 // Scriptable/Complex graphics
+    ];
+
+	if ( ! $allow_titles ) { // other title restrictions
+		$strip_tags[] = 'h2';
+		$strip_tags[] = 'h3';
+	}
+
+    foreach ($strip_tags as $tag) {
+        if (isset($allowed_html[$tag])) {
+            unset($allowed_html[$tag]);
+        }
+    }
+
+    return $allowed_html;
+}

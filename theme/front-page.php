@@ -151,7 +151,7 @@ if ( $last_edition->have_posts() ) {
 				while ( $query->have_posts() ) : 
 					$query->the_post();
 					
-					get_template_part( 'template-parts/content/content-title', 'page' );
+					get_template_part( 'template-parts/content/content', 'title' );
 			
 				endwhile; // End of the loop.
 				wp_reset_postdata(); // Restores the global $post object

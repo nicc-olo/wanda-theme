@@ -20,7 +20,7 @@ $_id = $args['giudice_id'] ?? get_the_ID();
             'class' => 'block w-full h-auto max-h-96 aspect-3/5 object-cover' 
         ) ); ?>
     <?php else : ?>
-        <div class="block aspect-3/5 h-full max-h-96 w-full from-primary-100 to-secondary-100 bg-linear-to-b"></div>
+        <div class="block aspect-3/5 h-full max-h-96 w-full bg-linear-to-b from-primary-100 to-secondary-100"></div>
     <?php endif; ?>
 
 	<header class="entry-header mt-4">

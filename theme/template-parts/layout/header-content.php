@@ -12,35 +12,35 @@ $banner = get_field( 'banner', 'options' );    // group: testo (wysiwyg), banner
 $bando  = get_field( 'bando', 'options' );    // file (return: array)
 
 if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
-<div class="bg-tertiary text-white/90 text-center p-2 text-sm font-sans" role="banner" aria-live="polite" >
+<div class="bg-tertiary p-2 text-center font-sans text-sm text-white/90" role="banner" aria-live="polite" >
 	<?= wp_kses_post( do_shortcode( $banner['testo'] ) ); ?>
 </div>
 <?php endif; ?>
 
-<header id="masthead" class="flex flex-row items-center justify-between px-2 py-4 max-w-wide mx-auto border-b border-foreground/15">
+<header id="masthead" class="mx-auto flex max-w-wide flex-row items-center justify-between border-b border-foreground/15 px-2 py-4">
 
 	<div>
 		<?php
 		$wanda_description = get_bloginfo( 'description', 'display' );
 		if ( $wanda_description || is_customize_preview() ) :
 			?>
-			<p class="italic font-title font-light text-primary-900 leading-none"><?php echo $wanda_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<p class="font-title leading-none font-light text-primary-900 italic"><?php echo $wanda_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 		<?php endif; ?>
 
 		<?php
 		if ( is_front_page() ) :
 			?>
-			<h1 class="font-bold font-title uppercase text-primary"><?php bloginfo( 'name' ); ?></h1>
+			<h1 class="font-title font-bold text-primary uppercase"><?php bloginfo( 'name' ); ?></h1>
 			<?php
 		else :
 			?>
-			<p class="font-bold font-title uppercase text-primary"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+			<p class="font-title font-bold text-primary uppercase"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 		<?php endif; ?>
 	</div>
 
 	<input aria-hidden="true" type="checkbox" id="menu-state" />
-	<nav id="site-navigation" class="relative flex flex-row justify-end items-center gap-4" aria-label="<?php esc_attr_e( 'Navigazione principale', 'wanda' ); ?>">
-		<div class="hamburger-button transition-transform hover:cursor-pointer hover:scale-105 hover:bg-primary-50 p-4">
+	<nav id="site-navigation" class="relative flex flex-row items-center justify-end gap-4" aria-label="<?php esc_attr_e( 'Navigazione principale', 'wanda' ); ?>">
+		<div class="hamburger-button p-4 transition-transform hover:scale-105 hover:cursor-pointer hover:bg-primary-50">
 			<a class="menu-open" role="button" href="#menu-state" aria-controls="primary-menu" aria-expanded="false">
 				<span class="sr-only"><?= __('Apri il menu','wanda'); ?></span>
 			</a>
@@ -77,7 +77,7 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 
 <?php
 if ( function_exists( 'rank_math_the_breadcrumbs' ) && ! is_front_page() ): ?>
-<div class="px-2 py-4 max-w-wide mx-auto">
+<div class="mx-auto max-w-wide px-2 py-4">
 	<?php rank_math_the_breadcrumbs(); ?>
 </div>
 <?php endif; ?>

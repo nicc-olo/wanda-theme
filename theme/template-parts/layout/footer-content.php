@@ -12,9 +12,9 @@
 ?>
 
 <footer id="colophon" class="bg-neutral-100 text-muted">
-	<div class="mx-auto max-w-wide py-6 flex flex-row flex-wrap gap-8 justify-between items-start">
+	<div class="mx-auto flex max-w-wide flex-row flex-wrap items-start justify-between gap-8 py-6">
 
-		<div class="flex flex-row max-w-6/12 gap-4 items-start">
+		<div class="flex max-w-6/12 flex-row items-start gap-4">
 			<?php if ( has_custom_logo() ) {
 				$logo = get_theme_mod( 'custom_logo' );
 				$image = wp_get_attachment_image_src( $logo , 'full' );
@@ -29,7 +29,7 @@
 
 		<?php if ( has_nav_menu( 'menu-2' ) ) : ?>
 			<div>
-			<h2 class="text-lg small-caps mb-4"><?php _e('Link utili','wanda'); ?></h2>
+			<h2 class="small-caps mb-4 text-lg"><?php _e('Link utili','wanda'); ?></h2>
 			<nav aria-label="<?php esc_attr_e( 'Menu del Footer', 'wanda' ); ?>">
 				<?php
 				wp_nav_menu(
@@ -45,7 +45,7 @@
 		<?php endif; ?>
 		<?php if ( has_nav_menu( 'menu-4' ) ) : ?>
 			<div>
-			<h2 class="text-lg small-caps mb-4"><?php _e('Link Social','wanda'); ?></h2>
+			<h2 class="small-caps mb-4 text-lg"><?php _e('Link Social','wanda'); ?></h2>
 			<nav aria-label="<?php esc_attr_e( 'Menu dei social', 'wanda' ); ?>">
 				<?php
 				wp_nav_menu(
@@ -63,7 +63,7 @@
 
 	</div>
 
-	<div class="text-center font-sans bg-primary text-primary-100 text-sm p-3 border-t-2 border-secondary">
+	<div class="border-t-2 border-secondary bg-primary p-3 text-center font-sans text-sm text-primary-100">
 		<?php
 		$wanda_blog_info = get_bloginfo( 'name' );
 		if ( ! empty( $copyright ) ): echo wp_kses_post( do_shortcode( $copyright ) );
@@ -73,7 +73,7 @@
 			<?php
 		endif;
 		?>
-		<nav class="flex flex-row justify-center items-center mt-2 gap-4 opacity-50 text-xs transition-all text-inherit focus:opacity-100">
+		<nav class="mt-2 flex flex-row items-center justify-center gap-4 text-xs text-inherit opacity-50 transition-all focus:opacity-100">
 			<?php
 				wp_nav_menu(
 				array(

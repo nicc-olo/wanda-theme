@@ -10,6 +10,9 @@
 		}
 	}
 	@media (max-width: 996px) {
+		.hamburger-menu {
+			@apply z-50;
+		}
 		.hamburger-button {
 			display: block;
 			position: relative;

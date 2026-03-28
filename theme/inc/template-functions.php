@@ -339,28 +339,73 @@ function wanda_countdown_scadenza() {
 add_shortcode('countdown_scadenza', 'wanda_countdown_scadenza');
 
 
-/** Returns the latest "edition" of the festival based on the last "edition" post type  published, or the current year */
+function wanda_get_edition_details( $post_id = null ) {
+    // 1. If no ID is provided, find the last edition
+    if ( ! $post_id ) {
+        $last_edition = new WP_Query( array(
+            'post_type'           => 'edizione',
+            'posts_per_page'      => 1,
+            'meta_key'            => 'edizione_data_serata',
+            'orderby'             => 'meta_value',
+            'order'               => 'DESC',
+            'post_status'         => 'publish',
+            'fields'              => 'ids', // Performance: only get IDs
+            'no_found_rows'       => true,
+        ) );
+
+        if ( $last_edition->have_posts() ) {
+            $post_id = $last_edition->posts[0];
+        } else {
+            return false; // No editions found
+        }
+    }
+
+    $data_raw = get_field( 'edizione_data_serata', $post_id ); // Y-m-d H:i:s
+    
+    if ( ! $data_raw ) return false;
+
+    $date_obj = DateTime::createFromFormat( 'Y-m-d H:i:s', $data_raw );
+
+    if ( ! $date_obj ) return false;
+
+    // 4. Return an easy-to-use array of data
+    return array(
+        'id'           => $post_id,
+        'url'          => get_permalink( $post_id ),
+        'title'        => get_the_title( $post_id ),
+        'year'         => $date_obj->format( 'Y' ),
+        'time'         => $date_obj->format( 'H.i' ),
+        'date_display' => date_i18n( 'j F', $date_obj->getTimestamp() ), // Translated
+        'is_past'      => ( new DateTime() > $date_obj ),
+        'raw_obj'      => $date_obj // For custom
+    );
+}
+
+
+/** Returns the latest "edition" of the festival based on the last "edition" post type, or the current year */
 function wanda_current_edition() {
 
-	$edtion = get_posts([
-		'numberposts' => 1,
-		'orderby' => 'date',
-		'order' => 'DESC',
-		'post_type' => 'edizione',
-		'post_status' => 'publish'
-	]);
+	$edition = wanda_get_edition_details();
+
+	if ( ! $edition ) {
+        return __('Edizione', 'wanda') . ' ' . date('Y');
+    }
+
+	$edition_number = [];
+
 	if ( ! empty($edition) ){
 		$edition_number = [];
 
 		preg_match(
 			'/^[MDCLXVI]{2,}|[MDCLXVI]{2,}$/i', // search for roman numbers in the string either at the start or end
-			apply_filters( 'the_title', $edition[0]->title ), 
+			$edition['title'], 
 			$edition_number
 		);
 	}
 
-	$last_edition = ! empty( $edition_number ) ? $edition_number[0] : date('Y');
-	return __('Edizione', 'wanda') . ' ' . $last_edition;
+	$display_value = ! empty( $edition_number ) ? strtoupper($edition_number[0]) : $edition['year'];
+
+	return __('Edizione', 'wanda') . ' ' . $display_value;
 }
 
 add_shortcode('edizione', 'wanda_current_edition');

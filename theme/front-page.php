@@ -13,25 +13,37 @@ get_header();
 $homepage  = get_field( 'homepage', 'options' ); // group: descrizione_del_sito, foto_slider_principale, cta_finale_*
 $bando     = get_field( 'bando', 'options' ); 
 
-
-// orderby date DESC = ultima pubblicata; per ordinare per anno ACF usa meta_value_num + meta_key anno.
 $last_edition = new WP_Query(
-	array(
-		'post_status'         => 'publish',
-		'post_type'           => 'edizione',
-		'posts_per_page'      => 1,
-		'orderby'             => 'date',
-		'order'               => 'DESC',
-		'ignore_sticky_posts' => true,
-		'no_found_rows'       => true,
-	)
+    array(
+        'post_status'         => 'publish',
+        'post_type'           => 'edizione',
+        'posts_per_page'      => 1,
+        'meta_key'            => 'edizione_data_serata', // Y-m-d H:i:s (required)
+        'orderby'             => 'meta_value',
+        'order'               => 'DESC',
+        'ignore_sticky_posts' => true,
+        'no_found_rows'       => true,
+    )
 );
 
 $last_edition_URL = '#';
+$is_past_event_date = false;
+
 if ( $last_edition->have_posts() ) {
-	$last_edition->the_post();
-	$last_edition_URL = get_permalink();
-	wp_reset_postdata();
+    $last_edition->the_post();
+    
+    $last_edition_URL = get_permalink();
+    
+    $date_raw = get_field('edizione_data_serata', get_the_ID());
+    
+    if ($date_raw) {
+        $event_date = DateTime::createFromFormat('Y-m-d H:i:s', $date_raw);
+        if ($event_date) {
+            $is_past_event_date = new DateTime() > $event_date;
+        }
+    }
+
+    wp_reset_postdata();
 }
 
 ?>
@@ -52,7 +64,7 @@ if ( $last_edition->have_posts() ) {
 				href="<?= $last_edition_URL; ?>">
 					<?= __( 'Guarda l&apos;', 'wanda' ) . do_shortcode( '[edizione]' ); ?>
 				</a>
-				<?php if( ! empty( $bando ) ): ?>
+				<?php if( ! empty( $bando ) && ! $is_past_event_date ): ?>
 				<a 
 				class="primary-button bg-primary-900 border-primary-900 text-white"
 				href="<?php esc_html_e($bando); ?>"

@@ -1,0 +1,58 @@
+.tab-nav-list {
+	list-style: none;
+	scrollbar-width: thin; /* Firefox */
+	scrollbar-color: var(--color-neutral-400) transparent; /* Firefox */
+	-webkit-overflow-scrolling: touch;
+}
+
+.tab-nav-list::-webkit-scrollbar {
+	height: 1px;
+}
+
+.tab-nav-list::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.tab-nav-list::-webkit-scrollbar-thumb {
+	background-color: var(--color-primary);
+	border-radius: 1px;
+}
+
+nav:has(> .tab-nav-list).is-overflowing::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 120px;
+	height: 100%;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	opacity: 1;
+}
+
+nav.is-overflowing.nav-end-scroll::after {
+	opacity: 0;
+}
+
+.tab-nav-list li button {
+	@apply text-primary-900 block cursor-pointer p-4;
+}
+.tab-nav-list li {
+	@apply min-w-fit border-b-2 border-transparent transition-all;
+}
+.tab-nav-list li:has(button:hover, button:focus) {
+	@apply border-primary -translate-y-0.5 bg-white;
+}
+
+.tab-nav-list li:has(button[aria-selected="true"]) {
+	@apply border-secondary;
+}
+
+section[role="tabpanel"]:not([hidden]) {
+	@apply block! px-2 py-12;
+}
+
+section[role="tabpanel"][hidden] {
+	@apply hidden;
+}

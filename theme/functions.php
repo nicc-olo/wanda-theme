@@ -86,6 +86,7 @@ if ( ! function_exists( 'wanda_setup' ) ) :
 				'menu-1' => __( 'Principale', 'wanda' ),
 				'menu-2' => __( 'Footer', 'wanda' ),
 				'menu-3' => __( 'Legale', 'wanda'),
+				'menu-4' => __( 'Social', 'wanda'),
 			)
 		);
 
@@ -150,6 +151,7 @@ add_action( 'widgets_init', 'wanda_widgets_init' );
 function wanda_scripts() {
 	wp_enqueue_style( 'wanda-style', get_stylesheet_uri(), array(), WANDA_VERSION );
 	wp_enqueue_script( 'wanda-script', get_template_directory_uri() . '/js/script.min.js', array(), WANDA_VERSION, true );
+	wp_enqueue_script( 'wanda-tabs-script', get_template_directory_uri() . '/js/tabs-automatic.min.js', array(), WANDA_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

@@ -8,28 +8,62 @@
  */
 
  $copyright = get_field( 'copyright', 'options' );
+ $descrizione = get_field( 'breve_descrizione_del_sito', 'options' );
 ?>
 
-<footer id="colophon" class="bg-background-alt text-muted">
-	<div class="mx-auto max-w-wide py-6">
+<footer id="colophon" class="bg-neutral-100 text-muted">
+	<div class="mx-auto max-w-wide py-6 flex flex-row flex-wrap gap-8 justify-between items-start">
+
+		<div class="flex flex-row max-w-6/12 gap-4 items-start">
+			<?php if ( has_custom_logo() ) {
+				$logo = get_theme_mod( 'custom_logo' );
+				$image = wp_get_attachment_image_src( $logo , 'full' );
+				echo '<img src='. $image[0] .' alt="" role="presentation" class="custom-logo object-scale-down max-w-48 block">';
+			} ?>
+
+			<div>
+				<h2 class="text-lg"><em><?php bloginfo('description'); ?></em> <strong><?php bloginfo('name'); ?></strong></h2>
+				<p class="text-sm italic"><?= wp_kses($descrizione, array('strong','b','i','em')) ?></p>
+			</div>
+		</div>
 
 		<?php if ( has_nav_menu( 'menu-2' ) ) : ?>
+			<div>
+			<h2 class="text-lg small-caps mb-4"><?php _e('Link utili','wanda'); ?></h2>
 			<nav aria-label="<?php esc_attr_e( 'Menu del Footer', 'wanda' ); ?>">
 				<?php
 				wp_nav_menu(
 					array(
 						'theme_location' => 'menu-2',
-						'menu_class'     => 'footer-menu menu flex flex-row justify-center items-center gap-4',
+						'menu_class'     => 'footer-menu menu flex flex-col gap-2',
 						'depth'          => 1,
 					)
 				);
 				?>
 			</nav>
+			</div>
 		<?php endif; ?>
+		<?php if ( has_nav_menu( 'menu-4' ) ) : ?>
+			<div>
+			<h2 class="text-lg small-caps mb-4"><?php _e('Link Social','wanda'); ?></h2>
+			<nav aria-label="<?php esc_attr_e( 'Menu dei social', 'wanda' ); ?>">
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'menu-4',
+						'menu_class'     => 'social-menu menu flex flex-col gap-2',
+						'depth'          => 1,
+					)
+				);
+				?>
+			</nav>
+			</div>
+		<?php endif; ?>
+
 
 	</div>
 
-	<div class="text-center font-sans bg-primary text-primary-100 text-sm p-2">
+	<div class="text-center font-sans bg-primary text-primary-100 text-sm p-3 border-t-2 border-secondary">
 		<?php
 		$wanda_blog_info = get_bloginfo( 'name' );
 		if ( ! empty( $copyright ) ): echo wp_kses_post( do_shortcode( $copyright ) );
@@ -39,7 +73,7 @@
 			<?php
 		endif;
 		?>
-		<nav class="flex flex-row justify-center items-center gap-4 opacity-50 text-xs transition-all text-inherit focus:opacity-100">
+		<nav class="flex flex-row justify-center items-center mt-2 gap-4 opacity-50 text-xs transition-all text-inherit focus:opacity-100">
 			<?php
 				wp_nav_menu(
 				array(

@@ -319,8 +319,8 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					</div>
 					<div class="p-8">
 						<h3 class="text-primary text-center small-caps mb-4">Con il sostegno di:</h3>
-						<div class="grid grid-auto-fit-fill grid-flow-col gap-4">
-							<?php foreach ( $loghi_patrocini as $logo ) {
+						<div class="grid auto-cols-auto grid-flow-col gap-4">
+							<?php foreach ( $loghi_sostenitori as $logo ) {
 								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain' ) );
 							} ?>
 						</div>

@@ -109,7 +109,7 @@ if ( ! function_exists( 'wanda_entry_meta' ) ) :
 			sprintf(
 				wp_kses(
 				/* translators: %s: Name of current post. Only visible to screen readers. */
-					__( 'Edit <span class="sr-only">%s</span>', 'wanda' ),
+					__( 'Modifica <span class="sr-only">%s</span>', 'wanda' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -143,7 +143,7 @@ if ( ! function_exists( 'wanda_entry_footer' ) ) :
 				printf(
 				/* translators: 1: posted in label, only visible to screen readers. 2: list of categories. */
 					'<span><span class="sr-only">%1$s</span>%2$s</span>',
-					esc_html__( 'Posted in', 'wanda' ),
+					esc_html__( 'Postato in', 'wanda' ),
 					$categories_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}
@@ -170,7 +170,7 @@ if ( ! function_exists( 'wanda_entry_footer' ) ) :
 			sprintf(
 				wp_kses(
 				/* translators: %s: Name of current post. Only visible to screen readers. */
-					__( 'Edit <span class="sr-only">%s</span>', 'wanda' ),
+					__( 'Modifica <span class="sr-only">%s</span>', 'wanda' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -261,8 +261,8 @@ if ( ! function_exists( 'wanda_the_posts_navigation' ) ) :
 		the_posts_pagination(
 			array(
 				'mid_size'  => 2,
-				'prev_text' => __( 'Newer posts', 'wanda' ),
-				'next_text' => __( 'Older posts', 'wanda' ),
+				'prev_text' => __( 'Articoli più recenti', 'wanda' ),
+				'next_text' => __( 'Articoli più vecchi', 'wanda' ),
 			)
 		);
 	}

@@ -15,7 +15,7 @@ if ( ! defined( 'WANDA_VERSION' ) ) {
 	 * to create your production build, the value below will be replaced in the
 	 * generated zip file with a timestamp, converted to base 36.
 	 */
-	define( 'WANDA_VERSION', '0.1.1' );
+	define( 'WANDA_VERSION', '0.1.2' );
 }
 
 if ( ! defined( 'WANDA_TYPOGRAPHY_CLASSES' ) ) {
@@ -235,3 +235,8 @@ require get_template_directory() . '/inc/custom-post-types.php';
  * Custom menu walker for this theme.
  */
 require get_template_directory() . '/inc/template-menu.php';
+
+/**
+ * Custom shortcodes for this theme.
+ */
+require get_template_directory() . '/inc/template-shortcodes.php';

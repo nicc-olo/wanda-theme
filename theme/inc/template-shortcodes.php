@@ -253,3 +253,51 @@ function wanda_current_edition() {
 
 add_shortcode('edizione', 'wanda_current_edition');
 
+
+// Shortcode per creare una galleria con Swiper.js:
+// [gallery]<img src="..." /><img src="..." /><img src="..." />[/gallery]
+function wanda_swiper_gallery( $atts, $content = null ) {
+    if ( empty( $content ) ) {
+        return '';
+    }
+
+    preg_match_all( '/<img\b[^>]*>/i', $content, $matches );
+
+    if ( empty( $matches[0] ) ) {
+        return '';
+    }
+
+    $allowed_img_attrs = array(
+        'src'      => true,
+        'srcset'   => true,
+        'sizes'    => true,
+        'alt'      => true,
+        'class'    => true,
+        'id'       => true,
+        'width'    => true,
+        'height'   => true,
+        'loading'  => true,
+        'decoding' => true,
+        'title'    => true,
+    );
+
+    $output = '<div class="swiper">';
+    $output .= '<div class="swiper-wrapper">';
+
+    foreach ( $matches[0] as $img_tag ) {
+        $output .= '<div class="swiper-slide">';
+        $output .= wp_kses( $img_tag, array( 'img' => $allowed_img_attrs ) );
+        $output .= '</div>';
+    }
+
+    $output .= '</div>';
+    $output .= '<div class="swiper-pagination"></div>';
+    $output .= '<div class="swiper-button-prev"></div>';
+    $output .= '<div class="swiper-button-next"></div>';
+    $output .= '<div class="autoplay-progress"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"></circle></svg><span></span></div>';
+    $output .= '</div>';
+
+    return $output;
+}
+
+add_shortcode('gallery', 'wanda_swiper_gallery');

@@ -79,7 +79,8 @@
 				array(
 					'theme_location' => 'menu-3',
 					'menu_id'        => 'legal-menu',
-					'items_wrap'     => '<ul id="%1$s" class="%2$s flex flex-row gap-4" aria-label="submenu">%3$s</ul>',
+					'menu_class'     => 'flex flex-row gap-4',
+					'items_wrap'     => '<ul id="%1$s" class="%2$s flex flex-row gap-4" aria-label="menu dei documenti legali">%3$s</ul>',
 
 				)
 			);

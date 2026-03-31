@@ -199,7 +199,7 @@
 		array(
 			'key' => 'field_69c572956d893',
 			'label' => 'Altre informazioni',
-			'name' => 'altre_informazioni',
+			'name' => 'edizione_altre_informazioni',
 			'aria-label' => '',
 			'type' => 'wysiwyg',
 			'instructions' => 'Per altre informazioni varie, es:\nA cura di..., In ricordo di...',
@@ -454,7 +454,7 @@
 		array(
 			'key' => 'field_69c5739253c88',
 			'label' => 'Regolamento (testo)',
-			'name' => 'regolamento',
+			'name' => 'edizione_regolamento',
 			'aria-label' => '',
 			'type' => 'wysiwyg',
 			'instructions' => '',
@@ -475,7 +475,7 @@
 		array(
 			'key' => 'field_69c5735b53c87',
 			'label' => 'Regolamento (documento scaricabile)',
-			'name' => 'regolamento_file',
+			'name' => 'edizione_regolamento_file',
 			'aria-label' => '',
 			'type' => 'file',
 			'instructions' => '',
@@ -496,7 +496,7 @@
 		array(
 			'key' => 'field_69c573bd53c89',
 			'label' => 'Catalogo',
-			'name' => 'catalogo_file',
+			'name' => 'edizione_catalogo_file',
 			'aria-label' => '',
 			'type' => 'file',
 			'instructions' => '',
@@ -535,7 +535,7 @@
 		array(
 			'key' => 'field_69c579910beeb',
 			'label' => 'Patrocini',
-			'name' => 'lista_patrocini',
+			'name' => 'edizione_lista_patrocini',
 			'aria-label' => '',
 			'type' => 'gallery',
 			'instructions' => 'Loghi degli enti patrocinatori',
@@ -563,7 +563,7 @@
 		array(
 			'key' => 'field_69c579d70beec',
 			'label' => 'Sostenitori',
-			'name' => 'lista_sostenitori',
+			'name' => 'edizione_lista_sostenitori',
 			'aria-label' => '',
 			'type' => 'gallery',
 			'instructions' => 'Loghi dei sostenitori privati',

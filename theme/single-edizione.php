@@ -283,7 +283,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 						]);
 					}?>
 					</div>
-					<h3 class="text-center text-lg"><?php _e('E gli altri finalisti','wanda'); ?></h3>
+					<h3 class="text-center text-xl mt-12 mb-4"><?php _e('E gli altri finalisti','wanda'); ?></h3>
 				<?php else: ?>
 					<h2 class="entry-title text-center"><?php _e('I Finalisti','wanda'); ?></h2>
 				<?php endif; ?>
@@ -317,11 +317,11 @@ if (! in_array($active_tab, $accepted_tabs)) {
 							} ?>
 						</div>
 					</div>
-					<div class="p-8">
+					<div class="bg-neutral-50 p-8">
 						<h3 class="text-primary text-center small-caps mb-4">Con il sostegno di:</h3>
-						<div class="grid auto-cols-auto grid-flow-col gap-4">
+						<div class="gap-4 md:columns-2 lg:columns-3">
 							<?php foreach ( $loghi_sostenitori as $logo ) {
-								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain' ) );
+								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain mb-4' ) );
 							} ?>
 						</div>
 					</div>

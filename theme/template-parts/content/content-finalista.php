@@ -7,16 +7,31 @@
  * @package wanda
  */
 
+$_id = $args['finalista_id'] ?? get_the_ID();
+$posizione_in_classifica = $args['posizione_in_classifica'] ?? get_field('finalista_posizione_in_classifica', $_id);
+$is_winner = in_array((string) $posizione_in_classifica, ['1', '2', '3'], true);
 
-$_id = $args['giudice_id'] ?? get_the_ID();
+$labels = [
+	'1' => '1º Classificato',
+	'2' => '2º Classificato',
+	'3' => '3º Classificato',
+	'0' => 'Partecipante',
+];
+$posizione_label = $labels[(string) $posizione_in_classifica] ?? '';
 
-$posizione_in_classifica = get_field('finalista_posizione_in_classifica', $_id);
-$ha_vinto_concorso = get_field('finalista_ha_vinto_concorso', $_id);
+$border_colors = [
+    '1' => 'border-amber-600',
+    '2' => 'border-slate-500',
+    '3' => 'border-yellow-900',
+    '0' => 'border-transparent',
+];
+$border_color = $border_colors[(string) $posizione_in_classifica] ?? 'border-transparent';
+
 ?>
 
-<article id="post-<?php echo esc_attr( $_id ); ?>" <?php post_class( 'my-4', $_id ); ?>>
+<article id="post-<?php echo esc_attr( $_id ); ?>" <?php post_class( 'my-4', $_id ); ?> data-classifica="<?= esc_attr($posizione_in_classifica); ?>">
 
-    <div class="<?= $ha_vinto_concorso ? 'border-amber-600' : 'border-transparent'; ?> border-2">
+    <div class="border-2 <?= esc_attr($border_color); ?>">
     <?php if ( has_post_thumbnail( $_id ) ) : ?>
         <?php echo get_the_post_thumbnail( $_id, 'medium', array( 
             'alt'   => the_title_attribute( array( 'echo' => false, 'post' => $_id ) ), 
@@ -33,11 +48,11 @@ $ha_vinto_concorso = get_field('finalista_ha_vinto_concorso', $_id);
                 <?php echo get_the_title( $_id ); ?>
             </a>
         </h3>
-        <?php if ( $posizione_in_classifica ) : ?>
-        <p class="small-caps text-bold text-lg text-tertiary">
-            <?= esc_html($posizione_in_classifica); ?>
+        <?php if ( $posizione_label ) : ?>
+        <p class="small-caps text-bold p-2<?= $is_winner ? ' text-primary bg-primary-50' : 'text-gray-600 bg-gray-50' ; ?>">
+            <?= esc_html($posizione_label); ?>
         </p>
         <?php endif; ?>
 	</header><!-- .entry-header -->
 
-</article><!-- #post-${ID} -->
+</article><!-- #post-<?php echo esc_attr( $_id ); ?> -->

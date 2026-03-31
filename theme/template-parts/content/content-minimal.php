@@ -17,4 +17,4 @@
 		?>
 	</div><!-- .entry-content -->
 
-</article><!-- #post-${ID} -->
+</article><!-- #post-<?php the_ID(); ?> -->

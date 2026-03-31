@@ -482,3 +482,41 @@ function wanda_allowed_html($allow_titles = false) {
 
     return $allowed_html;
 }
+
+
+
+// ACF Validation for Repeater (Relationship + Select)
+add_filter('acf/validate_value/name=edizione_finalisti_list', function ($valid, $value, $field, $input) {
+	if ($valid !== true) {
+		return $valid;
+	}
+
+	if (empty($value) || !is_array($value)) {
+		return $valid;
+	}
+
+	$seen = [];
+
+	foreach ($value as $row_index => $row) {
+		// Subfield key from config: field_69cc2c2d3847f (Finalista relationship)
+		$selected = $row['field_69cc2c2d3847f'] ?? null;
+
+		// Relationship with max=1 still often returns array([post_id])
+		if (is_array($selected)) {
+			$selected = reset($selected);
+		}
+
+		$finalista_id = (int) $selected;
+		if (!$finalista_id) {
+			continue;
+		}
+
+		if (isset($seen[$finalista_id])) {
+			return __('Hai selezionato lo stesso finalista più di una volta nella lista.', 'wanda');
+		}
+
+		$seen[$finalista_id] = true;
+	}
+
+	return $valid;
+}, 10, 4);

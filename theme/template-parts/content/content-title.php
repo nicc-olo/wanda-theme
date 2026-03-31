@@ -22,4 +22,4 @@
 		?>
 	</header><!-- .entry-header -->
 
-</article><!-- #post-${ID} -->
+</article><!-- #post-<?php the_ID(); ?> -->

@@ -26,4 +26,4 @@
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-content -->
 
-</article><!-- #post-${ID} -->
+</article><!-- #post-<?php the_ID(); ?> -->

@@ -17,6 +17,7 @@ $ingresso 			= get_field('edizione_ingresso'); // testo
 $presentatore 		= get_field('edizione_presentatore'); // testo
 $esibizione 		= get_field('edizione_esibizione'); // WYSIWYG Editor 
 $finalisti 			= get_field('edizione_finalisti'); // WYSIWYG Editor 
+$finalisti_list_raw = get_field('edizione_finalisti_list'); // Repeater (Relationship + Select)
 $giuria_intro 		= get_field('edizione_giuria_wysiwyg'); // WYSIWYG Editor 
 $giuria_list 		= get_field('edizione_giuria_relationship'); // Relationship 
 $giuria_comm_list 	= get_field('edizione_commissione_relationship'); // WYSIWYG Editor 
@@ -32,13 +33,52 @@ $orario_serata		= $data_serata->format('H:i');
 $giorno_serata 		= date_i18n('j F', $data_serata->getTimestamp()); // data tradotta wp
 $is_past_event_date = new DateTime() > $data_serata;
 
-// TAG per filtrare i finalisti
-$tag_edizione = get_the_terms(get_the_ID(), 'tag-edizione');
-if ( $tag_edizione ) {
-	$tag_edizione_id = $tag_edizione[0]->term_id;
-} else {
-	$tag_edizione_id = null;
+
+// Filter duplicates from $finalisti_list_raw
+$podio_rows = [];   // posizione 1,2,3
+$other_rows = [];   // posizione 0 (or missing/invalid)
+$seen_ids   = [];
+
+foreach ((array) $finalisti_list_raw as $ui_index => $row) {
+	$finalista = $row['finalista'][0] ?? null;
+	if (! $finalista || empty($finalista->ID)) {
+		continue;
+	}
+
+	$id = (int) $finalista->ID;
+	if (isset($seen_ids[$id])) {
+		continue; // dedupe
+	}
+	$seen_ids[$id] = true;
+
+	$pos = (string) ($row['posizione_in_classifica'] ?? '0');
+	$row['_ui_index'] = $ui_index;
+
+	if (in_array($pos, ['1', '2', '3'], true)) {
+		$podio_rows[] = $row;
+	} else {
+		$other_rows[] = $row;
+	}
 }
+
+// Order winners by rank 1 -> 2 -> 3, preserving UI order inside same rank
+$rank = ['1' => 0, '2' => 1, '3' => 2];
+usort($podio_rows, function ($a, $b) use ($rank) {
+	$pa = (string) ($a['posizione_in_classifica'] ?? '0');
+	$pb = (string) ($b['posizione_in_classifica'] ?? '0');
+	$ra = $rank[$pa] ?? 99;
+	$rb = $rank[$pb] ?? 99;
+
+	if ($ra !== $rb) {
+		return $ra <=> $rb;
+	}
+
+	return ($a['_ui_index'] ?? 0) <=> ($b['_ui_index'] ?? 0);
+});
+
+// Keep others in UI order
+usort($other_rows, fn($a, $b) => ($a['_ui_index'] ?? 0) <=> ($b['_ui_index'] ?? 0));
+
 
 
 // TODO
@@ -235,35 +275,25 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			<section role="tabpanel" id="finalisti" aria-labelledby="finalisti-control" <?= $active_tab == 'finalisti' ? '' : 'hidden'; ?>>
 				<?php if ($is_past_event_date): ?>
 					<h2 class="entry-title text-center mb-2"><?php _e('I vincitori del Concorso','wanda'); ?></h2>
-					<p class="text-center text-lg"><?php _e('E gli altri finalisti','wanda'); ?></p>
+					<div class="posts-grid">
+					<?php foreach ( $podio_rows as $row ) {
+						get_template_part( 'template-parts/content/content', 'finalista', [
+							'finalista_id' => $row['finalista'][0]->ID,
+							'posizione_in_classifica' => (string) ($row['posizione_in_classifica'] ?? '0'),
+						]);
+					}?>
+					</div>
+					<h3 class="text-center text-lg"><?php _e('E gli altri finalisti','wanda'); ?></h3>
 				<?php else: ?>
-				<h2 class="entry-title text-center"><?php _e('I Finalisti','wanda'); ?></h2>
+					<h2 class="entry-title text-center"><?php _e('I Finalisti','wanda'); ?></h2>
 				<?php endif; ?>
 				<div class="posts-grid">
-				<?php if ( $tag_edizione_id ) {
-					$finalisti_query = new WP_Query( array(
-						'post_type'      => 'finalista',
-						'posts_per_page' => -1,
-						'post_status'    => 'publish',
-						'tax_query'      => array(
-							array(
-								'taxonomy' => 'tag-edizione',
-								'field'    => 'term_id',
-								'terms'    => $tag_edizione_id,
-							),
-						),
-						'meta_key'       => 'finalista_ha_vinto_concorso',
-						'orderby'        => 'meta_value_num',
-						'order'          => 'DESC',
-					) );
-					while ( $finalisti_query->have_posts() ) { 
-						$finalisti_query->the_post();
-						get_template_part( 'template-parts/content/content', 'finalista', [
-							'finalista_id' => $finalisti_query->post->ID
-						]);
-					}
-					wp_reset_postdata();
-				} ?>
+				<?php foreach ( $other_rows as $row ) {
+					get_template_part( 'template-parts/content/content', 'finalista', [
+						'finalista_id' => $row['finalista'][0]->ID,
+						'posizione_in_classifica' => (string) ($row['posizione_in_classifica'] ?? '0'),
+					]);
+				}?>
 				</div>
 			</section> <!-- #finalisti -->
 			<section role="tabpanel" id="sostenitori" aria-labelledby="sostenitori-control" <?= $active_tab == 'sostenitori' ? '' : 'hidden'; ?>>

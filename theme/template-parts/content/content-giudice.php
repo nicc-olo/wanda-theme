@@ -35,4 +35,4 @@ $_id = $args['giudice_id'] ?? get_the_ID();
         <?php echo wp_trim_words( get_the_excerpt( $_id ), 20, '...' ); ?>
     </div><!-- .entry-content -->
 
-</article><!-- #post-${ID} -->
+</article><!-- #post-<?php echo esc_attr( $_id ); ?> -->

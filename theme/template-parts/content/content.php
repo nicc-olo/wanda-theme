@@ -43,4 +43,4 @@
 		<?php wanda_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 
-</article><!-- #post-${ID} -->
+</article><!-- #post-<?php the_ID(); ?> -->

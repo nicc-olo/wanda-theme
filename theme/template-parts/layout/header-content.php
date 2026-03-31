@@ -59,6 +59,7 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 				'theme_location' => 'menu-1',
 				'menu_id'        => 'primary-menu',
 				'items_wrap'     => '<ul id="%1$s" class="%2$s hamburger-menu" aria-label="submenu">%3$s</ul>',
+				'walker'         => new Wanda_Details_Menu_Walker(),
 			)
 		);
 		if( ! empty( $bando ) ): ?>

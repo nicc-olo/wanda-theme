@@ -20,7 +20,7 @@
 			height: 2.5rem;
 		}
 
-		.hamburger-button :is(label, a) {
+		.hamburger-button :is(label, a, details) {
 			position: absolute;
 			inset: 0;
 		}
@@ -61,12 +61,20 @@
 			@apply border-primary-100 absolute top-10 right-10/12 flex flex-col gap-1 border bg-white drop-shadow-sm;
 		}
 
+		:is(#menu-state:checked, #menu-state:target) ~ nav .hamburger-menu li a,
 		:is(#menu-state:checked, #menu-state:target)
 			~ nav
 			.hamburger-menu
 			li
-			a {
+			summary {
 			@apply hover:bg-primary-50 focus:bg-primary-50 text-primary min-w-64 p-4;
 		}
+	}
+
+	li.menu-item-has-children > details > ul.sub-menu {
+		@apply absolute top-full flex flex-col gap-1 border bg-white drop-shadow-sm;
+	}
+	li.menu-item-has-children > details > ul.sub-menu > li {
+		@apply hover:bg-primary-50 focus:bg-primary-50 text-primary min-w-64 p-4;
 	}
 }

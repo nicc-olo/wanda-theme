@@ -230,3 +230,8 @@ require get_template_directory() . '/inc/template-functions.php';
  * Custom Post Types (ACF).
  */
 require get_template_directory() . '/inc/custom-post-types.php';
+
+/**
+ * Custom menu walker for this theme.
+ */
+require get_template_directory() . '/inc/template-menu.php';

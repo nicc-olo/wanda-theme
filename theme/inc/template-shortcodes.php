@@ -285,7 +285,7 @@ function wanda_swiper_gallery( $atts, $content = null ) {
     $output .= '<div class="swiper-wrapper items-center">';
 
     foreach ( $matches[0] as $img_tag ) {
-        $output .= '<div class="swiper-slide">';
+        $output .= '<div class="swiper-slide max-h-full max-w-full">';
         $output .= wp_kses( $img_tag, array( 'img' => $allowed_img_attrs ) );
         $output .= '</div>';
     }
@@ -311,6 +311,8 @@ function wanda_two_columns( $atts, $content = null ) {
         return '';
     }
 
+    // remove br and p tags
+    $content = preg_replace( '/<br\s*\/?>|<p\s*\/?>/', '', $content );
     return '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' . $content . '</div>';
 }
 

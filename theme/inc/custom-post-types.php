@@ -357,7 +357,7 @@
 				'id' => '',
 			),
 			'layout' => 'table',
-			'pagination' => 0,
+			'pagination' => 0, //  may need to be changed to 1 for larger lists
 			'min' => 0,
 			'max' => 0,
 			'collapsed' => 'field_69cc2c2d3847f',

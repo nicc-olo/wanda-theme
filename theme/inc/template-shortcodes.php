@@ -301,3 +301,17 @@ function wanda_swiper_gallery( $atts, $content = null ) {
 }
 
 add_shortcode('gallery', 'wanda_swiper_gallery');
+
+
+
+/** shortcode per mettere due elementi in colonna  */
+
+function wanda_two_columns( $atts, $content = null ) {
+    if ( empty( $content ) ) {
+        return '';
+    }
+
+    return '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' . $content . '</div>';
+}
+
+add_shortcode('in_linea', 'wanda_two_columns');

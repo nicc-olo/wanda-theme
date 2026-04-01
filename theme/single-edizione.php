@@ -319,7 +319,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					</div>
 					<div class="bg-neutral-50 p-8">
 						<h3 class="text-primary text-center small-caps mb-4">Con il sostegno di:</h3>
-						<div class="gap-4 grid grid-flow-row md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+						<div class="sponsors-grid">
 							<?php foreach ( $loghi_sostenitori as $logo ) {
 								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain mb-4' ) );
 							} ?>

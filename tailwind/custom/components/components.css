@@ -167,3 +167,12 @@
 .page-numbers:is(.prev, .next) {
 	@apply hover:bg-primary-50 focus:bg-primary-100 p-2;
 }
+
+.sponsors-grid {
+	@apply grid grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+.sponsors-grid:first-child,
+.sponsors-grid:nth-child(2) {
+	@apply md:col-span-2 lg:col-span-3 xl:col-span-2;
+}

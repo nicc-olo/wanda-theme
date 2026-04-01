@@ -9,6 +9,7 @@
 
  $copyright = get_field( 'copyright', 'options' );
  $descrizione = get_field( 'breve_descrizione_del_sito', 'options' );
+ $mostra_edizioni_footer = get_field( 'mostra_edizioni_footer', 'options' );
 ?>
 
 <footer id="colophon" class="bg-neutral-100 text-muted">
@@ -41,6 +42,36 @@
 				);
 				?>
 			</nav>
+			</div>
+		<?php endif; ?>
+		<?php if ( $mostra_edizioni_footer ) : ?>
+			<div>
+				<h2 class="small-caps mb-4 text-lg"><?php _e('Edizioni','wanda'); ?></h2>
+				<nav aria-label="<?php esc_attr_e( 'Menu delle edizioni', 'wanda' ); ?>">
+					<ul class="menu flex flex-col gap-2 font-sans">
+					<?php 
+					// wp query latest 5 edizioni
+					$args = array(
+						'post_type' => 'edizione',
+						'posts_per_page' => 5,
+						'orderby' => 'date',
+						'order' => 'DESC',
+						'post_status' => 'publish',
+					);
+					$query = new WP_Query( $args );
+					if ( $query->have_posts() ) :
+						while ( $query->have_posts() ) :
+							$query->the_post();
+							echo '<li class="menu-item"><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+						endwhile;
+					endif;
+					wp_reset_postdata();
+					?>
+					<li>
+						<a href="<?php echo home_url( '/edizioni' ); ?>"><?php _e('Altre edizioni','wanda'); ?></a>
+					</li>
+					</ul>
+				</nav>
 			</div>
 		<?php endif; ?>
 		<?php if ( has_nav_menu( 'menu-4' ) ) : ?>

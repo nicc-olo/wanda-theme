@@ -80,6 +80,7 @@
 	@apply float-right ml-8;
 }
 
+.search-submit,
 .wp-block-search__button.wp-element-button,
 .primary-button {
 	@apply border-primary hover:border-primary-100 bg-primary hover:bg-primary-900 focus:bg-primary-900 inline-block border px-4 py-2 text-white transition-all hover:-translate-y-1 hover:text-white hover:drop-shadow-sm focus:-translate-y-1 focus:text-white focus:outline-blue-500;
@@ -117,6 +118,10 @@
 		@apply font-bold;
 		font-variant-numeric: tabular-nums;
 	}
+}
+
+.search-field {
+	@apply font-sans font-medium;
 }
 
 .prose h2.wp-block-heading {

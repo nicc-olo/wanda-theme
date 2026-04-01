@@ -951,6 +951,27 @@ acf_add_local_field_group( array(
 			'allow_in_bindings' => 0,
 		),
 		array(
+			'key' => 'field_64cexy0e07a03',
+			'label' => 'Mostra menu edizioni (footer)',
+			'name' => 'mostra_edizioni_footer',
+			'aria-label' => '',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => 'Mostra un menu con tutte le edizioni nel footer',
+			'default_value' => 0,
+			'allow_in_bindings' => 0,
+			'ui_on_text' => 'Mostra',
+			'ui_off_text' => 'Non mostrare',
+			'ui' => 1,
+		),
+		array(
 			'key' => 'field_69c7cd950c127',
 			'label' => 'Breve descrizione del sito (footer)',
 			'name' => 'breve_descrizione_del_sito',
@@ -1235,7 +1256,7 @@ add_action( 'init', function() {
 		'search_items' => 'Search Edizioni',
 		'not_found' => 'No edizioni found',
 		'not_found_in_trash' => 'No edizioni found in Trash',
-		'archives' => 'Edizione Archives',
+		'archives' => 'Archivi delle Edizione',
 		'attributes' => 'Edizione Attributes',
 		'insert_into_item' => 'Insert into edizione',
 		'uploaded_to_this_item' => 'Uploaded to this edizione',
@@ -1261,6 +1282,12 @@ add_action( 'init', function() {
 		3 => 'custom-fields',
 	),
 	'delete_with_user' => false,
+	'has_archive' => true,
+	'rewrite' => array(
+		'slug' => 'edizioni-passate',
+		'with_front' => true,
+		'hierarchical' => false,
+	),
 ) );
 
 	register_post_type( 'finalista', array(

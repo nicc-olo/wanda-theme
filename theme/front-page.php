@@ -34,6 +34,8 @@ if ( $last_edition->have_posts() ) {
     
     $last_edition_URL = get_permalink();
     
+	$loghi_patrocini = get_field('edizione_lista_patrocini', get_the_ID());
+
     $date_raw = get_field('edizione_data_serata', get_the_ID());
     
     if ($date_raw) {
@@ -122,6 +124,16 @@ if ( $last_edition->have_posts() ) {
 	<?php endif; ?>
 
 	<section id="primary" class="mt-8">
+		<?php if ( ! empty( $loghi_patrocini ) ) : ?>
+		<aside class="mx-auto max-w-content">
+			<h2 class="sr-only"><?= __('Patrocini dell\'ultima edizione','wanda'); ?></h2>
+			<div class="grid auto-cols-fit gap-4 place-items-center">
+				<?php foreach ( $loghi_patrocini as $logo ) {
+					echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain mb-4 max-w-48' ) );
+				} ?>
+			</div>
+		</aside>
+		<?php endif; ?>
 		<main id="main" class="mx-auto max-w-wide">
 
 			<div class="my-6 flex flex-col justify-between gap-8 md:flex-row px-2">

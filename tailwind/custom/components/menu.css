@@ -82,4 +82,8 @@
 	li.menu-item-has-children > details > ul.sub-menu > li {
 		@apply hover:bg-primary-50 focus:bg-primary-50 text-primary min-w-64 p-4;
 	}
+
+	.menu-item a {
+		@apply inline-block transition-all hover:-translate-y-0.5 hover:underline focus:-translate-y-0.5 focus:underline;
+	}
 }

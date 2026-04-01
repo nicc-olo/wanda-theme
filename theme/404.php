@@ -11,7 +11,7 @@ get_header();
 ?>
 
 	<section id="primary">
-		<main id="main">
+		<main id="main" class="my-12">
 
 			<div>
 				<header class="page-header">

@@ -172,7 +172,7 @@
 	@apply grid grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
 }
 
-.sponsors-grid:first-child,
-.sponsors-grid:nth-child(2) {
+.sponsors-grid img:first-child,
+.sponsors-grid img:nth-child(2) {
 	@apply md:col-span-2 lg:col-span-3 xl:col-span-2;
 }

@@ -63,7 +63,7 @@
 
 		:is(#menu-state:checked, #menu-state:target) ~ nav .hamburger-menu {
 			/* Show the  ul.hamburger-menu when the #menu-state input field is checked or the target */
-			@apply border-primary-100 absolute top-10 right-10/12 flex flex-col gap-1 border bg-white drop-shadow-sm;
+			@apply border-primary-100 absolute top-15 right-0 flex w-max max-w-[95vw] flex-col gap-1 border bg-white drop-shadow-sm md:right-10/12 md:w-auto;
 		}
 
 		:is(#menu-state:checked, #menu-state:target) ~ nav .hamburger-menu li a,
@@ -79,11 +79,11 @@
 	li.menu-item-has-children > details > ul.sub-menu {
 		@apply absolute top-full flex flex-col gap-1 border bg-white drop-shadow-sm;
 	}
-	li.menu-item-has-children > details > ul.sub-menu > li {
-		@apply hover:bg-primary-50 focus:bg-primary-50 text-primary min-w-64 p-4;
+	li.menu-item-has-children > details > ul.sub-menu > li a {
+		@apply hover:bg-primary-100 focus:bg-primary-100 text-primary block min-w-64 p-4;
 	}
+}
 
-	.menu-item a {
-		@apply inline-block transition-all hover:-translate-y-0.5 hover:underline focus:-translate-y-0.5 focus:underline;
-	}
+.menu-item a {
+	@apply inline-block transition-all hover:-translate-y-0.5 hover:underline focus:-translate-y-0.5 focus:underline;
 }

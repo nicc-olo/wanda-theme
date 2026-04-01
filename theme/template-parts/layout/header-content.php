@@ -9,7 +9,8 @@
 
 
 $banner = get_field( 'banner', 'options' );    // group: testo (wysiwyg), banner_is_active (true_false)
-$bando  = get_field( 'bando', 'options' );    // file (return: array)
+$last_edition_id = wanda_get_edition_details()['id'];
+$bando = get_field('edizione_regolamento_file', $last_edition_id);
 
 if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 <div class="bg-tertiary p-2 text-center font-sans text-sm text-white/90" role="banner" aria-live="polite" >
@@ -65,7 +66,7 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 		if( ! empty( $bando ) && ! wanda_is_past_enrollment_date() ): ?>
 			<a 
 			class="primary-button"
-			href="<?php esc_html_e($bando); ?>"
+			href="<?php echo esc_url($bando['url']); ?>"
 			target="_blank"
 			rel="noopener nofollow noreferrer">
 				<?= __('Bando','wanda') . ' ' . date("Y"); ?>

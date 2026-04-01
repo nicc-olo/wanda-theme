@@ -21,7 +21,7 @@ if ( function_exists( 'rank_math_the_breadcrumbs' ) && ! is_front_page() ): ?>
 <?php endif; ?>
 
 	<section id="primary">
-		<main id="main">
+		<main id="main" class="p-2 lg:p-0">
 
 			<?php
 			/* Start the Loop */

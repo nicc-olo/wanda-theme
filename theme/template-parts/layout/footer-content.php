@@ -13,7 +13,7 @@
 ?>
 
 <footer id="colophon" class="bg-neutral-100 text-muted">
-	<div class="mx-auto flex max-w-wide flex-row flex-wrap items-start justify-between gap-8 px-2 py-6">
+	<div class="mx-auto flex max-w-wide flex-row flex-wrap items-start justify-between gap-8 p-4 md:py-6">
 
 		<div class="flex md:max-w-6/12 flex-col md:flex-row items-start gap-4">
 			<?php if ( has_custom_logo() ) {
@@ -68,7 +68,7 @@
 					wp_reset_postdata();
 					?>
 					<li>
-						<a href="<?php echo home_url( '/edizioni' ); ?>"><?php _e('Altre edizioni','wanda'); ?></a>
+						<a href="<?php echo home_url( '/edizioni-passate' ); ?>"><?php _e('Altre edizioni','wanda'); ?></a>
 					</li>
 					</ul>
 				</nav>
@@ -93,7 +93,6 @@
 
 
 	</div>
-
 	<div class="border-t-2 border-secondary bg-primary p-3 text-center font-sans text-sm text-primary-100">
 		<?php
 		$wanda_blog_info = get_bloginfo( 'name' );
@@ -119,5 +118,4 @@
 			<a class="no-underline hover:underline focus:underline" href="https://nicc-olo.com" rel="nofollow">Credits: <span class="sr-only">olo</span> <attr title="OLO" aria-hidden="true">o&iota;͜&sigma;</attr></a>
 		</nav>
 	</div>
-
 </footer><!-- #colophon -->

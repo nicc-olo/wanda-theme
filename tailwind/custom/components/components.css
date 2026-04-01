@@ -80,7 +80,7 @@
 	@apply float-right ml-8;
 }
 
-.search-submit,
+.search-form .search-submit,
 .wp-block-search__button.wp-element-button,
 .primary-button {
 	@apply border-primary hover:border-primary-100 bg-primary hover:bg-primary-900 focus:bg-primary-900 inline-block border px-4 py-2 text-white transition-all hover:-translate-y-1 hover:text-white hover:drop-shadow-sm focus:-translate-y-1 focus:text-white focus:outline-blue-500;
@@ -109,10 +109,10 @@
 
 @scope ( .wanda-countdown ) {
 	.wanda-timer {
-		@apply text-primary font-mono text-xl font-bold;
+		@apply text-primary font-mono text-base font-bold sm:text-xl;
 	}
 	.unit-group {
-		@apply bg-background-alt mx-2 inline-block px-4 py-2;
+		@apply bg-primary-50 mx-0.5 inline-block p-2 md:mx-2 md:px-4;
 	}
 	.number {
 		@apply font-bold;
@@ -196,4 +196,8 @@
 .sponsors-grid img:first-child,
 .sponsors-grid img:nth-child(2) {
 	@apply md:col-span-2 lg:col-span-3 xl:col-span-2;
+}
+
+.prose a {
+	word-wrap: anywhere;
 }

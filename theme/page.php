@@ -14,8 +14,15 @@
 get_header();
 ?>
 
+<?php
+if ( function_exists( 'rank_math_the_breadcrumbs' ) && ! is_front_page() ): ?>
+<div class="mx-auto max-w-wide px-2 py-4">
+	<?php rank_math_the_breadcrumbs(); ?>
+</div>
+<?php endif; ?>
+
 	<section id="primary">
-		<main id="main">
+		<main id="main" class="p-2 lg:p-0">
 
 			<?php
 			/* Start the Loop */

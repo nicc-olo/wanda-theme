@@ -9,7 +9,7 @@
 
 ?>
 
-<section>
+<section class="mt-8 min-h-[70vh]>
 
 	<header class="page-header">
 		<?php if ( is_search() ) : ?>

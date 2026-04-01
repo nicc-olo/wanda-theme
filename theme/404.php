@@ -10,7 +10,7 @@
 get_header();
 ?>
 
-	<section id="primary">
+	<section id="primary" class="min-h-[70vh]">
 		<main id="main" class="my-12">
 
 			<div>
@@ -20,7 +20,7 @@ get_header();
 
 				<div <?php wanda_content_class( 'page-content' ); ?>>
 					<p><?php esc_html_e( 'Impossibile trovare questa pagina. Potrebbe essere stata rimossa, rinominata o non essere mai esistita.', 'wanda' ); ?></p>
-					<?php get_search_form(); ?>
+					<?php get_search_form(array('aria_label' => __('Cerca nel sito', 'wanda'))); ?>
 				</div><!-- .page-content -->
 			</div>
 

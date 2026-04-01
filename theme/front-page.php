@@ -12,41 +12,12 @@ get_header();
 // ACF — Options page "Informazioni sito"
 $homepage  = get_field( 'homepage', 'options' ); // group: descrizione_del_sito, foto_slider_principale, cta_finale_* 
 
-$last_edition = new WP_Query(
-    array(
-        'post_status'         => 'publish',
-        'post_type'           => 'edizione',
-        'posts_per_page'      => 1,
-        'meta_key'            => 'edizione_data_serata', // Y-m-d H:i:s (required)
-        'orderby'             => 'meta_value',
-        'order'               => 'DESC',
-        'ignore_sticky_posts' => true,
-        'no_found_rows'       => true,
-    )
-);
-
-$last_edition_URL = '#';
-$is_past_event_date = false;
-
-if ( $last_edition->have_posts() ) {
-    $last_edition->the_post();
-    
-    $last_edition_URL = get_permalink();
-    
-	$loghi_patrocini = get_field('edizione_lista_patrocini', get_the_ID());
-	$bando = get_field('edizione_regolamento_file', get_the_ID());
-
-    $date_raw = get_field('edizione_data_serata', get_the_ID());
-    
-    if ($date_raw) {
-        $event_date = DateTime::createFromFormat('Y-m-d H:i:s', $date_raw);
-        if ($event_date) {
-            $is_past_event_date = new DateTime() > $event_date;
-        }
-    }
-
-    wp_reset_postdata();
-}
+$last_edition = wanda_get_edition_details();
+$last_edition_URL = $last_edition['url'];
+$last_edition_id = $last_edition['id'];
+$is_past_event_date = $last_edition['is_past'];
+$loghi_patrocini = get_field('edizione_lista_patrocini', $last_edition_id);
+$bando = get_field('edizione_regolamento_file', $last_edition_id);
 
 ?>
 	<?php if ( ! wanda_is_past_enrollment_date() ): ?>
@@ -57,7 +28,7 @@ if ( $last_edition->have_posts() ) {
 				$image = wp_get_attachment_image_src( $logo , 'full' );
 				echo '<img src='. $image[0] .' alt="" role="presentation" class="custom-logo max-w-48 mx-auto mb-8 block">';
 			} ?>
-			<h2 class="mb-4 text-center text-4xl text-white"> <?= do_shortcode( __( 'Sono in corso le selezioni per l&apos;[edizione] del Concorso Nazionale Wanda Capodaglio','wanda' ) ); ?></h2>
+			<h2 class="mb-4 text-center text-2xl md:text-4xl text-white"> <?= do_shortcode( __( 'Sono in corso le selezioni per l&apos;[edizione] del Concorso Nazionale Wanda Capodaglio','wanda' ) ); ?></h2>
 			<h3 class="small-caps mb-4 text-center text-xl text-primary-100"> <?= __( 'Le iscrizioni si chiuderanno tra', 'wanda' ); ?> </h3>
 			<?= do_shortcode('[countdown_scadenza]'); ?>
 			<div class="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row">
@@ -66,10 +37,10 @@ if ( $last_edition->have_posts() ) {
 				href="<?= $last_edition_URL; ?>">
 					<?= __( 'Vai alll&apos;', 'wanda' ) . do_shortcode( '[edizione]' ); ?>
 				</a>
-				<?php if( ! empty( $bando ) && ! $is_past_event_date ): ?>
+				<?php if( ! empty( $bando ) && ! wanda_is_past_enrollment_date() ): ?>
 				<a 
 				class="primary-button border-primary-900 bg-primary-900 text-white"
-				href="<?php esc_html_e($bando); ?>"
+				href="<?php echo esc_url($bando['url']); ?>"
 				target="_blank"
 				rel="noopener nofollow noreferrer">
 					<?= __('Scarica il bando','wanda') . ' ' . date("Y"); ?>
@@ -127,7 +98,7 @@ if ( $last_edition->have_posts() ) {
 		<?php if ( ! empty( $loghi_patrocini ) ) : ?>
 		<aside class="py-8 bg-gray-50 px-2">
 			<h2 class="sr-only"><?= __('Patrocini dell\'ultima edizione','wanda'); ?></h2>
-			<div class="mx-auto max-w-wide grid auto-cols-fr gap-4 place-items-center">
+			<div class="mx-auto max-w-wide grid-flow-col grid auto-cols-fr gap-4 place-items-center">
 				<?php foreach ( $loghi_patrocini as $logo ) {
 					echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain mb-4 max-w-26 max-h-20' ) );
 				} ?>

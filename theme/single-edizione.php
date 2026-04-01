@@ -246,15 +246,23 @@ if (! in_array($active_tab, $accepted_tabs)) {
 								<?php echo wp_kses($promosso_da, wanda_allowed_html()); ?>
 							</div>
 						</div>
+						<?php if ( $presentatore || $esibizione || $finalisti ): ?>
 						<div class="my-6 p-4 bg-slate-50 w-full">
 							<h3 class="text-2xl text-center"> <?php _e('Il programma della serata','wanda'); ?></h3>
-							<h4 class="text-lg mt-4"><?php _e('A presentare la serata','wanda'); ?></h4>
-							<p class="font-bold"><?php echo $presentatore; ?></p>
-							<h4 class="text-lg mt-4"><?php _e('Esibizione','wanda'); ?></h4>
-							<?php echo wp_kses($esibizione, wanda_allowed_html()); ?>
-							<h4 class="text-lg mt-4"> <?php _e('A seguire si esibiranno i finalisti','wanda'); ?></p>
-							<?php echo wp_kses($finalisti, wanda_allowed_html()); ?>
+							<?php if ( $presentatore ): ?>
+								<h4 class="text-lg mt-4"><?php _e('A presentare la serata','wanda'); ?></h4>
+								<p class="font-bold"><?php echo $presentatore; ?></p>
+							<?php endif; ?>
+							<?php if ( $esibizione ): ?>
+								<h4 class="text-lg mt-4"><?php _e('Esibizione','wanda'); ?></h4>
+								<?php echo wp_kses($esibizione, wanda_allowed_html()); ?>
+							<?php endif; ?>
+							<?php if ( $finalisti ): ?>
+								<h4 class="text-lg mt-4"> <?php _e('A seguire si esibiranno i finalisti','wanda'); ?></p>
+								<?php echo wp_kses($finalisti, wanda_allowed_html()); ?>
+							<?php endif; ?>
 						</div>
+						<?php endif; ?>
 						<?php if ( $giuria_intro ): ?>
 							<div class="my-6 bg-slate-50 p-4 w-full">
 								<h3 class="text-2xl text-center"><?php _e('La Giuria','wanda'); ?></h3>

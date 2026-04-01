@@ -19,11 +19,11 @@
  */
 .page-title,
 .entry-title {
-	@apply max-w-content mx-auto mb-6 text-5xl font-extrabold;
+	@apply max-w-content mx-auto mb-6 text-3xl font-extrabold;
 }
 
 .page-title {
-	font-variant: small-caps;
+	font-variant: small-caps text-5xl;
 }
 
 /**
@@ -148,4 +148,22 @@
 
 .promotori a:has(> img) {
 	@apply my-4 block;
+}
+
+/** post nav link */
+
+.nav-links {
+	@apply my-8 flex flex-row items-center justify-center gap-4;
+}
+
+.nav-links a {
+	@apply text-primary hover:text-primary-900 focus:text-primary-900 inline-block transition-all hover:-translate-y-0.5 hover:underline focus:-translate-y-0.5;
+}
+
+.page-numbers:not(.prev):not(.next) {
+	@apply text-primary-900 bg-primary-100 hover:bg-primary-200 focus:bg-primary-200 rounded-full p-4;
+}
+
+.page-numbers:is(.prev, .next) {
+	@apply hover:bg-primary-200 focus:bg-primary-200 p-2;
 }

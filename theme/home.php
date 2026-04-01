@@ -17,13 +17,13 @@ get_header();
 			if ( is_home() && ! is_front_page() ) :
 				?>
 				<header class="entry-header">
-					<h1 class="entry-title"><?php single_post_title(); ?></h1>
+					<h1 class="entry-title small-caps"><?php single_post_title(); ?></h1>
 				</header><!-- .entry-header -->
 				<?php
 			endif;
 
             ?>
-            <div class="posts-grid">
+            <div class="posts-grid mx-auto max-w-content my-12">
             <?php
 			// Load posts loop.
 			while ( have_posts() ) {

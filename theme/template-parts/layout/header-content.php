@@ -62,7 +62,7 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 				'walker'         => new Wanda_Details_Menu_Walker(),
 			)
 		);
-		if( ! empty( $bando ) ): ?>
+		if( ! empty( $bando ) && ! wanda_is_past_enrollment_date() ): ?>
 			<a 
 			class="primary-button"
 			href="<?php esc_html_e($bando); ?>"

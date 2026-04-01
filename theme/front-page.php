@@ -124,12 +124,12 @@ if ( $last_edition->have_posts() ) {
 	<section id="primary" class="mt-8">
 		<main id="main" class="mx-auto max-w-wide">
 
-			<div class="my-6 flex flex-col justify-between gap-8 md:flex-row">
+			<div class="my-6 flex flex-col justify-between gap-8 md:flex-row px-2">
 				<article class="prose max-w-content p-2">
 					<?= wp_kses_post( $homepage['descrizione_del_sito'] ); ?>
 				</article>
 				<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-					<aside class="p-2" role="complementary" aria-label="<?php esc_attr_e( 'Sidebar del Footer', 'wanda' ); ?>">
+					<aside class="p-2" role="complementary" aria-label="<?php esc_attr_e( 'Sidebar', 'wanda' ); ?>">
 						<?php dynamic_sidebar( 'sidebar-1' ); ?>
 					</aside>
 				<?php endif; ?>

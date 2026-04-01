@@ -133,11 +133,13 @@ if ( ! function_exists( 'wanda_entry_footer' ) ) :
 		// Hide author, post date, category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 
-			// Posted by.
-			wanda_posted_by();
+			// Posted by. 
+			//wanda_posted_by(); HIDDEN from version 0.1.6
 
 			// Posted on.
 			wanda_posted_on();
+
+			echo ' <span role="separator">|</span> '; // space between dates and categories
 
 			/* translators: used between list items, there is a space after the comma. */
 			$categories_list = get_the_category_list( __( ', ', 'wanda' ) );

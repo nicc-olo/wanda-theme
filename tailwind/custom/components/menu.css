@@ -1,4 +1,8 @@
 @scope ( #masthead ) {
+	#site-navigation {
+		@apply font-sans;
+	}
+
 	#menu-state,
 	.hamburger-button {
 		display: none;
@@ -67,7 +71,7 @@
 			.hamburger-menu
 			li
 			summary {
-			@apply hover:bg-primary-50 focus:bg-primary-50 text-primary min-w-64 p-4;
+			@apply hover:bg-primary-50 focus:bg-primary-50 text-primary min-w-64 cursor-pointer p-4;
 		}
 	}
 

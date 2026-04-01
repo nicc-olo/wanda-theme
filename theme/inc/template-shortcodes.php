@@ -281,8 +281,8 @@ function wanda_swiper_gallery( $atts, $content = null ) {
         'title'    => true,
     );
 
-    $output = '<div class="swiper">';
-    $output .= '<div class="swiper-wrapper">';
+    $output = '<div class="swiper bg-slate-900 my-8">';
+    $output .= '<div class="swiper-wrapper items-center">';
 
     foreach ( $matches[0] as $img_tag ) {
         $output .= '<div class="swiper-slide">';

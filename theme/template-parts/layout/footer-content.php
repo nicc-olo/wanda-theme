@@ -35,7 +35,7 @@
 				wp_nav_menu(
 					array(
 						'theme_location' => 'menu-2',
-						'menu_class'     => 'footer-menu menu flex flex-col gap-2',
+						'menu_class'     => 'footer-menu menu flex flex-col gap-2 font-sans',
 						'depth'          => 1,
 					)
 				);
@@ -51,7 +51,7 @@
 				wp_nav_menu(
 					array(
 						'theme_location' => 'menu-4',
-						'menu_class'     => 'social-menu menu flex flex-col gap-2',
+						'menu_class'     => 'social-menu menu flex flex-col gap-2 font-sans',
 						'depth'          => 1,
 					)
 				);

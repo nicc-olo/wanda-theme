@@ -49,8 +49,7 @@ if ( function_exists( 'rank_math_the_breadcrumbs' ) && ! is_front_page() ): ?>
 				?>
 			</div>
 
-		else :
-			?>
+		<?php else : ?>
 			<div class="mx-auto max-w-content rounded-sm bg-neutral-100 p-6">
 				<?php
 				// If no content, include the "No posts found" template.

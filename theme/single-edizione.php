@@ -79,20 +79,53 @@ usort($podio_rows, function ($a, $b) use ($rank) {
 // Keep others in UI order
 usort($other_rows, fn($a, $b) => ($a['_ui_index'] ?? 0) <=> ($b['_ui_index'] ?? 0));
 
+$edizione_term_ids = wp_get_post_terms( get_queried_object_id(), 'tag-edizione', array(
+	'fields' => 'ids',
+) );
+
+$news_query_args = array(
+	'post_type' => 'post',
+	'posts_per_page' => 9,
+	'paged' => 1,
+	'orderby' => 'date',
+	'order' => 'DESC',
+);
+
+if ( ! is_wp_error( $edizione_term_ids ) && ! empty( $edizione_term_ids ) ) {
+	$news_query_args['tax_query'] = array(
+		array(
+			'taxonomy' => 'tag-edizione',
+			'field' => 'term_id',
+			'terms' => $edizione_term_ids,
+		),
+	);
+} else {
+	$news_query_args['post__in'] = array( 0 );
+}
+
+$news_query = new WP_Query( $news_query_args );
+$has_news_posts = $news_query->have_posts();
+$has_giuria_content = ! empty( $giuria_list ) || ! empty( $giuria_comm_list );
+$has_finalisti_content = ! empty( $podio_rows ) || ! empty( $other_rows );
+
 
 
 // TODO
 // ?scheda=tabId
 $active_tab = filter_input(INPUT_GET, 'scheda', FILTER_SANITIZE_SPECIAL_CHARS);
-$accepted_tabs = [
-	'intro',
-	'news',
-	'programma',
-	'iscrizione',
-	'giuria',
-	'finalisti',
-	'sostenitori',
-];
+$accepted_tabs = [ 'intro' ];
+if ( $has_news_posts ) {
+	$accepted_tabs[] = 'news';
+}
+$accepted_tabs[] = 'programma';
+$accepted_tabs[] = 'iscrizione';
+if ( $has_giuria_content ) {
+	$accepted_tabs[] = 'giuria';
+}
+if ( $has_finalisti_content ) {
+	$accepted_tabs[] = 'finalisti';
+}
+$accepted_tabs[] = 'sostenitori';
 
 if (! in_array($active_tab, $accepted_tabs)) {
 	$active_tab = 'intro';
@@ -122,9 +155,11 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					<li><button role="tab" aria-controls="intro" id="intro-control" aria-selected="<?= $active_tab == 'intro'; ?>">
 						<?php _e('Introduzione','wanda'); ?>
 					</button></li>
+					<?php if ( $has_news_posts ): ?>
 					<li><button role="tab" aria-controls="news" id="news-control" aria-selected="<?= $active_tab == 'news'; ?>">
 						<?php _e('News e Info','wanda'); ?>
 					</button></li>
+					<?php endif; ?>
 					<li><button role="tab" aria-controls="programma" id="programma-control" aria-selected="<?= $active_tab == 'programma'; ?>">
 						<?php _e('Programma','wanda'); ?>
 					</button></li>
@@ -133,9 +168,12 @@ if (! in_array($active_tab, $accepted_tabs)) {
 						<?php _e('Come partecipare','wanda'); ?>
 					</button></li>
 					<?php endif; ?>
+					<?php if ( $has_giuria_content ): ?>
 					<li><button role="tab" aria-controls="giuria" id="giuria-control" aria-selected="<?= $active_tab == 'giuria'; ?>">
 						<?php _e('La Giuria','wanda'); ?>
 					</button></li>
+					<?php endif; ?>
+					<?php if ( $has_finalisti_content ): ?>
 					<li><button role="tab" aria-controls="finalisti" id="finalisti-control" aria-selected="<?= $active_tab == 'finalisti'; ?>">
 						<?php
 						if ( $is_past_event_date ) {
@@ -144,6 +182,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 							_e('Finalisti','wanda');
 						} ?>
 					</button></li>
+					<?php endif; ?>
 					<li><button role="tab" aria-controls="sostenitori" id="sostenitori-control" aria-selected="<?= $active_tab == 'sostenitori'; ?>">
 						<?php _e('Sostenitori','wanda'); ?>
 					</button></li>
@@ -157,32 +196,27 @@ if (! in_array($active_tab, $accepted_tabs)) {
 				/* Start the Loop */
 				while ( have_posts() ) :
 					the_post();
-					get_template_part( 'template-parts/content/content-minimal', 'single' );
+					get_template_part( 'template-parts/content/content', 'minimal' );
 					// End the loop.
 				endwhile;
 				?>
 				</div>
             </section> <!-- #intro -->
+			<?php if ( $has_news_posts ): ?>
 			<section role="tabpanel" id="news" aria-labelledby="news-control" <?= $active_tab == 'news' ? '' : 'hidden'; ?>>
 				<h2 class="entry-title text-center"><?php _e('Ultime informazioni e novità su quest&apos;edizione','wanda'); ?></h2>
 				<div class="posts-grid">
 				<?php  
-					$news_query = new WP_Query( array(
-						'post_type' => 'post',
-						'posts_per_page' => 9,
-						'paged' => 1,
-						'orderby' => 'date',
-						'order' => 'DESC',
-						'taxonomy' => 'tag-edizione',
-					) );
+					$news_query->rewind_posts();
 					while ( $news_query->have_posts() ) {
 						$news_query->the_post();
-						get_template_part( 'template-parts/content/content-excerpt', 'page' );
+						get_template_part( 'template-parts/content/content', 'excerpt' );
 					}
 					wp_reset_postdata();
 				?>
 				</div>
 			</section> <!-- #news -->
+			<?php endif; ?>
 			<section role="tabpanel" id="programma" aria-labelledby="programma-control" <?= $active_tab == 'programma' ? '' : 'hidden'; ?>>
 				<div class="flex flex-col-reverse items-start gap-6 lg:flex-row">
 					<?php if ( has_post_thumbnail() ) {
@@ -250,6 +284,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 				<?php endif; ?>
 			</section> <!-- #iscrizione -->
 			<?php endif; ?>
+			<?php if ( $has_giuria_content ): ?>
 			<section role="tabpanel" id="giuria" aria-labelledby="giuria-control" <?= $active_tab == 'giuria' ? '' : 'hidden'; ?>>
 				<?php if ( $giuria_list ): ?>
 					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La Giuria','wanda'); ?></h2>
@@ -272,6 +307,8 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					</div>
 				<?php endif; ?>
 			</section> <!-- #giuria -->
+			<?php endif; ?>
+			<?php if ( $has_finalisti_content ): ?>
 			<section role="tabpanel" id="finalisti" aria-labelledby="finalisti-control" <?= $active_tab == 'finalisti' ? '' : 'hidden'; ?>>
 				<?php if ($is_past_event_date): ?>
 					<h2 class="entry-title text-center mb-2"><?php _e('I vincitori del Concorso','wanda'); ?></h2>
@@ -296,6 +333,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 				}?>
 				</div>
 			</section> <!-- #finalisti -->
+			<?php endif; ?>
 			<section role="tabpanel" id="sostenitori" aria-labelledby="sostenitori-control" <?= $active_tab == 'sostenitori' ? '' : 'hidden'; ?>>
 				<h2 class="entry-title text-center"><?php _e('Patrocini e Sostenitori','wanda'); ?></h2>
 				<p class="max-w-content mx-auto my-2">

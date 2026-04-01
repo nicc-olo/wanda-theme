@@ -10,8 +10,7 @@ get_header();
 
 
 // ACF — Options page "Informazioni sito"
-$homepage  = get_field( 'homepage', 'options' ); // group: descrizione_del_sito, foto_slider_principale, cta_finale_*
-$bando     = get_field( 'bando', 'options' ); 
+$homepage  = get_field( 'homepage', 'options' ); // group: descrizione_del_sito, foto_slider_principale, cta_finale_* 
 
 $last_edition = new WP_Query(
     array(
@@ -35,6 +34,7 @@ if ( $last_edition->have_posts() ) {
     $last_edition_URL = get_permalink();
     
 	$loghi_patrocini = get_field('edizione_lista_patrocini', get_the_ID());
+	$bando = get_field('edizione_regolamento_file', get_the_ID());
 
     $date_raw = get_field('edizione_data_serata', get_the_ID());
     
@@ -64,7 +64,7 @@ if ( $last_edition->have_posts() ) {
 				<a 
 				class="primary-button border-primary-100 bg-secondary-900 text-white"
 				href="<?= $last_edition_URL; ?>">
-					<?= __( 'Guarda l&apos;', 'wanda' ) . do_shortcode( '[edizione]' ); ?>
+					<?= __( 'Vai alll&apos;', 'wanda' ) . do_shortcode( '[edizione]' ); ?>
 				</a>
 				<?php if( ! empty( $bando ) && ! $is_past_event_date ): ?>
 				<a 

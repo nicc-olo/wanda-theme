@@ -123,13 +123,13 @@ if ( $last_edition->have_posts() ) {
 	</section>
 	<?php endif; ?>
 
-	<section id="primary" class="mt-8">
+	<section id="primary">
 		<?php if ( ! empty( $loghi_patrocini ) ) : ?>
-		<aside class="mx-auto max-w-content">
+		<aside class="py-8 bg-gray-50 px-2">
 			<h2 class="sr-only"><?= __('Patrocini dell\'ultima edizione','wanda'); ?></h2>
-			<div class="grid auto-cols-fit gap-4 place-items-center">
+			<div class="mx-auto max-w-wide grid auto-cols-fr gap-4 place-items-center">
 				<?php foreach ( $loghi_patrocini as $logo ) {
-					echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain mb-4 max-w-48' ) );
+					echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain mb-4 max-w-26 max-h-20' ) );
 				} ?>
 			</div>
 		</aside>
@@ -141,7 +141,7 @@ if ( $last_edition->have_posts() ) {
 					<?= wp_kses_post( $homepage['descrizione_del_sito'] ); ?>
 				</article>
 				<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
-					<aside class="p-2" role="complementary" aria-label="<?php esc_attr_e( 'Sidebar', 'wanda' ); ?>">
+					<aside class="p-2 md:max-w-3/12" role="complementary" aria-label="<?php esc_attr_e( 'Sidebar', 'wanda' ); ?>">
 						<?php dynamic_sidebar( 'sidebar-1' ); ?>
 					</aside>
 				<?php endif; ?>

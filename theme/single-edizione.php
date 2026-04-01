@@ -243,7 +243,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 						<div class="mb-6 p-4 bg-slate-50 w-full">
 							<h3 class="small-caps text-xl mb-2"><?php _e('Promosso da','wanda'); ?></h3>
 							<div class="prose promotori">
-								<?php echo wp_kses($promosso_da, wanda_allowed_html()); ?>
+								<?php echo wp_kses(do_shortcode($promosso_da), wanda_allowed_html()); ?>
 							</div>
 						</div>
 						<?php if ( $presentatore || $esibizione || $finalisti ): ?>
@@ -255,11 +255,11 @@ if (! in_array($active_tab, $accepted_tabs)) {
 							<?php endif; ?>
 							<?php if ( $esibizione ): ?>
 								<h4 class="text-lg mt-4"><?php _e('Esibizione','wanda'); ?></h4>
-								<?php echo wp_kses($esibizione, wanda_allowed_html()); ?>
+								<?php echo wp_kses(do_shortcode($esibizione), wanda_allowed_html()); ?>
 							<?php endif; ?>
 							<?php if ( $finalisti ): ?>
 								<h4 class="text-lg mt-4"> <?php _e('A seguire si esibiranno i finalisti','wanda'); ?></p>
-								<?php echo wp_kses($finalisti, wanda_allowed_html()); ?>
+								<?php echo wp_kses(do_shortcode($finalisti), wanda_allowed_html()); ?>
 							<?php endif; ?>
 						</div>
 						<?php endif; ?>
@@ -267,13 +267,13 @@ if (! in_array($active_tab, $accepted_tabs)) {
 							<div class="my-6 bg-slate-50 p-4 w-full">
 								<h3 class="text-2xl text-center"><?php _e('La Giuria','wanda'); ?></h3>
 								<div class="w-prose mx-auto max-w-content mb-8">
-									<?php echo wp_kses($giuria_intro, wanda_allowed_html(true)); ?>
+									<?php echo wp_kses(do_shortcode($giuria_intro), wanda_allowed_html(true)); ?>
 								</div>
 							</div>
 						<?php endif; ?>
 						<?php if ( $altre_informazioni ): ?>
 						<div class="prose p-4 bg-slate-50 my-6 w-full">
-							<?php echo wp_kses($altre_informazioni, wanda_allowed_html(true)); ?>
+							<?php echo wp_kses(do_shortcode($altre_informazioni), wanda_allowed_html(true)); ?>
 						</div>
 						<?php endif; ?>
 					</div>
@@ -287,7 +287,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 				</a>
 				<?php if ( $regolamento ): ?>
 				<div class="prose max-w-content mx-auto my-6 w-full">
-					<?php echo wp_kses_post($regolamento); ?>
+					<?php echo wp_kses_post(do_shortcode($regolamento)); ?>
 				</div>
 				<?php endif; ?>
 			</section> <!-- #iscrizione -->

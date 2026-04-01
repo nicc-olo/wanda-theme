@@ -213,7 +213,7 @@ function wanda_allowed_html($allow_titles = false) {
     // Tags to STRIP (Layout, Media, and specific Headers)
     $strip_tags = [
         'h1', 
-        'div', 'section', 'article', 'aside', 'main', 'header', 'footer', // Layout
+        'section', 'article', 'aside', 'main', 'header', 'footer', // Layout
         'video', 'audio', 'track', 'source', // Media
         'iframe', 'object', 'embed',         // Iframes/Embeds
         'canvas', 'math'             		 // Scriptable/Complex graphics

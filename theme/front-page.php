@@ -144,7 +144,7 @@ if ( $last_edition->have_posts() ) {
 
 			if ( $query->have_posts() ) : ?>
 				<hr class="mx-auto mt-12 mb-6 w-32 border-0 border-b-4 border-dotted border-secondary/50" />
-				<h2 class="text-center text-3xl italic"> <?= __('Gli ultimi articoli', 'wanda'); ?> </h2>
+				<h2 class="text-center text-3xl italic my-4"> <?= __('Gli ultimi articoli', 'wanda'); ?> </h2>
 				<div id="#latest-posts" class="posts-grid">
 
 				<?php
@@ -168,7 +168,7 @@ if ( $last_edition->have_posts() ) {
 		?>
 		<section id="final-cta" class="mx-auto my-12 flex max-w-content flex-col justify-between gap-4 bg-primary-900 p-6 text-white md:flex-row">
 			<?php if ( ! empty( $homepage['cta_finale_img'] ) ) : ?>
-				<img class="max-w-4/12" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" role="presentation" loading="lazy" />
+				<img class="max-w-4/12 object-contain w-full h-full" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" role="presentation" loading="lazy" />
 			<?php endif; ?>
 			<div class="p-6">
 				<?php if ( ! empty($homepage['cta_finale_titolo'])): ?>

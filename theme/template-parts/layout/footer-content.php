@@ -12,7 +12,7 @@
 ?>
 
 <footer id="colophon" class="bg-neutral-100 text-muted">
-	<div class="mx-auto flex max-w-wide flex-row flex-wrap items-start justify-between gap-8 py-6">
+	<div class="mx-auto flex max-w-wide flex-row flex-wrap items-start justify-between gap-8 px-2 py-6">
 
 		<div class="flex max-w-6/12 flex-row items-start gap-4">
 			<?php if ( has_custom_logo() ) {

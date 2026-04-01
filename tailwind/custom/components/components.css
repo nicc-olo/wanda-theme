@@ -19,7 +19,11 @@
  */
 .page-title,
 .entry-title {
-	@apply max-w-content mx-auto mb-6 text-3xl font-extrabold;
+	@apply max-w-content mx-auto mb-6 text-5xl font-extrabold;
+}
+
+.page-title {
+	font-variant: small-caps;
 }
 
 /**

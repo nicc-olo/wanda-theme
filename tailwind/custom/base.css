@@ -41,7 +41,7 @@ form {
 	input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
 	select,
 	textarea {
-		@apply border-primary-100 bg-background text-foreground placeholder:text-muted block w-full rounded-md border px-3 py-2 transition-colors duration-200;
+		@apply border-primary-100 bg-background text-foreground placeholder:text-muted block w-full border px-3 py-2 transition-colors duration-200;
 	}
 
 	input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
@@ -63,7 +63,7 @@ form {
 	input[type="submit"],
 	input[type="button"],
 	input[type="reset"] {
-		@apply bg-primary text-background hover:bg-primary-900 focus-visible:ring-primary-100 inline-flex cursor-pointer items-center justify-center rounded-md px-4 py-2 font-semibold transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none;
+		@apply bg-primary text-background hover:bg-primary-900 focus-visible:ring-primary-100 inline-flex cursor-pointer items-center justify-center px-4 py-2 font-semibold transition-colors duration-200 focus-visible:ring-2 focus-visible:outline-none;
 	}
 
 	fieldset {

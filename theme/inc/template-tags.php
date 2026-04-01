@@ -12,15 +12,17 @@ if ( ! function_exists( 'wanda_posted_on' ) ) :
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
 	function wanda_posted_on() {
-		$time_string = '<time class="published updated" datetime="%1$s">%2$s</time>';
+		$time_string = '%1s <time class="published updated" datetime="%2$s">%3$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+			$time_string = '%1s: <time class="published" datetime="%2$s">%3$s</time>, %4$s: <time class="updated" datetime="%5$s">%6$s</time>';
 		}
 
 		$time_string = sprintf(
 			$time_string,
+			__( 'Pubblicato il', 'wanda' ),
 			esc_attr( get_the_date( DATE_W3C ) ),
 			esc_html( get_the_date() ),
+			__( 'Ultima modifica il', 'wanda' ),
 			esc_attr( get_the_modified_date( DATE_W3C ) ),
 			esc_html( get_the_modified_date() )
 		);
@@ -41,7 +43,7 @@ if ( ! function_exists( 'wanda_posted_by' ) ) :
 		printf(
 		/* translators: 1: posted by label, only visible to screen readers. 2: author link. 3: post author. */
 			'<span class="sr-only">%1$s</span><span class="author vcard"><a class="url fn n" href="%2$s">%3$s</a></span>',
-			esc_html__( 'Posted by', 'wanda' ),
+			esc_html__( 'Scritto da', 'wanda' ),
 			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 			esc_html( get_the_author() )
 		);
@@ -55,7 +57,7 @@ if ( ! function_exists( 'wanda_comment_count' ) ) :
 	function wanda_comment_count() {
 		if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			/* translators: %s: Name of current post. Only visible to screen readers. */
-			comments_popup_link( sprintf( __( 'Leave a comment<span class="sr-only"> on %s</span>', 'wanda' ), get_the_title() ) );
+			comments_popup_link( sprintf( __( 'Lascia un commento<span class="sr-only"> su %s</span>', 'wanda' ), get_the_title() ) );
 		}
 	}
 endif;
@@ -82,7 +84,7 @@ if ( ! function_exists( 'wanda_entry_meta' ) ) :
 				printf(
 				/* translators: 1: posted in label, only visible to screen readers. 2: list of categories. */
 					'<span><span class="sr-only">%1$s</span>%2$s</span>',
-					esc_html__( 'Posted in', 'wanda' ),
+					esc_html__( 'Pubblicato in', 'wanda' ),
 					$categories_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}
@@ -93,7 +95,7 @@ if ( ! function_exists( 'wanda_entry_meta' ) ) :
 				printf(
 				/* translators: 1: tags label, only visible to screen readers. 2: list of tags. */
 					'<span><span class="sr-only">%1$s</span>%2$s</span>',
-					esc_html__( 'Tags:', 'wanda' ),
+					esc_html__( 'Argomenti:', 'wanda' ),
 					$tags_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}
@@ -143,7 +145,7 @@ if ( ! function_exists( 'wanda_entry_footer' ) ) :
 				printf(
 				/* translators: 1: posted in label, only visible to screen readers. 2: list of categories. */
 					'<span><span class="sr-only">%1$s</span>%2$s</span>',
-					esc_html__( 'Postato in', 'wanda' ),
+					esc_html__( 'Pubblicato in', 'wanda' ),
 					$categories_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}
@@ -154,7 +156,7 @@ if ( ! function_exists( 'wanda_entry_footer' ) ) :
 				printf(
 				/* translators: 1: tags label, only visible to screen readers. 2: list of tags. */
 					'<span><span class="sr-only">%1$s</span>%2$s</span>',
-					esc_html__( 'Tags:', 'wanda' ),
+					esc_html__( 'Argomenti:', 'wanda' ),
 					$tags_list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}

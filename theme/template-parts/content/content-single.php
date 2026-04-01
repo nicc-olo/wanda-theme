@@ -14,11 +14,11 @@
 	<header class="entry-header mt-8">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
-		<?php if ( ! is_page() ) : ?>
+		<?php /*if ( ! is_page() ) : ?>
 			<div class="entry-meta">
 				<?php wanda_entry_meta(); ?>
 			</div><!-- .entry-meta -->
-		<?php endif; ?>
+		<?php endif; */ ?>
 	</header><!-- .entry-header -->
 
 	<?php wanda_post_thumbnail(); ?>

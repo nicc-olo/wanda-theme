@@ -133,9 +133,9 @@ add_action( 'after_setup_theme', 'wanda_setup' );
 function wanda_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => __( 'Footer', 'wanda' ),
+			'name'          => __( 'Homepage', 'wanda' ),
 			'id'            => 'sidebar-1',
-			'description'   => __( 'Add widgets here to appear in your footer.', 'wanda' ),
+			'description'   => __( 'Aggiungi widget che appariranno nella sidebar della homepage.', 'wanda' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',

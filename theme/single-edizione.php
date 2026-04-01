@@ -309,9 +309,9 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					); ?>
 				</p>
 				<div class="max-w-wide flex flex-col lg:flex-row gap-4 mt-8">
-					<div class="border border-tertiary bg-neutral-50 p-8">
+					<div class="border border-tertiary bg-neutral-50 p-8 min-w-2/12">
 						<h3 class="text-primary text-center small-caps mb-4">Con il patrocinio di:</h3>
-						<div class="flex flex-col gap-4 min-w-3/12">
+						<div class="flex flex-col gap-4">
 							<?php foreach ( $loghi_patrocini as $logo ) {
 								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain' ) );
 							} ?>

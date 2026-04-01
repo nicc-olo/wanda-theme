@@ -253,7 +253,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			<section role="tabpanel" id="giuria" aria-labelledby="giuria-control" <?= $active_tab == 'giuria' ? '' : 'hidden'; ?>>
 				<?php if ( $giuria_list ): ?>
 					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La Giuria','wanda'); ?></h2>
-					<div class="posts-grid lg:grid-cols-4 place-items-center">
+					<div class="posts-grid">
 					<?php foreach ( $giuria_list as $giudice ) {
 						get_template_part( 'template-parts/content/content', 'giudice', [
 							'giudice_id' => $giudice->ID
@@ -263,7 +263,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 				<?php endif; ?>
 				<?php if ( $giuria_comm_list ): ?>
 					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La Commissione di selezione','wanda'); ?></h2>
-					<div class="posts-grid lg:grid-cols-4 place-items-center">
+					<div class="posts-grid">
 						<?php foreach ( $giuria_comm_list as $giudice ) {
 							get_template_part( 'template-parts/content/content', 'giudice', [
 								'giudice_id' => $giudice->ID

@@ -29,9 +29,9 @@ $border_color = $border_colors[(string) $posizione_in_classifica] ?? 'border-tra
 
 ?>
 
-<article id="post-<?php echo esc_attr( $_id ); ?>" <?php post_class( 'my-4', $_id ); ?> data-classifica="<?= esc_attr($posizione_in_classifica); ?>">
+<article id="post-<?php echo esc_attr( $_id ); ?>" <?php post_class( 'my-4 bg-gray-50', $_id ); ?> data-classifica="<?= esc_attr($posizione_in_classifica); ?>">
 
-    <div class="border-2 <?= esc_attr($border_color); ?>">
+    <div>
     <?php if ( has_post_thumbnail( $_id ) ) : ?>
         <?php echo get_the_post_thumbnail( $_id, 'medium', array( 
             'alt'   => the_title_attribute( array( 'echo' => false, 'post' => $_id ) ), 
@@ -42,14 +42,12 @@ $border_color = $border_colors[(string) $posizione_in_classifica] ?? 'border-tra
     <?php endif; ?>
     </div>
 
-	<header class="entry-header mt-4">
-        <h3 class="entry-title">
-            <a href="<?php echo esc_url( get_permalink( $_id ) ); ?>" rel="bookmark">
-                <?php echo get_the_title( $_id ); ?>
-            </a>
+	<header class="entry-header mt-4 border-2 <?= esc_attr($border_color); ?> p-2">
+        <h3 class="entry-title text-xl">
+            <?php echo get_the_title( $_id ); ?>
         </h3>
         <?php if ( $posizione_label ) : ?>
-        <p class="small-caps text-bold text-center p-2 <?= $is_winner ? 'text-primary bg-primary-50' : 'text-gray-600 bg-gray-50'; ?>">
+        <p class="small-caps text-bold text-center <?= $is_winner ? 'text-tertiary bg-tertiary-50' : 'text-gray-600 bg-gray-50'; ?>">
             <?= esc_html($posizione_label); ?>
         </p>
         <?php endif; ?>

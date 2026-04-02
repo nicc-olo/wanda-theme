@@ -93,7 +93,7 @@
 
 
 	</div>
-	<div class="border-t-2 border-secondary bg-primary p-3 text-center font-sans text-sm text-primary-50">
+	<div class="border-t-2 border-secondary bg-primary p-3 text-center font-sans text-sm text-primary-100">
 		<?php
 		$wanda_blog_info = get_bloginfo( 'name' );
 		if ( ! empty( $copyright ) ): echo wp_kses_post( do_shortcode( $copyright ) );
@@ -103,7 +103,7 @@
 			<?php
 		endif;
 		?>
-		<nav class="mt-2 flex flex-row items-center justify-center gap-4 text-xs text-inherit opacity-50 transition-all focus:opacity-100">
+		<nav class="mt-2 flex flex-row items-center justify-center gap-4 text-xs text-inherit transition-all">
 			<?php
 				wp_nav_menu(
 				array(
@@ -111,11 +111,11 @@
 					'menu_id'        => 'legal-menu',
 					'menu_class'     => 'flex flex-row gap-4',
 					'items_wrap'     => '<ul id="%1$s" class="%2$s flex flex-row gap-4" aria-label="menu dei documenti legali">%3$s</ul>',
-
+					'items_class'    => 'opacity-70 hover:opacity-100 focus:opacity-100',
 				)
 			);
 			?>
-			<a class="no-underline hover:underline focus:underline" href="https://nicc-olo.com" rel="nofollow">Credits: <span class="sr-only">olo</span> <attr title="OLO" aria-hidden="true">o&iota;͜&sigma;</attr></a>
+			<a class="opacity-70 hover:opacity-100 focus:opacity-100 no-underline hover:underline focus:underline" href="https://nicc-olo.com" rel="nofollow">Credits: <span class="sr-only">olo</span> <attr title="nicc-olo.com" aria-hidden="true">o&iota;͜&sigma;</attr></a>
 		</nav>
 	</div>
 </footer><!-- #colophon -->

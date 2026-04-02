@@ -155,29 +155,34 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			<?php /*TABLIST Accessibile per navigare tra le varie sezioni dell'Evento */ ?>
 			<nav class="sticky top-0 z-20 max-w-full bg-neutral-100 p-2">
 				<ul class="tab-nav-list overflow-scroll flex flex-row gap-2 items-center justify-evenly" role="tablist" aria-label="<?php _e('Navigazione dei contenuti','wanda'); ?>">
-					<li><button role="tab" aria-controls="intro" id="intro-control" aria-selected="<?= $active_tab == 'intro'; ?>">
+					<li role="presentation"><button role="tab" aria-controls="intro" id="intro-control" aria-selected="<?= $active_tab == 'intro'; ?>">
 						<?php _e('Introduzione','wanda'); ?>
 					</button></li>
+
 					<?php if ( $has_news_posts ): ?>
-					<li><button role="tab" aria-controls="news" id="news-control" aria-selected="<?= $active_tab == 'news'; ?>">
+					<li role="presentation"><button role="tab" aria-controls="news" id="news-control" aria-selected="<?= $active_tab == 'news'; ?>">
 						<?php _e('News e Info','wanda'); ?>
 					</button></li>
 					<?php endif; ?>
-					<li><button role="tab" aria-controls="programma" id="programma-control" aria-selected="<?= $active_tab == 'programma'; ?>">
+					
+					<li role="presentation"><button role="tab" aria-controls="programma" id="programma-control" aria-selected="<?= $active_tab == 'programma'; ?>">
 						<?php _e('Programma','wanda'); ?>
 					</button></li>
+					
 					<?php if ( ! $is_past_event_date ): ?>
-						<li><button role="tab" aria-controls="iscrizione" id="iscrizione-control" aria-selected="<?= $active_tab == 'iscrizione'; ?>">
+					<li role="presentation"><button role="tab" aria-controls="iscrizione" id="iscrizione-control" aria-selected="<?= $active_tab == 'iscrizione'; ?>">
 						<?php _e('Come partecipare','wanda'); ?>
 					</button></li>
 					<?php endif; ?>
+
 					<?php if ( $has_giuria_content ): ?>
-					<li><button role="tab" aria-controls="giuria" id="giuria-control" aria-selected="<?= $active_tab == 'giuria'; ?>">
+					<li role="presentation"><button role="tab" aria-controls="giuria" id="giuria-control" aria-selected="<?= $active_tab == 'giuria'; ?>">
 						<?php _e('La Giuria','wanda'); ?>
 					</button></li>
 					<?php endif; ?>
+
 					<?php if ( $has_finalisti_content ): ?>
-					<li><button role="tab" aria-controls="finalisti" id="finalisti-control" aria-selected="<?= $active_tab == 'finalisti'; ?>">
+					<li role="presentation"><button role="tab" aria-controls="finalisti" id="finalisti-control" aria-selected="<?= $active_tab == 'finalisti'; ?>">
 						<?php
 						if ( $is_past_event_date ) {
 							_e('Vincitori (e finalisti)','wanda');
@@ -186,7 +191,8 @@ if (! in_array($active_tab, $accepted_tabs)) {
 						} ?>
 					</button></li>
 					<?php endif; ?>
-					<li><button role="tab" aria-controls="sostenitori" id="sostenitori-control" aria-selected="<?= $active_tab == 'sostenitori'; ?>">
+					
+					<li role="presentation"><button role="tab" aria-controls="sostenitori" id="sostenitori-control" aria-selected="<?= $active_tab == 'sostenitori'; ?>">
 						<?php _e('Sostenitori','wanda'); ?>
 					</button></li>
 				</ul>

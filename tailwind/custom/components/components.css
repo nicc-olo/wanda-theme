@@ -190,7 +190,7 @@
 }
 
 .sponsors-grid {
-	@apply grid grid-flow-row gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+	@apply grid grid-flow-row-dense gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
 }
 
 .sponsors-grid img:first-child,
@@ -203,9 +203,10 @@
 }
 
 .logo-list {
-	@apply max-w-wide mx-auto grid auto-cols-fr grid-flow-col place-items-center gap-4;
+	@apply max-w-wide mx-auto grid place-items-center gap-4;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 }
 
 .logo-list img {
-	@apply mb-4 h-auto max-h-20 w-full max-w-26 object-contain;
+	@apply mb-4 h-auto max-h-20 w-full max-w-28 object-contain;
 }

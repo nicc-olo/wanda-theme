@@ -307,13 +307,43 @@ add_shortcode('gallery', 'wanda_swiper_gallery');
 /** shortcode per mettere due elementi in colonna  */
 
 function wanda_two_columns( $atts, $content = null ) {
+
     if ( empty( $content ) ) {
         return '';
     }
 
+    $allowed_alignments = [
+        'left' => 'justify-start',
+        'center' => 'justify-center',
+        'right' => 'justify-end',
+        'between' => 'justify-between',
+        'around' => 'justify-around',
+        'evenly' => 'justify-evenly',
+    ];
+
+    $allowed_columns = [
+        'auto' => 'grid-cols-auto',
+        '2' => 'grid-cols-2',
+        '4' => 'md:grid-cols-2 lg:grid-cols-4',
+    ];
+
+    $pairs = [ 
+        'align' => 'left',
+        'cols' => '2',
+    ];
+
+    $atts = shortcode_atts($pairs, $atts, 'in_linea');
+    if ( ! in_array($atts['align'], array_keys($allowed_alignments), true) ) {
+        $atts['align'] = 'left';
+    }
+
+    if ( ! in_array($atts['cols'], array_keys($allowed_columns), true) ) {
+        $atts['cols'] = '2';
+    }
+
     // remove br and p tags
     $content = preg_replace( '/<br\s*\/?>|<p\s*\/?>/', '', $content );
-    return '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' . $content . '</div>';
+    return '<div class="grid gap-4 ' . $allowed_alignments[$atts['align']] . ' ' . $allowed_columns[$atts['cols']] . '">' . $content . '</div>';
 }
 
 add_shortcode('in_linea', 'wanda_two_columns');

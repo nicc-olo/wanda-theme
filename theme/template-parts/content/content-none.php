@@ -37,7 +37,7 @@
 		if ( is_home() && current_user_can( 'publish_posts' ) ) :
 			?>
 
-			<p>
+			<p class="font-serif p-1">
 				<?php esc_html_e( 'Il tuo sito è impostato per mostrare gli articoli più recenti nella pagina iniziale, ma non hai ancora pubblicato nulla.', 'wanda' ); ?>
 			</p>
 

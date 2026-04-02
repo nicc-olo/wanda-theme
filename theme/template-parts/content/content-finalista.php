@@ -19,13 +19,13 @@ $labels = [
 ];
 $posizione_label = $labels[(string) $posizione_in_classifica] ?? '';
 
-$border_colors = [
-    '1' => 'border-amber-600',
-    '2' => 'border-slate-500',
-    '3' => 'border-yellow-800',
-    '0' => 'border-transparent',
+$colors = [
+    '1' => 'bg-amber-50 text-amber-800 border-amber-600',
+    '2' => 'bg-slate-100 text-slate-700 border-slate-500',
+    '3' => 'bg-yellow-50 text-yellow-900 border-yellow-800',
+    '0' => 'text-gray-600 bg-gray-50 border-transparent',
 ];
-$border_color = $border_colors[(string) $posizione_in_classifica] ?? 'border-transparent';
+$color = $colors[(string) $posizione_in_classifica] ?? 'border-transparent';
 
 ?>
 
@@ -42,12 +42,12 @@ $border_color = $border_colors[(string) $posizione_in_classifica] ?? 'border-tra
     <?php endif; ?>
     </div>
 
-	<header class="entry-header mt-4 border-2 <?= esc_attr($border_color); ?> p-2">
+	<header class="entry-header mt-4 border-2 <?= esc_attr($color); ?> p-2">
         <h3 class="entry-title text-xl">
             <?php echo get_the_title( $_id ); ?>
         </h3>
         <?php if ( $posizione_label ) : ?>
-        <p class="small-caps text-bold text-center <?= $is_winner ? 'text-tertiary bg-tertiary-50' : 'text-gray-600 bg-gray-50'; ?>">
+        <p class="small-caps text-bold text-center">
             <?= esc_html($posizione_label); ?>
         </p>
         <?php endif; ?>

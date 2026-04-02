@@ -490,7 +490,7 @@
 			'library' => 'all',
 			'min_size' => '',
 			'max_size' => '',
-			'mime_types' => 'pdf, doc, docx',
+			'mime_types' => 'pdf, doc, docx, odt',
 			'allow_in_bindings' => 0,
 		),
 		array(
@@ -848,6 +848,48 @@ acf_add_local_field_group( array(
 					'ui_off_text' => '',
 				),
 			),
+		),
+		array(
+			'key' => 'field_38s7750015fa7',
+			'label' => 'Fac Simile: Domanda di partecipazione',
+			'name' => 'fasimile_partecipazione',
+			'aria-label' => '',
+			'type' => 'file',
+			'instructions' => 'File DOC da scaricare e stampare per la domanda di partecipazione',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'array',
+			'library' => 'all',
+			'min_size' => '',
+			'max_size' => '',
+			'mime_types' => 'pdf, doc, docx, odt',
+			'allow_in_bindings' => 0,
+		),
+		array(
+			'key' => 'field_18s0710015fa7',
+			'label' => 'Fac Simile: Liberatoria fotografica',
+			'name' => 'fasimile_partecipazione',
+			'aria-label' => '',
+			'type' => 'file',
+			'instructions' => 'File DOC da scaricare e stampare per la domanda di partecipazione',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'array',
+			'library' => 'all',
+			'min_size' => '',
+			'max_size' => '',
+			'mime_types' => 'pdf, doc, docx, odt',
+			'allow_in_bindings' => 0,
 		),
 		array(
 			'key' => 'field_69c5770655f17',
@@ -1261,12 +1303,11 @@ add_action( 'init', function() {
 		3 => 'custom-fields',
 	),
 	'delete_with_user' => false,
-	'has_archive' => true,
-	'rewrite' => array(
-		'slug' => 'edizioni-passate',
-		'with_front' => true,
-		'hierarchical' => false,
-	),
+    'has_archive' => 'edizioni-passate', // archive slug
+    'rewrite' => [
+        'slug' => 'edizione',             // single base
+        'with_front' => false,
+    ],
 ) );
 
 	register_post_type( 'finalista', array(

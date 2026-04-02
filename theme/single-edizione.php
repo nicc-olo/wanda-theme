@@ -108,7 +108,7 @@ $has_news_posts = $news_query->have_posts();
 $has_giuria_content = ! empty( $giuria_list ) || ! empty( $giuria_comm_list );
 $has_finalisti_content = ! empty( $podio_rows ) || ! empty( $other_rows );
 
-
+$facsimile = get_field('fasimile_partecipazione', 'options');
 
 // TODO
 // ?scheda=tabId
@@ -201,6 +201,11 @@ if (! in_array($active_tab, $accepted_tabs)) {
 				endwhile;
 				?>
 				</div>
+				<?php if ( $file_catalogo ): ?>
+				<a href="<?php echo $file_catalogo['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="my-4 primary-button mx-auto block w-fit">
+					<?php _e('Scarica il catalogo','wanda'); ?>
+				</a>
+				<?php endif; ?>
             </section> <!-- #intro -->
 			<?php if ( $has_news_posts ): ?>
 			<section role="tabpanel" id="news" aria-labelledby="news-control" <?= $active_tab == 'news' ? '' : 'hidden'; ?>>
@@ -282,9 +287,16 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			<?php if ( !$is_past_event_date ): ?>
 			<section role="tabpanel" id="iscrizione" aria-labelledby="iscrizione-control" <?= $active_tab == 'iscrizione' ? '' : 'hidden'; ?>>
 				<h2 class="entry-title text-center"><?php _e('Come partecipare al concorso','wanda'); ?></h2>
-				<a href="<?php echo $file_regolamento['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="secondary-button mx-auto block w-fit">
-					<?php _e('Scarica il bando','wanda'); ?>
-				</a>
+				<div class="grid place-items-center md:grid-cols-2 gap-4">
+					<a href="<?php echo $file_regolamento['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="secondary-button mx-auto block w-fit">
+						<?php _e('Scarica il bando','wanda'); ?>
+					</a>
+					<?php if ( $facsimile ): ?>
+					<a href="<?php echo $facsimile['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="secondary-button mx-auto block w-fit">
+						<?php _e('facsimile domanda di partecipazione','wanda'); ?>
+					</a>
+					<?php endif; ?>
+				</div>
 				<?php if ( $regolamento ): ?>
 				<div class="prose max-w-content mx-auto my-6 w-full">
 					<?php echo wp_kses_post(do_shortcode($regolamento)); ?>

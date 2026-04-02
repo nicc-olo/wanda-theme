@@ -151,7 +151,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		?>
 		<section id="final-cta" class="mx-auto my-12 flex max-w-content flex-col justify-between gap-4 bg-primary-900 p-6 text-white md:flex-row">
 			<?php if ( ! empty( $homepage['cta_finale_img'] ) ) : ?>
-				<img class="md:max-w-4/12 aspect-square object-contain w-full h-full" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" role="presentation" loading="lazy" />
+				<img class="md:max-w-4/12 aspect-square object-contain w-full h-full" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" loading="lazy" />
 			<?php endif; ?>
 			<div class="p-2 md:p-6">
 				<?php if ( ! empty($homepage['cta_finale_titolo'])): ?>

@@ -313,12 +313,10 @@ function wanda_two_columns( $atts, $content = null ) {
     }
 
     $allowed_alignments = [
-        'left' => 'justify-start',
-        'center' => 'justify-center',
-        'right' => 'justify-end',
-        'between' => 'justify-between',
-        'around' => 'justify-around',
-        'evenly' => 'justify-evenly',
+        'left' => 'justify-items-start',
+        'center' => 'justify-items-center-safe',
+        'right' => 'justify-items-end-safe',
+        'stretch' => 'justify-items-stretch',
     ];
 
     $allowed_columns = [

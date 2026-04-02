@@ -108,7 +108,10 @@ $has_news_posts = $news_query->have_posts();
 $has_giuria_content = ! empty( $giuria_list ) || ! empty( $giuria_comm_list );
 $has_finalisti_content = ! empty( $podio_rows ) || ! empty( $other_rows );
 
-$facsimile = get_field('fasimile_partecipazione', 'options');
+$facsimile_partecipazione = get_field('fasimile_partecipazione', 'options');
+$facsimile_liberatoria = get_field('fasimile_liberatoria', 'options');
+
+$documents_count = ($file_regolamento ? 1 : 0) + ($facsimile_partecipazione ? 1 : 0) + ($facsimile_liberatoria ? 1 : 0);
 
 // TODO
 // ?scheda=tabId
@@ -287,16 +290,25 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			<?php if ( !$is_past_event_date ): ?>
 			<section role="tabpanel" id="iscrizione" aria-labelledby="iscrizione-control" <?= $active_tab == 'iscrizione' ? '' : 'hidden'; ?>>
 				<h2 class="entry-title text-center"><?php _e('Come partecipare al concorso','wanda'); ?></h2>
-				<div class="grid place-items-center md:grid-cols-2 gap-4">
-					<a href="<?php echo $file_regolamento['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="secondary-button mx-auto block w-fit">
+				<?php if ( $documents_count > 0 ): ?>
+				<div class="grid place-items-center md:grid-cols-2 <?php echo $documents_count > 2 ? 'lg:grid-cols-3 ' : ''; ?>gap-4 border-b border-t border-gray-200 py-4">
+					<?php if ( $file_regolamento ): ?>
+					<a href="<?php echo $file_regolamento['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="primary-button <?php echo $documents_count > 1 ? 'md:col-span-2 lg:col-span-1 ' : ''; ?>mx-auto block w-fit">
 						<?php _e('Scarica il bando','wanda'); ?>
 					</a>
-					<?php if ( $facsimile ): ?>
-					<a href="<?php echo $facsimile['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="secondary-button mx-auto block w-fit">
+					<?php endif; ?>
+					<?php if ( $facsimile_partecipazione ): ?>
+					<a href="<?php echo $facsimile_partecipazione['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="secondary-button mx-auto block w-fit">
 						<?php _e('facsimile domanda di partecipazione','wanda'); ?>
 					</a>
 					<?php endif; ?>
+					<?php if ( $facsimile_liberatoria ): ?>
+					<a href="<?php echo $facsimile_liberatoria['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="secondary-button mx-auto block w-fit">
+						<?php _e('Liberatoria Foto','wanda'); ?>
+					</a>
+					<?php endif; ?>
 				</div>
+				<?php endif; ?>
 				<?php if ( $regolamento ): ?>
 				<div class="prose max-w-content mx-auto my-6 w-full">
 					<?php echo wp_kses_post(do_shortcode($regolamento)); ?>

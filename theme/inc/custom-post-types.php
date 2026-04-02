@@ -1010,7 +1010,7 @@ acf_add_local_field_group( array(
 		array(
 			'key' => 'field_18s0710015fa7',
 			'label' => 'Fac Simile: Liberatoria fotografica',
-			'name' => 'fasimile_partecipazione',
+			'name' => 'fasimile_liberatoria',
 			'aria-label' => '',
 			'type' => 'file',
 			'instructions' => 'File DOC da scaricare e stampare per la liberatoria fotografica',

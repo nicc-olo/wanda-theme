@@ -201,3 +201,11 @@
 .prose a {
 	word-wrap: anywhere;
 }
+
+.logo-list {
+	@apply max-w-wide mx-auto grid auto-cols-fr grid-flow-col place-items-center gap-4;
+}
+
+.logo-list img {
+	@apply mb-4 h-auto max-h-20 w-full max-w-26 object-contain;
+}

@@ -98,7 +98,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		<?php if ( ! empty( $loghi_patrocini ) ) : ?>
 		<aside class="py-8 bg-gray-50 px-2">
 			<h2 class="sr-only"><?= __('Patrocini dell\'ultima edizione','wanda'); ?></h2>
-			<div class="mx-auto max-w-wide grid-flow-col grid auto-cols-fr gap-4 place-items-center">
+			<div class="logo-list">
 				<?php foreach ( $loghi_patrocini as $logo ) {
 					echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain mb-4 max-w-26 max-h-20' ) );
 				} ?>
@@ -181,6 +181,12 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		<?php endif; ?>
 
 	</section><!-- #primary -->
+
+	<?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
+		<aside class="py-8 bg-gray-50 px-2">
+			<?php dynamic_sidebar( 'sidebar-2' ); ?>
+		</aside>
+	<?php endif; ?>
 
 <?php
 get_footer();

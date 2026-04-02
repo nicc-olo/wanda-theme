@@ -133,9 +133,20 @@ add_action( 'after_setup_theme', 'wanda_setup' );
 function wanda_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => __( 'Homepage', 'wanda' ),
+			'name'          => __( 'Homepage sidebar', 'wanda' ),
 			'id'            => 'sidebar-1',
 			'description'   => __( 'Aggiungi widget che appariranno nella sidebar della homepage.', 'wanda' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => __( 'Homepage pre-footer', 'wanda' ),
+			'id'            => 'sidebar-2',
+			'description'   => __( 'Aggiungi widget che appariranno prima del footer nella homepage.', 'wanda' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',

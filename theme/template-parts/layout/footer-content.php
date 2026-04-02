@@ -68,7 +68,7 @@
 					wp_reset_postdata();
 					?>
 					<li>
-						<a href="<?php echo home_url( '/edizioni-passate' ); ?>"><?php _e('Altre edizioni','wanda'); ?></a>
+						<a href="<?php echo home_url( '/edizioni-precedenti' ); ?>"><?php _e('Altre edizioni','wanda'); ?></a>
 					</li>
 					</ul>
 				</nav>

@@ -1013,7 +1013,7 @@ acf_add_local_field_group( array(
 			'name' => 'fasimile_partecipazione',
 			'aria-label' => '',
 			'type' => 'file',
-			'instructions' => 'File DOC da scaricare e stampare per la domanda di partecipazione',
+			'instructions' => 'File DOC da scaricare e stampare per la liberatoria fotografica',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(

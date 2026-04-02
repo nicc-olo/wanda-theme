@@ -52,14 +52,14 @@ function wanda_get_the_archive_title() {
 		$cpt   = get_post_type_object( get_queried_object()->name );
 		$title = sprintf(
 			/* translators: %s: Post type singular name */
-			esc_html__( '%s Archivi', 'wanda' ),
+			esc_html__( 'Archivio di ogni %s', 'wanda' ),
 			$cpt->labels->singular_name
 		);
 	} elseif ( is_tax() ) {
 		$tax   = get_taxonomy( get_queried_object()->taxonomy );
 		$title = sprintf(
 			/* translators: %s: Taxonomy singular name */
-			esc_html__( '%s Archivi', 'wanda' ),
+			esc_html__( 'Archivio per %s', 'wanda' ),
 			$tax->labels->singular_name
 		);
 	} else {

@@ -19,7 +19,7 @@
 			<?php if ( has_custom_logo() ) {
 				$logo = get_theme_mod( 'custom_logo' );
 				$image = wp_get_attachment_image_src( $logo , 'medium' );
-				echo '<img src='. $image[0] .' loading="lazy" alt="" role="presentation" class="custom-logo object-scale-down max-w-48 block">';
+				echo '<img src='. esc_url( $image[0] ) .' loading="lazy" width="'. esc_attr( $image[1] ) .'" height="'. esc_attr( $image[2] ) .'" alt="" role="presentation" class="custom-logo object-scale-down max-w-48 block">';
 			} ?>
 
 			<div>

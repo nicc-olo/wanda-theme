@@ -1357,7 +1357,7 @@ add_action( 'init', function() {
 		3 => 'custom-fields',
 	),
 	'delete_with_user' => false,
-    'has_archive' => 'edizioni-passate', // archive slug
+    'has_archive' => 'edizioni-precedenti', // archive slug
     'rewrite' => [
         'slug' => 'edizione',             // single base
         'with_front' => false,

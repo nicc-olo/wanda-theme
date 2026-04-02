@@ -20,9 +20,9 @@ $labels = [
 $posizione_label = $labels[(string) $posizione_in_classifica] ?? '';
 
 $colors = [
-    '1' => 'bg-amber-50 text-amber-800 border-amber-600',
-    '2' => 'bg-slate-100 text-slate-700 border-slate-500',
-    '3' => 'bg-yellow-50 text-yellow-900 border-yellow-800',
+    '1' => 'bg-amber-200 text-amber-700 border-amber-500',
+    '2' => 'bg-slate-300 text-slate-800 border-slate-500',
+    '3' => 'bg-orange-100 text-orange-900 border-orange-800',
     '0' => 'text-gray-600 bg-gray-50 border-transparent',
 ];
 $color = $colors[(string) $posizione_in_classifica] ?? 'border-transparent';
@@ -43,7 +43,7 @@ $color = $colors[(string) $posizione_in_classifica] ?? 'border-transparent';
     </div>
 
 	<header class="entry-header mt-4 border-2 <?= esc_attr($color); ?> p-2">
-        <h3 class="entry-title text-xl">
+        <h3 class="entry-title text-xl text-center text-inherit">
             <?php echo get_the_title( $_id ); ?>
         </h3>
         <?php if ( $posizione_label ) : ?>

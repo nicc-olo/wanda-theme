@@ -25,8 +25,8 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		<div class="mx-auto max-w-content p-2">
 			<?php if ( has_custom_logo() ) {
 				$logo = get_theme_mod( 'custom_logo' );
-				$image = wp_get_attachment_image_src( $logo , 'full' );
-				echo '<img src='. $image[0] .' alt="" role="presentation" class="custom-logo max-w-48 mx-auto mb-8 block">';
+				$image = wp_get_attachment_image_src( $logo , 'medium' );
+				echo '<img src='. $image[0] .' fetchpriority="high" alt="" role="presentation" class="custom-logo max-w-48 mx-auto mb-8 block">';
 			} ?>
 			<h2 class="mb-4 text-center text-2xl md:text-4xl text-white"> <?= do_shortcode( __( 'Sono in corso le selezioni per l&apos;[edizione] del Concorso Nazionale Wanda Capodaglio','wanda' ) ); ?></h2>
 			<h3 class="small-caps mb-4 text-center text-xl text-primary-100"> <?= __( 'Le iscrizioni si chiuderanno tra', 'wanda' ); ?> </h3>
@@ -87,7 +87,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 			<a 
 			class="primary-button border-primary-100 bg-secondary-900 text-white"
 			href="<?= $last_edition_URL; ?>">
-				Rivedi l'ultima edizione
+				<?php _e('Rivedi l&apos;ultima edizione','wanda') ;?>
 			</a>
 		</div>
 		<?php endif; ?>

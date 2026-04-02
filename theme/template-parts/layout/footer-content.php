@@ -18,8 +18,8 @@
 		<div class="flex md:max-w-6/12 flex-col md:flex-row items-start gap-4">
 			<?php if ( has_custom_logo() ) {
 				$logo = get_theme_mod( 'custom_logo' );
-				$image = wp_get_attachment_image_src( $logo , 'full' );
-				echo '<img src='. $image[0] .' alt="" role="presentation" class="custom-logo object-scale-down max-w-48 block">';
+				$image = wp_get_attachment_image_src( $logo , 'medium' );
+				echo '<img src='. $image[0] .' loading="lazy" alt="" role="presentation" class="custom-logo object-scale-down max-w-48 block">';
 			} ?>
 
 			<div>
@@ -93,7 +93,7 @@
 
 
 	</div>
-	<div class="border-t-2 border-secondary bg-primary p-3 text-center font-sans text-sm text-primary-100">
+	<div class="border-t-2 border-secondary bg-primary p-3 text-center font-sans text-sm text-primary-50">
 		<?php
 		$wanda_blog_info = get_bloginfo( 'name' );
 		if ( ! empty( $copyright ) ): echo wp_kses_post( do_shortcode( $copyright ) );

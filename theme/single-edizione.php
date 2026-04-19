@@ -177,7 +177,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 
 					<?php if ( $has_giuria_content ): ?>
 					<li role="presentation"><button role="tab" aria-controls="giuria" id="giuria-control" aria-selected="<?= $active_tab == 'giuria'; ?>">
-						<?php _e('La prestigiosa Giuria','wanda'); ?>
+						<?php _e('La Giuria','wanda'); ?>
 					</button></li>
 					<?php endif; ?>
 
@@ -325,7 +325,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			<?php if ( $has_giuria_content ): ?>
 			<section role="tabpanel" id="giuria" aria-labelledby="giuria-control" <?= $active_tab == 'giuria' ? '' : 'hidden'; ?>>
 				<?php if ( $giuria_list ): ?>
-					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La Giuria','wanda'); ?></h2>
+					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La prestigiosa Giuria','wanda'); ?></h2>
 					<div class="posts-grid">
 					<?php foreach ( $giuria_list as $giudice ) {
 						get_template_part( 'template-parts/content/content', 'giudice', [

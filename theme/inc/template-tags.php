@@ -200,7 +200,7 @@ if ( ! function_exists( 'wanda_post_thumbnail' ) ) :
 		if ( is_singular() ) :
 			?>
 
-			<figure>
+			<figure class="max-h-[80dvh] object-cover>
 				<?php the_post_thumbnail(); ?>
 			</figure><!-- .post-thumbnail -->
 

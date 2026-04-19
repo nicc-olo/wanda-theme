@@ -28,7 +28,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 				$image = wp_get_attachment_image_src( $logo , 'medium' );
 				echo '<img src='. $image[0] .' fetchpriority="high" alt="" role="presentation" class="custom-logo max-w-48 mx-auto mb-8 block">';
 			} ?>
-			<h2 class="mb-4 text-center text-2xl md:text-4xl text-white"> <?= do_shortcode( __( 'Sono in corso le selezioni per l&apos;[edizione] del Concorso Nazionale Wanda Capodaglio','wanda' ) ); ?></h2>
+			<h2 class="mb-4 text-center text-2xl text-white md:text-4xl"> <?= do_shortcode( __( 'Sono in corso le selezioni per l&apos;[edizione] del Concorso Nazionale Wanda Capodaglio','wanda' ) ); ?></h2>
 			<h3 class="small-caps mb-4 text-center text-xl text-primary-100"> <?= __( 'Le iscrizioni si chiuderanno tra', 'wanda' ); ?> </h3>
 			<?= do_shortcode('[countdown_scadenza]'); ?>
 			<div class="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row">
@@ -96,7 +96,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 
 	<section id="primary">
 		<?php if ( ! empty( $loghi_patrocini ) ) : ?>
-		<aside class="py-8 bg-gray-50 px-2">
+		<aside class="bg-gray-50 px-2 py-8">
 			<h2 class="sr-only"><?= __('Patrocini dell\'ultima edizione','wanda'); ?></h2>
 			<div class="logo-list">
 				<?php foreach ( $loghi_patrocini as $logo ) {
@@ -107,7 +107,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		<?php endif; ?>
 		<main id="main" class="mx-auto max-w-wide">
 
-			<div class="my-6 flex flex-col justify-between gap-8 md:flex-row px-2">
+			<div class="my-6 flex flex-col justify-between gap-8 px-2 md:flex-row">
 				<article class="prose max-w-content p-2">
 					<?= wp_kses_post( $homepage['descrizione_del_sito'] ); ?>
 				</article>
@@ -127,7 +127,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 
 			if ( $query->have_posts() ) : ?>
 				<hr class="mx-auto mt-12 mb-6 w-32 border-0 border-b-4 border-dotted border-secondary/50" />
-				<h2 class="text-center text-3xl italic my-4"> <?= __('Gli ultimi articoli', 'wanda'); ?> </h2>
+				<h2 class="my-4 text-center text-3xl italic"> <?= __('Gli ultimi articoli', 'wanda'); ?> </h2>
 				<div id="#latest-posts" class="posts-grid">
 
 				<?php
@@ -151,7 +151,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		?>
 		<section id="final-cta" class="mx-auto my-12 flex max-w-content flex-col justify-between gap-4 bg-primary-900 p-6 text-white md:flex-row">
 			<?php if ( ! empty( $homepage['cta_finale_img'] ) ) : ?>
-				<img class="md:max-w-4/12 aspect-square object-contain w-full h-full" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" loading="lazy" />
+				<img class="aspect-square h-full w-full object-contain md:max-w-4/12" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" loading="lazy" />
 			<?php endif; ?>
 			<div class="p-2 md:p-6">
 				<?php if ( ! empty($homepage['cta_finale_titolo'])): ?>
@@ -183,7 +183,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 	</section><!-- #primary -->
 
 	<?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
-		<aside class="py-8 bg-gray-50 px-2">
+		<aside class="bg-gray-50 px-2 py-8">
 			<?php dynamic_sidebar( 'sidebar-2' ); ?>
 		</aside>
 	<?php endif; ?>

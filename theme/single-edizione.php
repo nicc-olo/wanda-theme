@@ -177,7 +177,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 
 					<?php if ( $has_giuria_content ): ?>
 					<li role="presentation"><button role="tab" aria-controls="giuria" id="giuria-control" aria-selected="<?= $active_tab == 'giuria'; ?>">
-						<?php _e('La Giuria','wanda'); ?>
+						<?php _e('La prestigiosa Giuria','wanda'); ?>
 					</button></li>
 					<?php endif; ?>
 

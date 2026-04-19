@@ -23,7 +23,7 @@ get_header();
 			endif;
 
             ?>
-            <div class="posts-grid mx-auto max-w-content my-12">
+            <div class="posts-grid mx-auto my-12 max-w-content">
             <?php
 			// Load posts loop.
 			while ( have_posts() ) {

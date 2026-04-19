@@ -15,7 +15,7 @@
 <footer id="colophon" class="bg-neutral-100 text-muted">
 	<div class="mx-auto flex max-w-wide flex-row flex-wrap items-start justify-between gap-8 p-4 md:py-6">
 
-		<div class="flex md:max-w-6/12 flex-col md:flex-row items-start gap-4">
+		<div class="flex flex-col items-start gap-4 md:max-w-6/12 md:flex-row">
 			<?php if ( has_custom_logo() ) {
 				$logo = get_theme_mod( 'custom_logo' );
 				$image = wp_get_attachment_image_src( $logo , 'medium' );
@@ -115,7 +115,7 @@
 				)
 			);
 			?>
-			<a class="opacity-70 hover:opacity-100 focus:opacity-100 no-underline hover:underline focus:underline" href="https://nicc-olo.com" rel="nofollow">Credits: <span class="sr-only">olo</span> <attr title="nicc-olo.com" aria-hidden="true">o&iota;͜&sigma;</attr></a>
+			<a class="no-underline opacity-70 hover:underline hover:opacity-100 focus:underline focus:opacity-100" href="https://nicc-olo.com" rel="nofollow">Credits: <span class="sr-only">olo</span> <attr title="nicc-olo.com" aria-hidden="true">o&iota;͜&sigma;</attr></a>
 		</nav>
 	</div>
 </footer><!-- #colophon -->

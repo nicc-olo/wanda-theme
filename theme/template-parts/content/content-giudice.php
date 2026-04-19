@@ -17,10 +17,10 @@ $_id = $args['giudice_id'] ?? get_the_ID();
     <?php if ( has_post_thumbnail( $_id ) ) : ?>
         <?php echo get_the_post_thumbnail( $_id, 'medium', array( 
             'alt'   => the_title_attribute( array( 'echo' => false, 'post' => $_id ) ), 
-            'class' => 'block w-full h-42 md:h-96 object-cover' 
+            'class' => 'block w-full h-72 md:h-96 xl:h-104 object-cover' 
         ) ); ?>
     <?php else : ?>
-        <div class="block w-full h-42 md:h-96 bg-linear-to-b from-primary-100 to-secondary-100"></div>
+        <div class="block h-72 w-full bg-linear-to-b from-primary-100 to-secondary-100 md:h-96 xl:h-104"></div>
     <?php endif; ?>
 
 	<header class="entry-header mt-4">

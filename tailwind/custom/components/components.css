@@ -129,8 +129,15 @@
 }
 
 .posts-grid {
-	@apply grid grid-flow-row gap-4 md:grid-cols-3;
+	@apply grid grid-flow-row grid-cols-1 gap-4;
 }
+
+@media (width >= 28rem /* 448px */) {
+	.posts-grid {
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	}
+}
+
 .posts-grid .post {
 	@apply border-2 border-transparent bg-neutral-100 p-6 transition-all;
 }

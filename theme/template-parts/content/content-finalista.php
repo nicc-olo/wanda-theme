@@ -38,12 +38,12 @@ $color = $colors[(string) $posizione_in_classifica] ?? 'border-transparent';
             'class' => 'block w-full h-42 md:h-96 object-contain' 
         ) ); ?>
     <?php else : ?>
-        <div class="block w-full h-42 md:h-96 border bg-linear-to-b from-primary-100 to-secondary-100"></div>
+        <div class="block h-42 w-full border bg-linear-to-b from-primary-100 to-secondary-100 md:h-96"></div>
     <?php endif; ?>
     </div>
 
-	<header class="entry-header mt-4 border-2 <?= esc_attr($color); ?> p-2">
-        <h3 class="entry-title text-xl text-center text-inherit">
+	<header class="entry-header <?= esc_attr($color); ?> mt-4 border-2 p-2">
+        <h3 class="entry-title text-center text-xl text-inherit">
             <?php echo get_the_title( $_id ); ?>
         </h3>
         <?php if ( $posizione_label ) : ?>

@@ -23,7 +23,7 @@
 
 	<?php wanda_post_thumbnail(); ?>
 
-	<div <?php wanda_content_class( 'entry-content' ); ?>>
+	<div <?php wanda_content_class( 'entry-content my-4' ); ?>>
 		<?php
 		the_content(
 			sprintf(

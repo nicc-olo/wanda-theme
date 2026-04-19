@@ -217,3 +217,7 @@
 .logo-list img {
 	@apply mb-4 h-auto max-h-20 w-full max-w-28 object-contain;
 }
+
+.attachment-post-thumbnail {
+	@apply max-h-[80dvh] object-contain;
+}

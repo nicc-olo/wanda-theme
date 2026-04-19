@@ -17,7 +17,7 @@ $_id = $args['giudice_id'] ?? get_the_ID();
     <?php if ( has_post_thumbnail( $_id ) ) : ?>
         <?php echo get_the_post_thumbnail( $_id, 'medium', array( 
             'alt'   => the_title_attribute( array( 'echo' => false, 'post' => $_id ) ), 
-            'class' => 'block w-full h-96 xl:h-104 object-cover' 
+            'class' => 'block w-full h-96 xl:h-104 object-cover max-h-[80dvh]' 
         ) ); ?>
     <?php else : ?>
         <div class="block w-full bg-linear-to-b from-primary-100 to-secondary-100 h-96 xl:h-104"></div>

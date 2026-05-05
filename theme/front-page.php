@@ -82,7 +82,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		<?php else : ?>
 		<section class="bg-primary-900 text-white py-8">
 			<div class="mx-auto max-w-content flex flex-col items-center justify-center">
-				<h2 class="my-12 text-center text-6xl text-white">
+				<h2 class="mt-12 text-center text-6xl text-white">
 					<em><?= bloginfo('description');?></em><br>
 					<?= bloginfo('name');?>
 				</h2>

@@ -89,7 +89,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 				<a 
 				class="primary-button border-primary-100 bg-secondary-900 text-white"
 				href="<?= $last_edition_URL; ?>">
-					<?php _e('Rivedi l&apos;ultima edizione','wanda') ;?>
+					<?php _e('Vai all&apos;ultima edizione','wanda') ;?>
 				</a>
 			</div>
 		</section>

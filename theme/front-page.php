@@ -50,13 +50,13 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		</div>
 	</section>
 	<?php else : ?>
-	<section class="bg-neutral-900 text-white">
 		<?php if ( $homepage['foto_slider_principale'] ): ?>
-			<div class="swiper h-full w-full p-4">
+		<section class="bg-neutral-900 text-white">
+			<div class="swiper h-full w-full p-4 max-h-136">
 				<div class="swiper-wrapper">
 					<?php foreach( $homepage['foto_slider_principale'] as $image ): ?>
 						<div class="swiper-slide flex items-center justify-center">
-							<img class="block h-full max-w-full object-contain" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
+							<img class="block h-full max-w-full object-contain max-h-128" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" />
 						</div>
 					<?php endforeach; ?>
 				</div>
@@ -78,20 +78,22 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 					<svg class="mr-4 fill-none!" tabindex="-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-arrow-right-icon lucide-circle-arrow-right"><circle cx="12" cy="12" r="10"/><path d="m12 16 4-4-4-4"/><path d="M8 12h8"/></svg>
 				</button>
 			</div>
+		</section>
 		<?php else : ?>
-		<div class="mx-auto max-w-content">
-			<h2 class="my-12 text-center text-6xl text-white">
-				<em><?= bloginfo('description');?></em><br>
-				<?= bloginfo('name');?>
-			</h2>
-			<a 
-			class="primary-button border-primary-100 bg-secondary-900 text-white"
-			href="<?= $last_edition_URL; ?>">
-				<?php _e('Rivedi l&apos;ultima edizione','wanda') ;?>
-			</a>
-		</div>
+		<section class="bg-primary-900 text-white py-8">
+			<div class="mx-auto max-w-content flex flex-col items-center justify-center">
+				<h2 class="my-12 text-center text-6xl text-white">
+					<em><?= bloginfo('description');?></em><br>
+					<?= bloginfo('name');?>
+				</h2>
+				<a 
+				class="primary-button border-primary-100 bg-secondary-900 text-white"
+				href="<?= $last_edition_URL; ?>">
+					<?php _e('Rivedi l&apos;ultima edizione','wanda') ;?>
+				</a>
+			</div>
+		</section>
 		<?php endif; ?>
-	</section>
 	<?php endif; ?>
 
 	<section id="primary">

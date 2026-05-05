@@ -79,3 +79,9 @@ form {
 summary {
 	@apply cursor-pointer transition-all hover:-translate-y-0.5 hover:underline focus:-translate-y-0.5 focus:underline;
 }
+
+.single.post .entry-content iframe,
+.single.post .entry-content object,
+.single.post .entry-content embed {
+	@apply mx-auto;
+}

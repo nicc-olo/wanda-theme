@@ -385,7 +385,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					); ?>
 				</p>
 				<div class="max-w-wide flex flex-col md:flex-row gap-4 mt-8">
-					<div class="border border-tertiary bg-neutral-50 p-8 min-w-2/12">
+					<div class="border border-tertiary bg-neutral-50 p-8 min-w-2/10">
 						<h3 class="text-primary text-center small-caps mb-4">Con il patrocinio di:</h3>
 						<div class="flex flex-col gap-4">
 							<?php foreach ( $loghi_patrocini as $logo ) {

@@ -83,5 +83,5 @@ summary {
 .single.post .entry-content iframe,
 .single.post .entry-content object,
 .single.post .entry-content embed {
-	@apply mx-auto;
+	@apply mx-auto block;
 }

@@ -87,7 +87,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 					<?= bloginfo('name');?>
 				</h2>
 				<a 
-				class="primary-button border-primary-100 bg-secondary-900 text-white"
+				class="primary-button border-primary-100 mt-8 bg-secondary-900 text-white"
 				href="<?= $last_edition_URL; ?>">
 					<?php _e('Vai all&apos;ultima edizione','wanda') ;?>
 				</a>

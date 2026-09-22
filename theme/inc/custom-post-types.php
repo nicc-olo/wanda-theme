@@ -400,6 +400,25 @@
 					'parent_repeater' => 'field_69cc2c093847e',
 				),
 				array(
+					'key' => 'field_64mk5k4c28502',
+					'label' => 'Premio della critica',
+					'name' => 'finalista_premio_critica',
+					'aria-label' => '',
+					'type' => 'true_false',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'message' => 'Ha ricevuto il premio della critica',
+					'default_value' => 0,
+					'allow_in_bindings' => 0,
+					'parent_repeater' => 'field_69cc2c093847e',
+				),
+				array(
 					'key' => 'field_69cc2c4c38480',
 					'label' => 'Posizione in classifica',
 					'name' => 'posizione_in_classifica',
@@ -1407,6 +1426,7 @@ add_action( 'init', function() {
 		1 => 'excerpt',
 		2 => 'thumbnail',
 		3 => 'custom-fields',
+		4 => 'editor',
 	),
 	'delete_with_user' => false,
 ) );

@@ -129,17 +129,23 @@
 }
 
 .posts-grid {
-	@apply grid grid-flow-row grid-cols-1 gap-4;
+	@apply grid grid-flow-row grid-cols-1 items-start gap-4;
 }
 
 @media (width >= 28rem /* 448px */) {
 	.posts-grid {
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	}
+}
+
+@media (width >= 80rem) {
+	#giuria .posts-grid {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 }
 
 .posts-grid .post {
-	@apply border-2 border-transparent bg-neutral-100 p-6 transition-all;
+	@apply border border-neutral-200 bg-neutral-100 p-6 transition-all;
 }
 .posts-grid .post img {
 	aspect-ratio: 1;
@@ -155,7 +161,7 @@
 
 .posts-grid .post:has(a:hover),
 .posts-grid .post:has(a:focus) {
-	@apply border-b-primary -translate-y-0.5 border-neutral-200 drop-shadow-xs;
+	@apply -translate-y-0.5 border-b-4 border-b-primary drop-shadow-xs;
 }
 
 .promotori a > img {

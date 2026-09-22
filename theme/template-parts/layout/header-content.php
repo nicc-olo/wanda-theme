@@ -18,7 +18,7 @@ if ( ! empty( $banner ) && $banner['banner_is_active']): ?>
 </div>
 <?php endif; ?>
 
-<header id="masthead" class="mx-auto flex max-w-wide flex-row items-center justify-between border-b border-foreground/15 px-2 py-4">
+<header id="masthead" class="relative z-50 mx-auto flex max-w-wide flex-row items-center justify-between border-b border-foreground/15 px-2 py-4">
 
 	<div>
 		<?php

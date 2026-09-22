@@ -12,16 +12,18 @@ $_id = $args['giudice_id'] ?? get_the_ID();
 
 ?>
 
-<article id="post-<?php echo esc_attr( $_id ); ?>" <?php post_class( 'my-4', $_id ); ?>>
+<article id="post-<?php echo esc_attr( $_id ); ?>" <?php post_class( 'text-center', $_id ); ?>>
 
+    <div class="aspect-4/5 h-96 xl:h-104 mx-auto">
     <?php if ( has_post_thumbnail( $_id ) ) : ?>
         <?php echo get_the_post_thumbnail( $_id, 'medium', array( 
             'alt'   => the_title_attribute( array( 'echo' => false, 'post' => $_id ) ), 
-            'class' => 'block w-full max-w-xl h-96 xl:h-104 object-cover' 
+            'class' => 'block w-full max-w-xl h-full object-cover' 
         ) ); ?>
     <?php else : ?>
-        <div class="block w-full max-w-xl bg-linear-to-b from-primary-100 to-secondary-100 h-96 xl:h-104"></div>
+        <div class="block w-full max-w-xl h-full border bg-linear-to-b from-primary-100 to-secondary-100"></div>
     <?php endif; ?>
+    </div>
 
 	<header class="entry-header mt-4">
         <h3 class="entry-title text-xl mb-0">

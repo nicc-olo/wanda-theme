@@ -16,14 +16,18 @@
 		if ( is_sticky() && is_home() && ! is_paged() ) {
 			printf( '%s', esc_html_x( 'In evidenza', 'post', 'wanda' ) );
 		}
-		the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
+		the_title( '<h3 class="entry-title">', '</h3>' );
 		?>
 	</header><!-- .entry-header -->
 
 	<?php wanda_post_thumbnail(); ?>
 
-	<div <?php wanda_content_class( 'entry-content' ); ?>>
-		<?php the_excerpt(); ?>
+	<div class="entry-content">
+		<p><?php echo esc_html( wp_trim_words( get_post()->post_excerpt ?: get_post()->post_content, 15, '…' ) ); ?></p>
 	</div><!-- .entry-content -->
+
+	<a href="<?php echo esc_url( get_permalink() ); ?>" class="primary-button mt-4">
+		<?php esc_html_e( 'Leggi l\'articolo', 'wanda' ); ?>
+	</a>
 
 </article><!-- #post-<?php the_ID(); ?> -->

@@ -121,7 +121,9 @@ if ( $has_news_posts ) {
 	$accepted_tabs[] = 'news';
 }
 $accepted_tabs[] = 'programma';
-$accepted_tabs[] = 'iscrizione';
+if ( ! wanda_is_past_enrollment_date() ) {
+	$accepted_tabs[] = 'iscrizione';
+}
 if ( $has_giuria_content ) {
 	$accepted_tabs[] = 'giuria';
 }
@@ -169,7 +171,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 						<?php _e('Programma','wanda'); ?>
 					</button></li>
 					
-					<?php if ( ! $is_past_event_date ): ?>
+					<?php if ( ! wanda_is_past_enrollment_date() ): ?>
 					<li role="presentation"><button role="tab" aria-controls="iscrizione" id="iscrizione-control" aria-selected="<?= $active_tab == 'iscrizione'; ?>">
 						<?php _e('Come partecipare','wanda'); ?>
 					</button></li>
@@ -209,12 +211,12 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					// End the loop.
 				endwhile;
 				?>
-				</div>
 				<?php if ( $file_catalogo ): ?>
-				<a href="<?php echo $file_catalogo['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="my-4 primary-button mx-auto block w-fit">
+				<a href="<?php echo $file_catalogo['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="primary-button my-4 block w-fit">
 					<?php _e('Scarica il catalogo','wanda'); ?>
 				</a>
 				<?php endif; ?>
+				</div>
             </section> <!-- #intro -->
 			<?php if ( $has_news_posts ): ?>
 			<section role="tabpanel" id="news" aria-labelledby="news-control" <?= $active_tab == 'news' ? '' : 'hidden'; ?>>
@@ -260,28 +262,66 @@ if (! in_array($active_tab, $accepted_tabs)) {
 								<?php echo wp_kses(do_shortcode($promosso_da), wanda_allowed_html()); ?>
 							</div>
 						</div>
-						<?php if ( $presentatore || $esibizione || $finalisti ): ?>
-						<div class="my-6 p-4 bg-slate-50 w-full">
-							<h3 class="text-2xl text-center"> <?php _e('Il programma della serata','wanda'); ?></h3>
-							<?php if ( $presentatore ): ?>
-								<h4 class="text-lg mt-4"><?php _e('A presentare la serata','wanda'); ?></h4>
-								<p class="font-bold"><?php echo $presentatore; ?></p>
-							<?php endif; ?>
+						<?php if ( $file_catalogo ): ?>
+						<a href="<?php echo $file_catalogo['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="primary-button my-4 block w-fit">
+							<?php _e('Scarica il catalogo','wanda'); ?>
+						</a>
+						<?php endif; ?>
+						<?php if ( $presentatore || $esibizione || $finalisti || $has_finalisti_content ): ?>
+						<h2 class="entry-title text-center"><?php _e('Il programma della serata','wanda'); ?></h2>
+						<?php if ( $presentatore ): ?>
+						<div class="p-4 bg-slate-50 my-6 w-full">
+							<h3 class="small-caps text-xl mb-2"><?php _e('A presentare la serata','wanda'); ?></h3>
+							<p class="font-bold"><?php echo esc_html( $presentatore ); ?></p>
+						</div>
+						<?php endif; ?>
+						<?php if ( $esibizione || $finalisti || $has_finalisti_content ): ?>
+						<div class="p-4 bg-slate-50 my-6 w-full">
+							<h3 class="small-caps text-xl mb-2"><?php _e('Esibizione','wanda'); ?></h3>
 							<?php if ( $esibizione ): ?>
-								<h4 class="text-lg mt-4"><?php _e('Esibizione','wanda'); ?></h4>
 								<?php echo wp_kses(do_shortcode($esibizione), wanda_allowed_html()); ?>
 							<?php endif; ?>
-							<?php if ( $finalisti ): ?>
-								<h4 class="text-lg mt-4"> <?php _e('A seguire si esibiranno i finalisti','wanda'); ?></p>
-								<?php echo wp_kses(do_shortcode($finalisti), wanda_allowed_html()); ?>
+							<?php if ( $finalisti || $has_finalisti_content ): ?>
+								<h4 class="text-lg mt-4"><?php _e('Esibizione dei finalisti','wanda'); ?></h4>
+								<?php if ( $finalisti ): ?>
+									<?php echo wp_kses(do_shortcode($finalisti), wanda_allowed_html()); ?>
+								<?php else: ?>
+									<p class="font-bold"><?php echo esc_html( implode( ', ', array_map( fn( $row ) => get_the_title( $row['finalista'][0]->ID ), array_merge( $podio_rows, $other_rows ) ) ) ); ?></p>
+								<?php endif; ?>
 							<?php endif; ?>
 						</div>
 						<?php endif; ?>
-						<?php if ( $giuria_intro ): ?>
+						<?php endif; ?>
+						<?php if ( $has_giuria_content ): ?>
+							<h2 class="entry-title text-center"><?php _e('La Giuria','wanda'); ?></h2>
 							<div class="my-6 bg-slate-50 p-4 w-full">
-								<h3 class="text-2xl text-center"><?php _e('La Giuria','wanda'); ?></h3>
-								<div class="w-prose mx-auto max-w-content mb-8">
+								<h3 class="small-caps text-xl mb-2"><?php _e('La prestigiosa giuria di quest&apos;anno è composta da:','wanda'); ?></h3>
+								<?php if ( $giuria_intro ): ?>
+								<div class="mb-4">
 									<?php echo wp_kses(do_shortcode($giuria_intro), wanda_allowed_html(true)); ?>
+								</div>
+								<?php endif; ?>
+								<div class="flex flex-col gap-6 sm:flex-row">
+									<?php if ( $giuria_list ): ?>
+									<div class="flex-1">
+										<h4 class="text-lg mt-2 mb-2"><?php _e('La Giuria','wanda'); ?></h4>
+										<ul class="list-none p-0 my-0">
+										<?php foreach ( $giuria_list as $giudice ): ?>
+											<li class="font-bold"><a href="<?php echo esc_url( get_permalink( $giudice->ID ) ); ?>"><?php echo esc_html( get_the_title( $giudice->ID ) ); ?></a></li>
+										<?php endforeach; ?>
+										</ul>
+									</div>
+									<?php endif; ?>
+									<?php if ( $giuria_comm_list ): ?>
+									<div class="flex-1">
+										<h4 class="text-lg mt-2 mb-2"><?php _e('La Commissione di selezione','wanda'); ?></h4>
+										<ul class="list-none p-0 my-0">
+										<?php foreach ( $giuria_comm_list as $giudice ): ?>
+											<li class="font-bold"><a href="<?php echo esc_url( get_permalink( $giudice->ID ) ); ?>"><?php echo esc_html( get_the_title( $giudice->ID ) ); ?></a></li>
+										<?php endforeach; ?>
+										</ul>
+									</div>
+									<?php endif; ?>
 								</div>
 							</div>
 						<?php endif; ?>
@@ -293,7 +333,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					</div>
 				</div>
 			</section> <!-- #programma -->
-			<?php if ( !$is_past_event_date ): ?>
+			<?php if ( ! wanda_is_past_enrollment_date() ): ?>
 			<section role="tabpanel" id="iscrizione" aria-labelledby="iscrizione-control" <?= $active_tab == 'iscrizione' ? '' : 'hidden'; ?>>
 				<h2 class="entry-title text-center"><?php _e('Come partecipare al concorso','wanda'); ?></h2>
 				<?php if ( $documents_count > 0 ): ?>
@@ -355,6 +395,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 						get_template_part( 'template-parts/content/content', 'finalista', [
 							'finalista_id' => $row['finalista'][0]->ID,
 							'posizione_in_classifica' => (string) ($row['posizione_in_classifica'] ?? '0'),
+							'finalista_premio_critica' => ! empty( $row['finalista_premio_critica'] ),
 						]);
 					}?>
 					</div>
@@ -367,6 +408,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					get_template_part( 'template-parts/content/content', 'finalista', [
 						'finalista_id' => $row['finalista'][0]->ID,
 						'posizione_in_classifica' => (string) ($row['posizione_in_classifica'] ?? '0'),
+						'finalista_premio_critica' => ! empty( $row['finalista_premio_critica'] ),
 					]);
 				}?>
 				</div>
@@ -393,11 +435,11 @@ if (! in_array($active_tab, $accepted_tabs)) {
 							} ?>
 						</div>
 					</div>
-					<div class="border border-neutral-50 p-8">
+					<div class="border border-secondary p-8">
 						<h3 class="text-primary text-center small-caps mb-4">Con il sostegno di:</h3>
 						<div class="sponsors-grid">
 							<?php foreach ( $loghi_sostenitori as $logo ) {
-								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-auto object-contain mb-4' ) );
+								echo wp_get_attachment_image( $logo['ID'], 'medium', false, array( 'class' => 'w-full h-36 max-w-60 object-contain mb-4' ) );
 							} ?>
 						</div>
 					</div>

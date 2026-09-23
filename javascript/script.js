@@ -57,6 +57,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+	const cards = document.querySelectorAll('.portrait-card');
+	if (!cards.length || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		return;
+	}
+
+	const seen = new IntersectionObserver((entries) => {
+		const rising = entries
+			.filter((entry) => entry.isIntersecting)
+			.sort((a, b) => {
+				const ar = a.target.getBoundingClientRect();
+				const br = b.target.getBoundingClientRect();
+				return ar.top - br.top || ar.left - br.left;
+			});
+
+		rising.forEach((entry, i) => {
+			entry.target.style.setProperty('--rise', `${i * 80}ms`);
+			entry.target.classList.add('is-in');
+			seen.unobserve(entry.target);
+		});
+	}, { threshold: 0.2 });
+
+	cards.forEach((card) => seen.observe(card));
+});
+
+document.addEventListener('DOMContentLoaded', () => {
 	// MENU
 	const menuState = document.querySelector('#menu-state');
 	document.querySelector('a.menu-open').addEventListener('click', (e) => {

@@ -8,8 +8,7 @@
  */
 
 $_id = $args['finalista_id'] ?? get_the_ID();
-$posizione_in_classifica = $args['posizione_in_classifica'] ?? get_field('finalista_posizione_in_classifica', $_id);
-$is_winner = in_array((string) $posizione_in_classifica, ['1', '2', '3'], true);
+$posizione_in_classifica = (string) ( $args['posizione_in_classifica'] ?? get_field( 'finalista_posizione_in_classifica', $_id ) );
 $short_description = get_the_excerpt( $_id );
 $has_premio_critica = $args['finalista_premio_critica'] ?? get_field( 'finalista_premio_critica', $_id );
 
@@ -19,46 +18,35 @@ $labels = [
 	'3' => '3º Classificato',
 	'0' => 'Partecipante',
 ];
-$posizione_label = $labels[(string) $posizione_in_classifica] ?? '';
-
-$colors = [
-    '1' => 'bg-amber-200 text-amber-700 border-amber-500',
-    '2' => 'bg-slate-300 text-slate-800 border-slate-500',
-    '3' => 'bg-orange-100 text-orange-900 border-orange-800',
-    '0' => 'text-gray-600 bg-gray-50 border-transparent',
-];
-$color = $colors[(string) $posizione_in_classifica] ?? 'border-transparent';
+$posizione_label = $labels[ $posizione_in_classifica ] ?? '';
 
 ?>
 
-<article id="post-<?php echo esc_attr( $_id ); ?>" <?php post_class( 'my-4 bg-gray-50', $_id ); ?> data-classifica="<?= esc_attr($posizione_in_classifica); ?>" data-premio-critica="<?= esc_attr($has_premio_critica ? '1' : '0'); ?>">
+<article id="post-<?php echo esc_attr( $_id ); ?>" <?php post_class( 'portrait-card', $_id ); ?>>
 
-    <div class="aspect-4/5 h-42 md:h-96 mx-auto">
-    <?php if ( has_post_thumbnail( $_id ) ) : ?>
-        <?php echo get_the_post_thumbnail( $_id, 'medium', array( 
-            'alt'   => the_title_attribute( array( 'echo' => false, 'post' => $_id ) ), 
-            'class' => 'block w-full h-full object-cover' 
-        ) ); ?>
-    <?php else : ?>
-        <div class="block w-full h-full border bg-linear-to-b from-primary-100 to-secondary-100"></div>
-    <?php endif; ?>
-    </div>
+	<div class="portrait-photo">
+	<?php if ( has_post_thumbnail( $_id ) ) : ?>
+		<?php echo get_the_post_thumbnail( $_id, 'medium', array(
+			'alt' => the_title_attribute( array( 'echo' => false, 'post' => $_id ) ),
+		) ); ?>
+	<?php endif; ?>
+	</div>
 
-	<header class="entry-header <?= esc_attr($color); ?> mt-4 border-2 p-2">
-        <h3 class="entry-title text-center text-xl text-inherit">
-            <?php echo get_the_title( $_id ); ?>
-        </h3>
-        <?php if ( $posizione_label ) : ?>
-        <p class="text-center">
-            <span class="small-caps"><?= esc_html($posizione_label); ?></span>
-            <?php if ( $has_premio_critica ) : ?>
-                <br><span class="small-caps">&bull; <?php _e('Premio della critica', 'wanda'); ?> &bull; </span>
-            <?php endif; ?>
-            <?php if ( $short_description ) : ?>
-                <br><?= esc_html($short_description); ?>
-            <?php endif; ?>
-        </p>
-        <?php endif; ?>
-	</header><!-- .entry-header -->
+	<div class="portrait-body">
+		<h3 class="portrait-name"><?php echo esc_html( get_the_title( $_id ) ); ?></h3>
+		<?php if ( $posizione_label ) : ?>
+		<p class="rank rank--<?php echo esc_attr( $posizione_in_classifica ); ?>">
+			<span class="rank-rule" aria-hidden="true"></span>
+			<span class="rank-label small-caps"><?php echo esc_html( $posizione_label ); ?></span>
+			<span class="rank-rule" aria-hidden="true"></span>
+		</p>
+		<?php endif; ?>
+		<?php if ( $short_description ) : ?>
+		<p class="portrait-meta"><?php echo esc_html( $short_description ); ?></p>
+		<?php endif; ?>
+		<?php if ( $has_premio_critica ) : ?>
+		<p class="premio small-caps">&bull; <?php esc_html_e( 'Premio della critica', 'wanda' ); ?> &bull;</p>
+		<?php endif; ?>
+	</div>
 
 </article><!-- #post-<?php echo esc_attr( $_id ); ?> -->

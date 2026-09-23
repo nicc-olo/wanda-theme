@@ -212,7 +212,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 				endwhile;
 				?>
 				<?php if ( $file_catalogo ): ?>
-				<a href="<?php echo $file_catalogo['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="primary-button my-4 block w-fit">
+				<a href="<?php echo $file_catalogo['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="primary-button mx-auto my-4 block w-fit">
 					<?php _e('Scarica il catalogo','wanda'); ?>
 				</a>
 				<?php endif; ?>
@@ -262,11 +262,6 @@ if (! in_array($active_tab, $accepted_tabs)) {
 								<?php echo wp_kses(do_shortcode($promosso_da), wanda_allowed_html()); ?>
 							</div>
 						</div>
-						<?php if ( $file_catalogo ): ?>
-						<a href="<?php echo $file_catalogo['url']; ?>" target="_blank" rel="noopener nofollow noreferrer" class="primary-button my-4 block w-fit">
-							<?php _e('Scarica il catalogo','wanda'); ?>
-						</a>
-						<?php endif; ?>
 						<?php if ( $presentatore || $esibizione || $finalisti || $has_finalisti_content ): ?>
 						<h2 class="entry-title text-center"><?php _e('Il programma della serata','wanda'); ?></h2>
 						<?php if ( $presentatore ): ?>
@@ -366,7 +361,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			<section role="tabpanel" id="giuria" aria-labelledby="giuria-control" <?= $active_tab == 'giuria' ? '' : 'hidden'; ?>>
 				<?php if ( $giuria_list ): ?>
 					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La prestigiosa Giuria','wanda'); ?></h2>
-					<div class="posts-grid">
+					<div class="people-grid">
 					<?php foreach ( $giuria_list as $giudice ) {
 						get_template_part( 'template-parts/content/content', 'giudice', [
 							'giudice_id' => $giudice->ID
@@ -376,7 +371,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 				<?php endif; ?>
 				<?php if ( $giuria_comm_list ): ?>
 					<h2 class="small-caps text-2xl text-center mt-8 mb-4"><?php _e('La Commissione di selezione','wanda'); ?></h2>
-					<div class="posts-grid">
+					<div class="people-grid">
 						<?php foreach ( $giuria_comm_list as $giudice ) {
 							get_template_part( 'template-parts/content/content', 'giudice', [
 								'giudice_id' => $giudice->ID
@@ -390,20 +385,34 @@ if (! in_array($active_tab, $accepted_tabs)) {
 			<section role="tabpanel" id="finalisti" aria-labelledby="finalisti-control" <?= $active_tab == 'finalisti' ? '' : 'hidden'; ?>>
 				<?php if ($is_past_event_date): ?>
 					<h2 class="entry-title text-center mb-2"><?php _e('I vincitori del Concorso','wanda'); ?></h2>
-					<div class="posts-grid">
-					<?php foreach ( $podio_rows as $row ) {
-						get_template_part( 'template-parts/content/content', 'finalista', [
-							'finalista_id' => $row['finalista'][0]->ID,
-							'posizione_in_classifica' => (string) ($row['posizione_in_classifica'] ?? '0'),
-							'finalista_premio_critica' => ! empty( $row['finalista_premio_critica'] ),
-						]);
-					}?>
-					</div>
+					<?php
+					$ranked_rows = [
+						array_filter( $podio_rows, fn( $row ) => (string) ( $row['posizione_in_classifica'] ?? '0' ) === '1' ),
+						array_filter( $podio_rows, fn( $row ) => (string) ( $row['posizione_in_classifica'] ?? '0' ) !== '1' ),
+					];
+					foreach ( $ranked_rows as $rows ) {
+						if ( ! $rows ) {
+							continue;
+						}
+						echo '<div class="people-grid">';
+						foreach ( $rows as $row ) {
+							get_template_part( 'template-parts/content/content', 'finalista', [
+								'finalista_id' => $row['finalista'][0]->ID,
+								'posizione_in_classifica' => (string) ( $row['posizione_in_classifica'] ?? '0' ),
+								'finalista_premio_critica' => ! empty( $row['finalista_premio_critica'] ),
+							] );
+						}
+						echo '</div>';
+					}
+					?>
+					<?php if ( $other_rows ): ?>
 					<h3 class="text-center text-xl mt-12 mb-4"><?php _e('E gli altri finalisti','wanda'); ?></h3>
+					<?php endif; ?>
 				<?php else: ?>
 					<h2 class="entry-title text-center"><?php _e('I Finalisti','wanda'); ?></h2>
 				<?php endif; ?>
-				<div class="posts-grid">
+				<?php if ( $other_rows ): ?>
+				<div class="people-grid">
 				<?php foreach ( $other_rows as $row ) {
 					get_template_part( 'template-parts/content/content', 'finalista', [
 						'finalista_id' => $row['finalista'][0]->ID,
@@ -412,6 +421,7 @@ if (! in_array($active_tab, $accepted_tabs)) {
 					]);
 				}?>
 				</div>
+				<?php endif; ?>
 			</section> <!-- #finalisti -->
 			<?php endif; ?>
 			<section role="tabpanel" id="sostenitori" aria-labelledby="sostenitori-control" <?= $active_tab == 'sostenitori' ? '' : 'hidden'; ?>>

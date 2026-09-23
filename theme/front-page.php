@@ -130,7 +130,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 			if ( $query->have_posts() ) : ?>
 				<hr class="mx-auto mt-12 mb-6 w-32 border-0 border-b-4 border-dotted border-secondary/50" />
 				<h2 class="my-4 text-center text-3xl italic"> <?= __('Gli ultimi articoli', 'wanda'); ?> </h2>
-				<div id="#latest-posts" class="posts-grid">
+				<div id="latest-posts" class="posts-grid">
 
 				<?php
 				while ( $query->have_posts() ) : 

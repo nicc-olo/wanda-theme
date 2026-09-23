@@ -270,3 +270,15 @@ add_filter('acf/validate_value/name=edizione_finalisti_list', function ($valid, 
 
 	return $valid;
 }, 10, 4);
+
+/**
+ * News index: nine posts per page.
+ */
+function wanda_news_posts_per_page( $query ) {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_home() ) {
+		return;
+	}
+
+	$query->set( 'posts_per_page', 9 );
+}
+add_action( 'pre_get_posts', 'wanda_news_posts_per_page' );

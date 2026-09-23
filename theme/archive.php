@@ -20,17 +20,17 @@ if ( function_exists( 'rank_math_the_breadcrumbs' ) && ! is_front_page() ): ?>
 <?php endif; ?>
 
 
-	<section id="primary" class="px-2 py-8 md:py-12">
-		<main id="main" class="mx-auto max-w-wide">
+	<section id="primary">
+		<main id="main">
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header mb-8 border-b border-foreground/15 pb-6 md:mb-10">
+			<header class="page-header mb-8 pb-6 md:mb-10">
 				<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
 				<?php the_archive_description( '<div class="prose mx-auto max-w-content text-primary-900/85">', '</div>' ); ?>
 			</header><!-- .page-header -->
 
-			<div class="posts-grid">
+			<div class="posts-grid mx-auto my-12 max-w-content">
 				<?php
 				// Start the Loop.
 				while ( have_posts() ) :
@@ -42,7 +42,7 @@ if ( function_exists( 'rank_math_the_breadcrumbs' ) && ! is_front_page() ): ?>
 				?>
 			</div>
 
-			<div class="mt-8 border-t border-foreground/15 pt-6">
+			<div class="mt-8 pt-6">
 				<?php
 				// Previous/next page navigation.
 				wanda_the_posts_navigation();

@@ -15,7 +15,7 @@ get_header();
 
 <?php
 if ( function_exists( 'rank_math_the_breadcrumbs' ) && ! is_front_page() ): ?>
-<div class="mx-auto max-w-wide px-2 py-4">
+<div class="mx-auto border-b border-gray-300 opacity-80 uppercase font-mono text-xs max-w-wide p-2">
 	<?php rank_math_the_breadcrumbs(); ?>
 </div>
 <?php endif; ?>

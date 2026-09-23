@@ -272,13 +272,84 @@ add_filter('acf/validate_value/name=edizione_finalisti_list', function ($valid, 
 }, 10, 4);
 
 /**
- * News index: nine posts per page.
+ * News index and archives: nine posts per page.
  */
 function wanda_news_posts_per_page( $query ) {
-	if ( is_admin() || ! $query->is_main_query() || ! $query->is_home() ) {
+	if ( is_admin() || ! $query->is_main_query() || ( ! $query->is_home() && ! $query->is_archive() ) ) {
 		return;
 	}
 
 	$query->set( 'posts_per_page', 9 );
 }
 add_action( 'pre_get_posts', 'wanda_news_posts_per_page' );
+
+/**
+ * Page ID currently being edited, if any.
+ */
+function wanda_edited_page_id() {
+	if ( isset( $_GET['post'] ) ) {
+		return (int) $_GET['post'];
+	}
+
+	if ( isset( $_POST['post_ID'] ) ) {
+		return (int) $_POST['post_ID'];
+	}
+
+	return 0;
+}
+
+/**
+ * True when the static homepage is the page open in the editor.
+ */
+function wanda_is_front_page_edit( $post_id = 0 ) {
+	if ( get_option( 'show_on_front' ) !== 'page' ) {
+		return false;
+	}
+
+	$front_id = (int) get_option( 'page_on_front' );
+	if ( ! $front_id ) {
+		return false;
+	}
+
+	if ( ! $post_id ) {
+		$post_id = wanda_edited_page_id();
+	}
+
+	return (int) $post_id === $front_id;
+}
+
+/**
+ * The homepage body is not rendered. Hide the editor and keep the stored content.
+ */
+function wanda_lock_front_page_editor() {
+	if ( ! wanda_is_front_page_edit() ) {
+		return;
+	}
+
+	remove_post_type_support( 'page', 'editor' );
+}
+add_action( 'admin_init', 'wanda_lock_front_page_editor' );
+
+function wanda_preserve_front_page_content( $data, $postarr ) {
+	if ( ! wanda_is_front_page_edit( $postarr['ID'] ?? 0 ) ) {
+		return $data;
+	}
+
+	$existing = get_post_field( 'post_content', (int) $postarr['ID'] );
+	if ( is_string( $existing ) ) {
+		$data['post_content'] = $existing;
+	}
+
+	return $data;
+}
+add_filter( 'wp_insert_post_data', 'wanda_preserve_front_page_content', 10, 2 );
+
+function wanda_front_page_editor_notice() {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( ! $screen || $screen->base !== 'post' || $screen->post_type !== 'page' || ! wanda_is_front_page_edit() ) {
+		return;
+	}
+
+	echo '<div class="notice notice-info"><p>' . esc_html__( 'Il contenuto di questa pagina non viene mostrato: la homepage è composta dal tema.', 'wanda' ) . '</p></div>';
+}
+add_action( 'admin_notices', 'wanda_front_page_editor_notice' );

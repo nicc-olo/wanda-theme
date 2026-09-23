@@ -130,7 +130,7 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 			if ( $query->have_posts() ) : ?>
 				<hr class="mx-auto mt-12 mb-6 w-32 border-0 border-b-4 border-dotted border-secondary/50" />
 				<h2 class="my-4 text-center text-3xl italic"> <?= __('Gli ultimi articoli', 'wanda'); ?> </h2>
-				<div id="latest-posts" class="posts-grid">
+				<div id="latest-posts" class="posts-grid p-2">
 
 				<?php
 				while ( $query->have_posts() ) : 
@@ -151,32 +151,34 @@ $bando = get_field('edizione_regolamento_file', $last_edition_id);
 		<?php
 		if ( $homepage ): 
 		?>
-		<section id="final-cta" class="mx-auto my-12 flex max-w-content flex-col justify-between gap-4 bg-primary-900 p-6 text-white md:flex-row">
-			<?php if ( ! empty( $homepage['cta_finale_img'] ) ) : ?>
-				<img class="aspect-square h-full w-full object-contain md:max-w-4/12" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" loading="lazy" />
-			<?php endif; ?>
-			<div class="p-2 md:p-6">
-				<?php if ( ! empty($homepage['cta_finale_titolo'])): ?>
-					<h2 class="font-regular small-caps text-4xl text-primary-100 italic">
-						<?= sanitize_text_field( $homepage['cta_finale_titolo'] ); ?>
-					</h2>
+		<section id="final-cta" class="mt-4 overflow-clip p-1 md:p-2" style="--bg-img: url('<?php echo esc_url($homepage['cta_finale_bg_img']['url']); ?>');">
+			<div class="z-5 mx-auto my-8 flex max-w-content flex-col justify-between gap-4 bg-tertiary-900 p-4 md:p-6 text-white md:flex-row">
+				<?php if ( ! empty( $homepage['cta_finale_img'] ) ) : ?>
+					<img class="aspect-square h-full w-full object-contain md:max-w-4/12" src="<?php echo esc_url($homepage['cta_finale_img']['url']); ?>" alt="<?php echo esc_attr($homepage['cta_finale_img']['alt']); ?>" loading="lazy" />
 				<?php endif; ?>
-				<?php if ( ! empty($homepage['cta_finale_body']) ): ?>
-				<p class="text-2xl italic">
-					<?= sanitize_text_field( $homepage['cta_finale_body'] ); ?>
-				</p>
-				<?php endif; ?>
-				<?php if ( ! empty( $homepage['cta_finale_link'] ) ): ?>
-					<a href="<?= wp_parse_url( $homepage['cta_finale_link'] ); ?>" class=" primary-button mt-4 bg-white text-primary">
-						<?php 
-						if( ! empty( $homepage['cta_finale_button_text'] ) ){
-							echo esc_html( $homepage['cta_finale_button_text'] );
-						} else {
-							echo __('Scopri di più', 'wanda'); 
-						}
-						?>
-					</a>
-				<?php endif; ?>
+				<div class="p-2 md:p-6">
+					<?php if ( ! empty($homepage['cta_finale_titolo'])): ?>
+						<h2 class="font-regular small-caps text-4xl text-primary-100 italic">
+							<?= sanitize_text_field( $homepage['cta_finale_titolo'] ); ?>
+						</h2>
+					<?php endif; ?>
+					<?php if ( ! empty($homepage['cta_finale_body']) ): ?>
+					<p class="text-2xl italic">
+						<?= sanitize_text_field( $homepage['cta_finale_body'] ); ?>
+					</p>
+					<?php endif; ?>
+					<?php if ( ! empty( $homepage['cta_finale_link'] ) ): ?>
+						<a href="<?= wp_parse_url( $homepage['cta_finale_link'] ); ?>" class=" primary-button mt-4 bg-white text-primary">
+							<?php 
+							if( ! empty( $homepage['cta_finale_button_text'] ) ){
+								echo esc_html( $homepage['cta_finale_button_text'] );
+							} else {
+								echo __('Scopri di più', 'wanda'); 
+							}
+							?>
+						</a>
+					<?php endif; ?>
+				</div>
 			</div>
 		</section><!-- #final-cta -->
 
